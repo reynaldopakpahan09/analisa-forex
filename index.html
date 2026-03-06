@@ -65,13 +65,13 @@
             <h1 style="color:white; letter-spacing: 5px;">KING<span style="color:var(--accent-color);">GOLD</span></h1>
             <div class="disclaimer-box">
                 <p>⚠️ PERINGATAN KEAMANAN:</p>
-                <p style="font-weight: normal; margin-top: 5px;">1 Kode VVIP maksimal 2 Device. Hubungi Admin untuk pembelian kunci.</p>
+                <p style="font-weight: normal; margin-top: 5px;">Akses VVIP terdeteksi di 2 perangkat maksimal. Preview hanya tersedia 1x.</p>
             </div>
             <input type="password" id="passInput" placeholder="ENTER VVIP KEY" style="padding:15px; margin-bottom:15px; width:100%; box-sizing:border-box; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; font-family:'JetBrains Mono';"><br>
             
             <button onclick="valX()" style="padding:15px; background:var(--accent-color); border:none; font-weight:900; cursor:pointer; width:100%; border-radius:4px; color:#000; margin-bottom:10px;">VERIFY & SYNC</button>
             
-            <button onclick="startPreview()" style="padding:12px; background:transparent; border:1px solid #444; font-weight:700; cursor:pointer; width:100%; border-radius:4px; color:#888; margin-bottom:10px;">FREE PREVIEW (1 MIN)</button>
+            <button id="btnPreview" onclick="startPreview()" style="padding:12px; background:transparent; border:1px solid #444; font-weight:700; cursor:pointer; width:100%; border-radius:4px; color:#888; margin-bottom:10px;">FREE PREVIEW (1 MIN)</button>
             
             <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold%2C%20saya%20ingin%20beli%20Kunci%20VVIP" target="_blank" class="btn btn-wa">HUBUNGI ADMIN</a>
         </div>
@@ -163,6 +163,14 @@
         const _0xH = ["\x4B\x49\x4E\x47\x30\x31", "\x47\x4F\x4C\x44\x38\x38", "\x52\x45\x59\x59\x56\x49\x50", "\x4D\x49\x46\x58\x50\x52\x4F", "\x53\x43\x41\x4C\x50\x45\x52", "\x50\x52\x4F\x46\x49\x54\x37\x37", "\x56\x49\x50\x47\x4F\x4C\x44", "\x4D\x41\x53\x54\x45\x52\x32\x32", "\x58\x41\x55\x55\x53\x44", "\x43\x55\x41\x4E\x42\x4F\x53\x53"];
         let t = 60;
 
+        // CEK STATUS PREVIEW SAAT LOAD
+        window.onload = function() {
+            if (localStorage.getItem("kg_previewUsed") === "true") {
+                const btn = document.getElementById("btnPreview");
+                if (btn) btn.style.display = "none";
+            }
+        };
+
         function valX() {
             const i = document.getElementById("passInput").value.trim().toUpperCase();
             if (_0xH.includes(i)) {
@@ -171,13 +179,22 @@
             } else { alert("ACCESS DENIED!"); }
         }
 
-        /* FUNGSI PREVIEW 1 MENIT */
+        /* FUNGSI PREVIEW 1 KALI SEUMUR HIDUP BROWSER */
         function startPreview() {
-            alert("Mode Preview Aktif: Anda memiliki 60 detik untuk memantau sinyal AI.");
+            if (localStorage.getItem("kg_previewUsed") === "true") {
+                alert("Jatah Preview 1 menit Anda sudah habis!");
+                location.reload();
+                return;
+            }
+
+            alert("Mode Preview Aktif (60 Detik). Gunakan waktu ini untuk memantau akurasi AI!");
+            localStorage.setItem("kg_previewUsed", "true"); // Kunci selamanya
+            document.getElementById("btnPreview").style.display = "none";
             document.getElementById("password-overlay").style.display = "none";
             lCh(); sSi();
+            
             setTimeout(function() {
-                alert("Waktu Preview habis! Silakan hubungi Admin untuk mendapatkan Kunci VVIP.");
+                alert("Waktu Preview habis! Silakan beli Kunci VVIP untuk akses penuh.");
                 location.reload();
             }, 60000); 
         }
