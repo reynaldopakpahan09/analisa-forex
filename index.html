@@ -95,17 +95,11 @@
                 <h2>📈 Live MT5 Feed (XAUUSD)</h2>
                 <div id="tv-chart" style="height: calc(100% - 30px);"></div>
             </div>
-            
             <div class="card">
                 <h2>📜 Signal History (Last 6 Months)</h2>
                 <table class="history-table">
                     <thead>
-                        <tr>
-                            <th>MONTH</th>
-                            <th>TOTAL TRADES</th>
-                            <th>WIN RATE</th>
-                            <th>PROFIT (PIPS)</th>
-                        </tr>
+                        <tr><th>MONTH</th><th>TOTAL TRADES</th><th>WIN RATE</th><th>PROFIT (PIPS)</th></tr>
                     </thead>
                     <tbody>
                         <tr><td>Sept 2024</td><td>142</td><td style="color:var(--success)">89.4%</td><td>+4,210</td></tr>
@@ -141,7 +135,7 @@
             </div>
 
             <div class="risk-card">
-                <p><strong>⚠️ RISK MANAGEMENT:</strong><br>Gunakan lot bijak sesuai modal. Jangan rakus! Sinyal adalah alat bantu, keputusan tetap di tangan Anda. Batasi maksimal 3-5 posisi per hari.</p>
+                <p><strong>⚠️ RISK MANAGEMENT:</strong><br>Gunakan lot bijak sesuai modal. Jangan rakus! Sinyal adalah alat bantu, keputusan tetap di tangan Anda.</p>
             </div>
 
             <div class="card" style="margin-top:15px;">
@@ -152,6 +146,12 @@
                     <a href="https://t.me/KinggGold" class="btn btn-tele" target="_blank" style="background:#0088cc; color:white;">TELEGRAM VIP SIGNAL</a>
                 </div>
             </div>
+
+            <div class="card" style="height: 250px;">
+                <h2>💬 Security Chat (Member Only)</h2>
+                <iframe src="https://my.cbox.ws/fixcuan" width="100%" height="90%" frameborder="0"></iframe>
+            </div>
+
         </div>
     </main>
 
@@ -202,13 +202,13 @@
             if (isBuy) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
-                res.innerHTML = "<strong>REASON:</strong> Breakout Resistance + Golden Cross MA20/50. Tekanan beli meningkat di M1.";
+                res.innerHTML = "<strong>REASON:</strong> Breakout Resistance + Golden Cross MA20/50.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) + 1.20).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) - 1.00).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
-                res.innerHTML = "<strong>REASON:</strong> Rejection Supply Zone + RSI Overbought. Potensi koreksi harga menuju Entry Zone.";
+                res.innerHTML = "<strong>REASON:</strong> Rejection Supply Zone + RSI Overbought.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) - 1.20).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) + 1.00).toFixed(2);
             }
