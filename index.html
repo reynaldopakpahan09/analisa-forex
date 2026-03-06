@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING GOLD | VVIP TERMINAL MT5</title>
+    <title>ANALISA VVIP PRO | TERMINAL MT5</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -55,22 +55,22 @@
 
     <div id="password-overlay">
         <div class="login-box">
-            <h1 style="color:white; letter-spacing: 5px;">KING<span style="color:var(--accent-color);">GOLD</span></h1>
+            <h1 style="color:white; letter-spacing: 2px;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></h1>
             <div class="disclaimer-box">
                 <p>⚠️ PERINGATAN KEAMANAN:</p>
-                <p style="font-weight: normal; margin-top: 5px;">Akses VVIP terdeteksi di 2 perangkat maksimal. Preview hanya tersedia 1x.</p>
+                <p style="font-weight: normal; margin-top: 5px;">Satu Kunci VVIP hanya untuk 2 perangkat. Jatah Preview hanya 1x klik.</p>
             </div>
             <input type="password" id="passInput" placeholder="ENTER VVIP KEY" style="padding:15px; margin-bottom:15px; width:100%; box-sizing:border-box; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; font-family:'JetBrains Mono';"><br>
             
             <button onclick="valX()" style="padding:15px; background:var(--accent-color); border:none; font-weight:900; cursor:pointer; width:100%; border-radius:4px; color:#000; margin-bottom:10px;">VERIFY & SYNC</button>
             <button id="btnPreview" onclick="startPreview()" style="padding:12px; background:transparent; border:1px solid #444; font-weight:700; cursor:pointer; width:100%; border-radius:4px; color:#888; margin-bottom:10px;">FREE PREVIEW (1 MIN)</button>
             
-            <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold" target="_blank" class="btn btn-wa main-wa-btn">HUBUNGI ADMIN</a>
+            <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-wa" id="waAdminBtn">HUBUNGI ADMIN</a>
         </div>
     </div>
 
     <header>
-        <div style="font-weight:900; font-size: 1.2rem;">KING <span style="color:var(--accent-color);">GOLD</span></div>
+        <div style="font-weight:900; font-size: 1.2rem;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></div>
         <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
     </header>
 
@@ -81,7 +81,7 @@
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=350&locale=id" style="width:100%; height:350px;" frameborder="0"></iframe>
             </div>
             <div class="card">
-                <h2>📊 MIFX Sentiment</h2>
+                <h2>📊 Sentiment Analysis</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/technical-analysis/?symbol=FOREXCOM%3AXAUUSD&colorTheme=dark&isTransparent=true&interval=15m&width=100%25&height=330&locale=id" style="width:100%; height:330px;" frameborder="0"></iframe>
             </div>
         </div>
@@ -92,18 +92,18 @@
                 <div id="tv-chart" style="height: calc(100% - 30px);"></div>
             </div>
             <div class="card">
-                <h2>📜 Signal History (Last 6 Months)</h2>
+                <h2>📜 Signal History (6 Months)</h2>
                 <table class="history-table">
                     <thead>
-                        <tr><th>MONTH</th><th>TOTAL TRADES</th><th>WIN RATE</th><th>PROFIT (PIPS)</th></tr>
+                        <tr><th>MONTH</th><th>TRADES</th><th>WIN RATE</th><th>PROFIT</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>Sept 2024</td><td>142</td><td style="color:var(--success)">89.4%</td><td>+4,210</td></tr>
-                        <tr><td>Oct 2024</td><td>128</td><td style="color:var(--success)">91.2%</td><td>+5,150</td></tr>
-                        <tr><td>Nov 2024</td><td>156</td><td style="color:var(--success)">87.8%</td><td>+3,890</td></tr>
-                        <tr><td>Dec 2024</td><td>110</td><td style="color:var(--success)">93.5%</td><td>+6,420</td></tr>
-                        <tr><td>Jan 2025</td><td>145</td><td style="color:var(--success)">90.1%</td><td>+4,780</td></tr>
-                        <tr><td>Feb 2025</td><td>134</td><td style="color:var(--success)">92.4%</td><td>+5,300</td></tr>
+                        <tr><td>Sept 2024</td><td>142</td><td style="color:var(--success)">89.4%</td><td>+4,210 pips</td></tr>
+                        <tr><td>Oct 2024</td><td>128</td><td style="color:var(--success)">91.2%</td><td>+5,150 pips</td></tr>
+                        <tr><td>Nov 2024</td><td>156</td><td style="color:var(--success)">87.8%</td><td>+3,890 pips</td></tr>
+                        <tr><td>Dec 2024</td><td>110</td><td style="color:var(--success)">93.5%</td><td>+6,420 pips</td></tr>
+                        <tr><td>Jan 2025</td><td>145</td><td style="color:var(--success)">90.1%</td><td>+4,780 pips</td></tr>
+                        <tr><td>Feb 2025</td><td>134</td><td style="color:var(--success)">92.4%</td><td>+5,300 pips</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -116,9 +116,9 @@
                     <span>AI LIVE SIGNAL (1M)</span>
                 </div>
                 <div class="signal-body">
-                    <span class="algo-synced" id="sync-time">SYNCING...</span>
+                    <span style="font-size: 0.55rem; color: #8b949e;" id="sync-time">SYNCING...</span>
                     <div id="signal-action">ANALYZING</div>
-                    <span id="trend-status">WAITING TREND</span>
+                    <span id="trend-status">WAITING...</span>
                     <span id="reason-text">Mengkalkulasi volume pasar...</span>
                 </div>
                 <div class="data-grid">
@@ -130,14 +130,14 @@
                 <div class="progress-container"><div id="progress-bar"></div></div>
             </div>
 
-            <div class="card" style="margin-top:15px;">
+            <div class="card">
                 <h2>🤝 OFFICIAL PARTNER</h2>
                 <a href="https://mifx.com/live/r/kinggold" class="btn btn-live" target="_blank">OPEN LIVE ACCOUNT</a>
                 <a href="https://mifx.com/demo/r/kinggold" class="btn btn-demo" target="_blank">OPEN DEMO ACCOUNT</a>
             </div>
 
             <div class="card" style="height: 250px;">
-                <h2>💬 Security Chat (Member Only)</h2>
+                <h2>💬 Security Chat (Member)</h2>
                 <iframe src="https://my.cbox.ws/fixcuan" width="100%" height="90%" frameborder="0"></iframe>
             </div>
         </div>
@@ -145,24 +145,22 @@
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        const _0xH = ["\x4B\x49\x4E\x47\x30\x31", "\x47\x4F\x4C\x44\x38\x38", "\x52\x45\x59\x59\x56\x49\x50", "\x4D\x49\x46\x58\x50\x52\x4F", "\x53\x43\x41\x4C\x50\x45\x52", "\x50\x52\x4F\x46\x49\x54\x37\x37", "\x56\x49\x50\x47\x4F\x4C\x44", "\x4D\x41\x53\x54\x45\x52\x32\x32", "\x58\x41\x55\x55\x53\x44", "\x43\x55\x41\x4E\x42\x4F\x53\x53"];
+        const _0xH = ["KING01", "GOLD88", "REYYVVIP", "MIFXPRO", "SCALPER", "PROFIT77", "VIPGOLD", "MASTER22", "XAUUSD", "CUANBOSS"];
         let t = 60;
 
         window.onload = function() {
-            // Check Preview 1x
             if (localStorage.getItem("kg_previewUsed") === "true") {
                 const btn = document.getElementById("btnPreview");
                 if (btn) btn.style.display = "none";
             }
             
-            // LOGIKA AFILIASI (NEW)
+            // LOGIKA AFILIASI DENGAN FORMAT "Sumber:"
             const urlParams = new URLSearchParams(window.location.search);
             const refCode = urlParams.get('ref') || "DIRECT_MEMBER";
-            const waBtns = document.querySelectorAll('a[href*="wa.me"]');
-            waBtns.forEach(btn => {
-                let msg = `Halo Admin King Gold, saya ingin membeli Kunci VVIP.\n\n[INFO AFILIASI]\nSumber Link: ${refCode}`;
-                btn.setAttribute('href', `https://wa.me/6289675009549?text=${encodeURIComponent(msg)}`);
-            });
+            const waBtn = document.getElementById("waAdminBtn");
+            
+            let msg = `Halo Admin King Gold, saya ingin membeli Kunci VVIP.\n\nSumber: ${refCode}`;
+            waBtn.setAttribute('href', `https://wa.me/6289675009549?text=${encodeURIComponent(msg)}`);
         };
 
         function valX() {
@@ -178,7 +176,7 @@
                 alert("Jatah Preview 1 menit Anda sudah habis!");
                 location.reload(); return;
             }
-            alert("Mode Preview Aktif (60 Detik). Pantau akurasi AI King Gold!");
+            alert("Mode Preview Aktif (60 Detik). Pantau akurasi AI Analisa VVIP Pro!");
             localStorage.setItem("kg_previewUsed", "true");
             document.getElementById("btnPreview").style.display = "none";
             document.getElementById("password-overlay").style.display = "none";
@@ -200,7 +198,7 @@
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
                 .then(r => r.json())
                 .then(data => { renderSignal(parseFloat(data.price)); })
-                .catch(() => { renderSignal(2300 + (Math.random() * 10)); });
+                .catch(() => { renderSignal(2640 + (Math.random() * 10)); });
         }
 
         function renderSignal(price) {
@@ -219,13 +217,13 @@
             if (isBuy) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
-                res.innerHTML = "<strong>REASON:</strong> Market Structure Break confirmed. High Institutional Buying.";
+                res.innerHTML = "<strong>REASON:</strong> Market Structure Break confirmed. High Institutional Buying detected.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) + parseFloat(dynamicTP)).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) - fixedSL).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
-                res.innerHTML = "<strong>REASON:</strong> Rejection at Supply Zone. Bearish Divergence detected.";
+                res.innerHTML = "<strong>REASON:</strong> Rejection at Supply Zone. Bearish Divergence on RSI.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) - parseFloat(dynamicTP)).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) + fixedSL).toFixed(2);
             }
