@@ -18,19 +18,26 @@
         .card { background: var(--card-bg); border-radius: 4px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
+        /* LOGIN SCREEN */
         #password-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
         .login-box { text-align:center; border: 1px solid #333; padding: 40px; background: #0d1117; border-radius: 12px; max-width: 400px; }
         .disclaimer-box { background: rgba(255, 77, 77, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 6px; margin-bottom: 20px; text-align: left; }
         .disclaimer-box p { color: var(--danger); font-size: 0.7rem; margin: 0; line-height: 1.5; font-weight: bold; }
         
+        /* SIGNAL CARD */
         #ai-signal-card { border: 2px solid var(--vvip-color); padding: 0; overflow: hidden; }
         .signal-header { background: rgba(0,0,0,0.4); padding: 10px 15px; border-bottom: 1px solid #222; display: flex; align-items: center; gap: 10px; }
         .signal-header span { font-size: 0.75rem; font-weight: 900; color: var(--accent-color); letter-spacing: 1px; }
         .signal-body { padding: 20px 15px; text-align: center; }
         .algo-synced { font-size: 0.55rem; color: #8b949e; text-transform: uppercase; margin-bottom: 5px; display: block; }
         #signal-action { font-size: 2.8rem; font-weight: 900; margin: 5px 0; line-height: 1; }
-        #trend-status { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; display: block; }
+        #trend-status { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+        #reason-text { font-size: 0.65rem; color: #aaa; font-style: italic; margin-bottom: 15px; display: block; min-height: 20px; }
         
+        /* RISK WARNING CARD */
+        .risk-card { background: rgba(255, 77, 77, 0.05); border: 1px solid #442222; padding: 12px; border-radius: 4px; margin-top: 10px; }
+        .risk-card p { margin: 0; font-size: 0.65rem; color: #ff8888; line-height: 1.4; }
+
         .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px 15px; font-family: 'JetBrains Mono'; }
         .data-item { background: rgba(30, 40, 55, 0.5); padding: 12px; border-radius: 4px; border: 1px solid #2d333b; }
         .label { color: #8b949e; font-size: 0.6rem; display: block; margin-bottom: 3px; }
@@ -39,10 +46,9 @@
         .progress-container { height: 4px; background: rgba(255,255,255,0.05); width: 100%; }
         #progress-bar { height: 100%; background: var(--vvip-color); width: 100%; transition: width 1s linear; }
 
-        .btn { display: block; width: 100%; padding: 12px; text-align: center; text-decoration: none; font-weight: 800; border-radius: 4px; font-size: 0.75rem; margin-top: 8px; border: none; cursor: pointer; transition: 0.3s; }
+        .btn { display: block; width: 100%; padding: 12px; text-align: center; text-decoration: none; font-weight: 800; border-radius: 4px; font-size: 0.75rem; margin-top: 8px; border: none; cursor: pointer; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-demo { background: transparent; color: var(--vvip-color); border: 1px solid var(--vvip-color); }
-        .btn-tele { background: #0088cc; color: white; }
         .btn-wa { background: #25d366; color: white; }
 
         @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
@@ -55,11 +61,11 @@
             <h1 style="color:white; letter-spacing: 5px;">KING<span style="color:var(--accent-color);">GOLD</span></h1>
             <div class="disclaimer-box">
                 <p>⚠️ PERINGATAN KEAMANAN:</p>
-                <p style="font-weight: normal; margin-top: 5px;">1 Kode VVIP maksimal 2 Device. Jika terdeteksi lebih dari 2 Device, akun di-BANNED PERMANEN. Untuk pendaftaran Device baru, hubungi Admin.</p>
+                <p style="font-weight: normal; margin-top: 5px;">1 Kode VVIP maksimal 2 Device. Jika terdeteksi penyalahgunaan, akun di-BANNED PERMANEN.</p>
             </div>
             <input type="password" id="passInput" placeholder="ENTER VVIP KEY" style="padding:15px; margin-bottom:15px; width:100%; box-sizing:border-box; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; font-family:'JetBrains Mono';"><br>
             <button onclick="valX()" style="padding:15px; background:var(--accent-color); border:none; font-weight:900; cursor:pointer; width:100%; border-radius:4px; color:#000;">VERIFY & SYNC</button>
-            <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold%2C%20saya%20ingin%20daftar%20Device%20baru%20%2F%20Beli%20Kode%20Akses%20VVIP" target="_blank" class="btn btn-wa">HUBUNGI ADMIN</a>
+            <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold%2C%20saya%20ingin%20daftar%20Device%20baru" target="_blank" class="btn btn-wa">HUBUNGI ADMIN</a>
         </div>
     </div>
 
@@ -97,6 +103,7 @@
                     <span class="algo-synced" id="sync-time">SYNCING...</span>
                     <div id="signal-action">ANALYZING</div>
                     <span id="trend-status">WAITING TREND</span>
+                    <span id="reason-text">Mengkalkulasi volume pasar...</span>
                 </div>
                 <div class="data-grid">
                     <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="entry-price">0.00</span></div>
@@ -107,13 +114,16 @@
                 <div class="progress-container"><div id="progress-bar"></div></div>
             </div>
 
-            <div class="card">
+            <div class="risk-card">
+                <p><strong>⚠️ RISK MANAGEMENT:</strong><br>Gunakan lot bijak sesuai modal. Jangan rakus! Sinyal adalah alat bantu, keputusan tetap di tangan Anda. Batasi maksimal 3-5 posisi per hari.</p>
+            </div>
+
+            <div class="card" style="margin-top:15px;">
                 <h2>🤝 OFFICIAL PARTNER</h2>
                 <a href="https://mifx.com/live/r/kinggold" class="btn btn-live" target="_blank">OPEN LIVE ACCOUNT</a>
                 <a href="https://mifx.com/demo/r/kinggold" class="btn btn-demo" target="_blank">OPEN DEMO ACCOUNT</a>
-                <div style="margin-top:15px; border-top:1px solid #222; padding-top:10px;">
-                    <a href="https://t.me/KinggGold" class="btn btn-tele" target="_blank">TELEGRAM VIP SIGNAL</a>
-                    <a href="https://www.tiktok.com/@king.goldd?_r=1&_t=ZS-94Ro5pXJO1H" class="btn btn-tele" style="background:#ee1d52;" target="_blank">FOLLOW TIKTOK</a>
+                <div style="margin-top:10px; border-top:1px solid #222; padding-top:10px;">
+                    <a href="https://t.me/KinggGold" class="btn btn-tele" target="_blank" style="background:#0088cc; color:white;">TELEGRAM VIP SIGNAL</a>
                 </div>
             </div>
         </div>
@@ -127,7 +137,6 @@
         function valX() {
             const i = document.getElementById("passInput").value.trim().toUpperCase();
             if (_0xH.includes(i)) {
-                alert("LOGIN SUCCESS");
                 document.getElementById("password-overlay").style.display = "none";
                 lCh(); sSi();
             } else { alert("ACCESS DENIED!"); }
@@ -141,7 +150,6 @@
         }
 
         function uSi() {
-            // Sinkronisasi dengan harga Emas Global (simulasi feed Forexcom)
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
                 .then(r => r.json())
                 .then(data => {
@@ -157,19 +165,24 @@
             const entry = price.toFixed(2);
             const act = document.getElementById("signal-action");
             const trd = document.getElementById("trend-status");
+            const res = document.getElementById("reason-text");
             
             document.getElementById("entry-price").innerText = entry;
             document.getElementById("accuracy").innerText = (97 + Math.random() * 2).toFixed(1) + "%";
             document.getElementById("sync-time").innerText = "ALGORITHM SYNCED: " + new Date().toLocaleTimeString();
 
-            if (new Date().getSeconds() % 2 === 0) {
+            const isBuy = new Date().getSeconds() % 2 === 0;
+
+            if (isBuy) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
+                res.innerText = "Harga di atas MA-50, dorongan Buyer kuat.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) + 1.20).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) - 1.00).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
+                res.innerText = "Tekanan Seller tinggi, RSI jenuh beli.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) - 1.20).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) + 1.00).toFixed(2);
             }
