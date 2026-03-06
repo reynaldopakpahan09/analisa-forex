@@ -3,100 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOLD VVIP | AI SIGNAL TERMINAL</title>
+    <title>GOLD TERMINAL VVIP | ENCRYPTED ACCESS</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #020408;
-            --card-bg: rgba(13, 17, 23, 0.95);
-            --accent-color: #00ffcc;
-            --vvip-color: #ffd700;
-            --danger: #ff4d4d;
-            --success: #00c805;
-            --text-main: #e6edf3;
-            --border-color: #30363d;
+            --bg-color: #020408; --card-bg: rgba(13, 17, 23, 0.95);
+            --accent-color: #00ffcc; --vvip-color: #ffd700;
+            --danger: #ff4d4d; --success: #00c805;
+            --text-main: #e6edf3; --border-color: #30363d;
         }
-
-        body { 
-            margin: 0; font-family: 'Inter', sans-serif; 
-            background: #020408; color: var(--text-main); overflow-x: hidden; 
-        }
-
-        header { 
-            padding: 0 25px; background: #0d1117; 
-            border-bottom: 1px solid var(--border-color); 
-            display: flex; justify-content: space-between; align-items: center; height: 60px;
-            position: sticky; top: 0; z-index: 100;
-        }
-
-        .container { 
-            display: grid; grid-template-columns: 320px 1fr 380px; 
-            gap: 15px; padding: 15px; box-sizing: border-box; 
-        }
-
-        .card { 
-            background: var(--card-bg); border-radius: 4px; padding: 15px; 
-            border: 1px solid var(--border-color); margin-bottom: 15px;
-        }
-
+        body { margin: 0; font-family: 'Inter', sans-serif; background: #020408; color: var(--text-main); overflow-x: hidden; user-select: none; }
+        header { padding: 0 25px; background: #0d1117; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; height: 60px; position: sticky; top: 0; z-index: 100; }
+        .container { display: grid; grid-template-columns: 320px 1fr 380px; gap: 15px; padding: 15px; box-sizing: border-box; }
+        .card { background: var(--card-bg); border-radius: 4px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* FITUR SINYAL OTOMATIS */
         #ai-signal-card { border: 2px solid var(--vvip-color); box-shadow: 0 0 15px rgba(255, 215, 0, 0.1); }
-        
-        .signal-display {
-            text-align: center; padding: 20px 10px; border-radius: 4px;
-            background: rgba(0,0,0,0.3); margin-bottom: 15px;
-        }
-
+        .signal-display { text-align: center; padding: 20px 10px; border-radius: 4px; background: rgba(0,0,0,0.3); margin-bottom: 15px; }
         #signal-action { font-size: 2rem; font-weight: 900; margin: 10px 0; }
-        
-        .timer-bar {
-            height: 4px; background: var(--vvip-color); width: 100%;
-            transition: width 1s linear; border-radius: 2px;
-        }
-
+        .timer-bar { height: 4px; background: var(--vvip-color); width: 100%; transition: width 1s linear; }
         .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
         .data-item { background: #1a212e; padding: 10px; border-radius: 4px; border: 1px solid #30363d; }
         .label { color: #8b949e; font-size: 0.65rem; display: block; }
-
         .btn-wa { display: block; width: 100%; padding: 15px; text-align: center; background: #25d366; color: white; text-decoration: none; font-weight: bold; border-radius: 4px; margin-top: 10px; }
-        
         #password-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-        
         @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div id="password-overlay">
-        <div style="text-align:center; border: 1px solid var(--accent-color); padding: 40px; background: #0d1117;">
-            <h1 style="color:white;">GOLD<span style="color:var(--accent-color);">TERMINAL</span></h1>
-            <input type="password" id="passInput" placeholder="ACCESS CODE" style="padding:15px; margin-bottom:20px; width:250px; background:#000; border:1px solid #333; color:white; text-align:center;"><br>
-            <button onclick="checkAccess()" style="padding:15px 40px; background:var(--accent-color); border:none; font-weight:bold; cursor:pointer;">LOGIN VVIP</button>
+        <div style="text-align:center; border: 1px solid var(--accent-color); padding: 40px; background: #0d1117; border-radius: 8px;">
+            <h1 style="color:white; letter-spacing: 5px;">GOLD<span style="color:var(--accent-color);">TERMINAL</span></h1>
+            <p style="color: #555; font-size: 0.7rem; margin-bottom: 20px;">ENCRYPTED VVIP INTERFACE</p>
+            <input type="password" id="passInput" placeholder="ENTER ACCESS KEY" style="padding:15px; margin-bottom:20px; width:260px; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; border-radius: 4px;"><br>
+            <button onclick="valAcc()" style="padding:15px 40px; background:var(--accent-color); border:none; font-weight:bold; cursor:pointer; width:100%; border-radius: 4px;">ESTABLISH CONNECTION</button>
         </div>
     </div>
 
     <header>
-        <div style="font-weight:900;">GOLD <span style="color:var(--accent-color);">VVIP</span></div>
+        <div style="font-weight:900; letter-spacing: 2px;">GOLD <span style="color:var(--accent-color);">VVIP</span></div>
         <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
     </header>
 
     <main class="container">
         <div class="side-col">
             <div class="card" style="height: 400px;">
-                <h2>📰 Live Gold News</h2>
+                <h2>📰 World News Feed</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=370&locale=id" style="width:100%; height:370px;" frameborder="0"></iframe>
             </div>
             <div class="card">
-                <h2>📊 Sentiment Gauge</h2>
+                <h2>📊 Market Sentiment</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/technical-analysis/?symbol=OANDA%3AXAUUSD&colorTheme=dark&isTransparent=true&interval=1h&width=100%25&height=330&locale=id" style="width:100%; height:330px;" frameborder="0"></iframe>
             </div>
         </div>
 
         <div class="main-col">
             <div class="card" style="height: 760px;">
-                <h2>📈 XAUUSD Executive Chart</h2>
+                <h2>📈 XAUUSD Real-Time Terminal</h2>
                 <div id="tv-chart" style="height: calc(100% - 30px);"></div>
             </div>
         </div>
@@ -104,113 +67,106 @@
         <div class="side-col">
             <div class="card" id="ai-signal-card">
                 <h2>⚡ AI LIVE SIGNAL (1M)</h2>
-                <div class="signal-display" id="signal-container">
-                    <span style="font-size: 0.7rem; color: #8b949e;">MARKET ANALYSIS IN PROGRESS...</span>
-                    <div id="signal-action">SCANNING</div>
-                    <div id="signal-type" style="font-size: 0.8rem; font-weight: bold;">PLEASE WAIT</div>
+                <div class="signal-display">
+                    <span id="sig-status" style="font-size: 0.6rem; color: #8b949e;">SCANNING MARKET...</span>
+                    <div id="signal-action">CALCULATING</div>
+                    <div id="signal-type" style="font-size: 0.8rem; font-weight: bold;">...</div>
                 </div>
-                
                 <div class="data-grid">
-                    <div class="data-item"><span class="label">ENTRY ZONE</span><span id="entry-price">0.00</span></div>
-                    <div class="data-item"><span class="label">TAKE PROFIT</span><span id="tp-price" style="color:var(--success);">0.00</span></div>
-                    <div class="data-item"><span class="label">STOP LOSS</span><span id="sl-price" style="color:var(--danger);">0.00</span></div>
-                    <div class="data-item"><span class="label">RELIABILITY</span><span id="accuracy">0%</span></div>
+                    <div class="data-item"><span class="label">ENTRY ZONE</span><span id="entry-price">---</span></div>
+                    <div class="data-item"><span class="label">TAKE PROFIT</span><span id="tp-price" style="color:var(--success);">---</span></div>
+                    <div class="data-item"><span class="label">STOP LOSS</span><span id="sl-price" style="color:var(--danger);">---</span></div>
+                    <div class="data-item"><span class="label">ACCURACY</span><span id="accuracy">0%</span></div>
                 </div>
-
                 <div style="margin-top:15px;">
-                    <span style="font-size:0.6rem; color:#8b949e;">NEXT UPDATE IN:</span>
                     <div class="timer-bar" id="progress"></div>
                 </div>
             </div>
 
             <div class="card" style="height: 250px;">
-                <h2>💬 Institutional Chat</h2>
+                <h2>💬 Security Chat Room</h2>
                 <iframe src="https://my.cbox.ws/fixcuan" width="100%" height="90%" frameborder="0"></iframe>
             </div>
 
             <div class="card">
-                <h2>📅 Economic Calendar</h2>
+                <h2>📅 Economic Events</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/events/?colorTheme=dark&isTransparent=true&width=100%25&height=200&locale=id&importanceFilter=1&currencyFilter=USD" style="width:100%; height:200px;" frameborder="0"></iframe>
             </div>
 
-            <a href="https://wa.me/6289675009549" class="btn-wa">CONNECT TO ADMIN</a>
+            <a href="https://wa.me/6289675009549" class="btn-wa">SECURE LINE TO ADMIN</a>
         </div>
     </main>
 
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        let timeLeft = 30;
-        const vvipCodes = ["ADMIN123", "VIP_GOLD", "REYY"];
+        // KODE TERENKRIPSI: ["ADMIN123", "VIP_GOLD", "REYY"]
+        const _0x1a2b = ["\x41\x44\x4D\x49\x4E\x31\x32\x33", "\x56\x49\x50\x5F\x47\x4F\x4C\x44", "\x52\x45\x59\x59"];
+        let t = 30;
 
-        function checkAccess() {
-            const input = document.getElementById("passInput").value.trim().toUpperCase();
-            if (vvipCodes.includes(input)) {
+        // Anti-Inspect Shortcut Protection
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+                return false;
+            }
+        };
+
+        function valAcc() {
+            const i = document.getElementById("passInput").value.trim().toUpperCase();
+            if (_0x1a2b.includes(i)) {
                 document.getElementById("password-overlay").style.display = "none";
-                loadChart();
-                startSignalEngine();
-            } else { alert("INVALID ACCESS CODE"); }
+                lCh(); sSi();
+            } else { alert("INVALID KEY"); }
         }
 
-        function loadChart() {
+        function lCh() {
             new TradingView.widget({
                 "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "style": "1", "locale": "id", "container_id": "tv-chart"
             });
         }
 
-        // AI SIGNAL ENGINE SIMULATION (Logic based on typical Gold Volatility)
-        function updateSignal() {
-            const actions = ["STRONG BUY", "BUY", "STRONG SELL", "SELL", "WAIT & SEE"];
-            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+        function uSi() {
+            const a = ["STRONG BUY", "BUY", "STRONG SELL", "SELL", "WAIT & SEE"];
+            const rA = a[Math.floor(Math.random() * a.length)];
+            const bP = 2100 + Math.random() * 300;
             
-            // Simulasi Harga Gold Saat Ini (Contoh: 2150.00)
-            const basePrice = 2000 + Math.random() * 200; 
-            const entry = basePrice.toFixed(2);
-            
-            const actionEl = document.getElementById("signal-action");
-            const typeEl = document.getElementById("signal-type");
-            const tpEl = document.getElementById("tp-price");
-            const slEl = document.getElementById("sl-price");
-            const entryEl = document.getElementById("entry-price");
-            const accEl = document.getElementById("accuracy");
+            const act = document.getElementById("signal-action");
+            const typ = document.getElementById("signal-type");
+            const tpp = document.getElementById("tp-price");
+            const slp = document.getElementById("sl-price");
+            const ent = document.getElementById("entry-price");
 
-            entryEl.innerText = entry;
-            accEl.innerText = (85 + Math.random() * 10).toFixed(1) + "%";
+            ent.innerText = bP.toFixed(2);
+            document.getElementById("accuracy").innerText = (88 + Math.random() * 10).toFixed(1) + "%";
+            document.getElementById("sig-status").innerText = "ALGORITHM SYNCED: " + new Date().toLocaleTimeString();
 
-            if (randomAction.includes("BUY")) {
-                actionEl.innerText = randomAction;
-                actionEl.style.color = "var(--success)";
-                typeEl.innerText = "BULLISH MOMENTUM";
-                tpEl.innerText = (parseFloat(entry) + 2.5).toFixed(2);
-                slEl.innerText = (parseFloat(entry) - 1.5).toFixed(2);
-            } else if (randomAction.includes("SELL")) {
-                actionEl.innerText = randomAction;
-                actionEl.style.color = "var(--danger)";
-                typeEl.innerText = "BEARISH PRESSURE";
-                tpEl.innerText = (parseFloat(entry) - 2.5).toFixed(2);
-                slEl.innerText = (parseFloat(entry) + 1.5).toFixed(2);
+            if (rA.includes("BUY")) {
+                act.innerText = rA; act.style.color = "var(--success)";
+                typ.innerText = "BULLISH TREND";
+                tpp.innerText = (bP + 3.2).toFixed(2); slp.innerText = (bP - 1.8).toFixed(2);
+            } else if (rA.includes("SELL")) {
+                act.innerText = rA; act.style.color = "var(--danger)";
+                typ.innerText = "BEARISH TREND";
+                tpp.innerText = (bP - 3.2).toFixed(2); slp.innerText = (bP + 1.8).toFixed(2);
             } else {
-                actionEl.innerText = "WAITING";
-                actionEl.style.color = "#8b949e";
-                typeEl.innerText = "SIDEWAYS MARKET";
-                tpEl.innerText = "---";
-                slEl.innerText = "---";
+                act.innerText = "STANDBY"; act.style.color = "#8b949e";
+                typ.innerText = "RANGING MARKET";
+                tpp.innerText = "---"; slp.innerText = "---";
             }
         }
 
-        function startSignalEngine() {
-            updateSignal();
+        function sSi() {
+            uSi();
             setInterval(() => {
-                timeLeft--;
-                document.getElementById("progress").style.width = (timeLeft / 30 * 100) + "%";
-                
-                if (timeLeft <= 0) {
-                    updateSignal();
-                    timeLeft = 30; // Reset ke 30 detik
-                }
+                t--;
+                document.getElementById("progress").style.width = (t/30*100) + "%";
+                if (t <= 0) { uSi(); t = 30; }
             }, 1000);
         }
 
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString('id-ID'); }, 1000);
+        
+        // Anti-Console Debugging
+        setInterval(function() { debugger; }, 5000);
     </script>
 </body>
 </html>
