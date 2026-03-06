@@ -27,7 +27,6 @@
         .signal-header { background: rgba(0,0,0,0.4); padding: 10px 15px; border-bottom: 1px solid #222; display: flex; align-items: center; gap: 10px; }
         .signal-header span { font-size: 0.75rem; font-weight: 900; color: var(--accent-color); letter-spacing: 1px; }
         .signal-body { padding: 20px 15px; text-align: center; }
-        .algo-synced { font-size: 0.55rem; color: #8b949e; text-transform: uppercase; margin-bottom: 5px; display: block; }
         #signal-action { font-size: 2.8rem; font-weight: 900; margin: 5px 0; line-height: 1; }
         #trend-status { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
         #reason-text { font-size: 0.65rem; color: #aaa; font-style: italic; margin-bottom: 15px; display: block; min-height: 20px; border: 1px dashed #333; padding: 5px; border-radius: 4px; }
@@ -36,9 +35,6 @@
         .history-table th { text-align: left; color: #8b949e; padding: 8px; border-bottom: 1px solid #30363d; }
         .history-table td { padding: 8px; border-bottom: 1px solid #161b22; }
         
-        .risk-card { background: rgba(255, 77, 77, 0.05); border: 1px solid #442222; padding: 12px; border-radius: 4px; margin-top: 10px; }
-        .risk-card p { margin: 0; font-size: 0.65rem; color: #ff8888; line-height: 1.4; }
-
         .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 15px 15px; font-family: 'JetBrains Mono'; }
         .data-item { background: rgba(30, 40, 55, 0.5); padding: 12px; border-radius: 4px; border: 1px solid #2d333b; }
         .label { color: #8b949e; font-size: 0.6rem; display: block; margin-bottom: 3px; }
@@ -62,14 +58,14 @@
             <h1 style="color:white; letter-spacing: 5px;">KING<span style="color:var(--accent-color);">GOLD</span></h1>
             <div class="disclaimer-box">
                 <p>⚠️ PERINGATAN KEAMANAN:</p>
-                <p style="font-weight: normal; margin-top: 5px;">Satu Kunci VVIP hanya untuk 2 perangkat. Gunakan Mode Preview 1x saja.</p>
+                <p style="font-weight: normal; margin-top: 5px;">Akses VVIP terdeteksi di 2 perangkat maksimal. Preview hanya tersedia 1x.</p>
             </div>
             <input type="password" id="passInput" placeholder="ENTER VVIP KEY" style="padding:15px; margin-bottom:15px; width:100%; box-sizing:border-box; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; font-family:'JetBrains Mono';"><br>
             
             <button onclick="valX()" style="padding:15px; background:var(--accent-color); border:none; font-weight:900; cursor:pointer; width:100%; border-radius:4px; color:#000; margin-bottom:10px;">VERIFY & SYNC</button>
             <button id="btnPreview" onclick="startPreview()" style="padding:12px; background:transparent; border:1px solid #444; font-weight:700; cursor:pointer; width:100%; border-radius:4px; color:#888; margin-bottom:10px;">FREE PREVIEW (1 MIN)</button>
             
-            <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold%2C%20saya%20ingin%20beli%20Kunci%20VVIP" target="_blank" class="btn btn-wa">HUBUNGI ADMIN</a>
+            <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold" target="_blank" class="btn btn-wa main-wa-btn">HUBUNGI ADMIN</a>
         </div>
     </div>
 
@@ -134,17 +130,10 @@
                 <div class="progress-container"><div id="progress-bar"></div></div>
             </div>
 
-            <div class="risk-card">
-                <p><strong>⚠️ RISK MANAGEMENT:</strong><br>Gunakan lot bijak sesuai modal. Jangan rakus! Sinyal adalah alat bantu, keputusan tetap di tangan Anda.</p>
-            </div>
-
             <div class="card" style="margin-top:15px;">
                 <h2>🤝 OFFICIAL PARTNER</h2>
                 <a href="https://mifx.com/live/r/kinggold" class="btn btn-live" target="_blank">OPEN LIVE ACCOUNT</a>
                 <a href="https://mifx.com/demo/r/kinggold" class="btn btn-demo" target="_blank">OPEN DEMO ACCOUNT</a>
-                <div style="margin-top:10px; border-top:1px solid #222; padding-top:10px;">
-                    <a href="https://t.me/KinggGold" class="btn btn-tele" target="_blank" style="background:#0088cc; color:white;">TELEGRAM VIP SIGNAL</a>
-                </div>
             </div>
 
             <div class="card" style="height: 250px;">
@@ -160,10 +149,20 @@
         let t = 60;
 
         window.onload = function() {
+            // Check Preview 1x
             if (localStorage.getItem("kg_previewUsed") === "true") {
                 const btn = document.getElementById("btnPreview");
                 if (btn) btn.style.display = "none";
             }
+            
+            // LOGIKA AFILIASI (NEW)
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref') || "DIRECT_MEMBER";
+            const waBtns = document.querySelectorAll('a[href*="wa.me"]');
+            waBtns.forEach(btn => {
+                let msg = `Halo Admin King Gold, saya ingin membeli Kunci VVIP.\n\n[INFO AFILIASI]\nSumber Link: ${refCode}`;
+                btn.setAttribute('href', `https://wa.me/6289675009549?text=${encodeURIComponent(msg)}`);
+            });
         };
 
         function valX() {
@@ -177,8 +176,7 @@
         function startPreview() {
             if (localStorage.getItem("kg_previewUsed") === "true") {
                 alert("Jatah Preview 1 menit Anda sudah habis!");
-                location.reload();
-                return;
+                location.reload(); return;
             }
             alert("Mode Preview Aktif (60 Detik). Pantau akurasi AI King Gold!");
             localStorage.setItem("kg_previewUsed", "true");
@@ -201,42 +199,33 @@
         function uSi() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
                 .then(r => r.json())
-                .then(data => {
-                    let price = parseFloat(data.price);
-                    renderSignal(price);
-                })
-                .catch(() => {
-                    renderSignal(2300 + (Math.random() * 10));
-                });
+                .then(data => { renderSignal(parseFloat(data.price)); })
+                .catch(() => { renderSignal(2300 + (Math.random() * 10)); });
         }
 
-        /* BAGIAN TAKE PROFIT LEBAR (20-45 PIPS) */
         function renderSignal(price) {
             const entry = price.toFixed(2);
             const act = document.getElementById("signal-action");
             const trd = document.getElementById("trend-status");
             const res = document.getElementById("reason-text");
-            
             document.getElementById("entry-price").innerText = entry;
             document.getElementById("accuracy").innerText = (96.8 + Math.random() * 2.8).toFixed(1) + "%";
             document.getElementById("sync-time").innerText = "ALGORITHM SYNCED: " + new Date().toLocaleTimeString();
 
             const isBuy = new Date().getSeconds() % 2 === 0;
-            
-            // Jarak TP Dinamis (2.00 - 4.50 Poin Gold) = 20 - 45 Pips
-            const dynamicTP = (2.00 + Math.random() * 2.50).toFixed(2); 
-            const fixedSL = 1.20; // SL tetap disiplin di 12 Pips
+            const dynamicTP = (2.00 + Math.random() * 2.50).toFixed(2); // TP 20-45 Pips
+            const fixedSL = 1.20;
 
             if (isBuy) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
-                res.innerHTML = "<strong>REASON:</strong> Market Structure Break confirmed. Price holding above MA-50 with high volume.";
+                res.innerHTML = "<strong>REASON:</strong> Market Structure Break confirmed. High Institutional Buying.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) + parseFloat(dynamicTP)).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) - fixedSL).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
-                res.innerHTML = "<strong>REASON:</strong> Rejection at Supply Zone. Bearish Divergence detected on M5 analysis.";
+                res.innerHTML = "<strong>REASON:</strong> Rejection at Supply Zone. Bearish Divergence detected.";
                 document.getElementById("tp-price").innerText = (parseFloat(entry) - parseFloat(dynamicTP)).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) + fixedSL).toFixed(2);
             }
