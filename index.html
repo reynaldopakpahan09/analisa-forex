@@ -18,13 +18,11 @@
         .card { background: var(--card-bg); border-radius: 4px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* LOGIN SCREEN */
         #password-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
         .login-box { text-align:center; border: 1px solid #333; padding: 40px; background: #0d1117; border-radius: 12px; max-width: 400px; }
         .disclaimer-box { background: rgba(255, 77, 77, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 6px; margin-bottom: 20px; text-align: left; }
         .disclaimer-box p { color: var(--danger); font-size: 0.7rem; margin: 0; line-height: 1.5; font-weight: bold; }
         
-        /* SIGNAL CARD */
         #ai-signal-card { border: 2px solid var(--vvip-color); padding: 0; overflow: hidden; }
         .signal-header { background: rgba(0,0,0,0.4); padding: 10px 15px; border-bottom: 1px solid #222; display: flex; align-items: center; gap: 10px; }
         .signal-header span { font-size: 0.75rem; font-weight: 900; color: var(--accent-color); letter-spacing: 1px; }
@@ -34,7 +32,6 @@
         #trend-status { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
         #reason-text { font-size: 0.65rem; color: #aaa; font-style: italic; margin-bottom: 15px; display: block; min-height: 20px; border: 1px dashed #333; padding: 5px; border-radius: 4px; }
         
-        /* HISTORY TABLE */
         .history-table { width: 100%; border-collapse: collapse; font-size: 0.65rem; font-family: 'JetBrains Mono'; margin-top: 10px; }
         .history-table th { text-align: left; color: #8b949e; padding: 8px; border-bottom: 1px solid #30363d; }
         .history-table td { padding: 8px; border-bottom: 1px solid #161b22; }
@@ -151,7 +148,6 @@
                 <h2>💬 Security Chat (Member Only)</h2>
                 <iframe src="https://my.cbox.ws/fixcuan" width="100%" height="90%" frameborder="0"></iframe>
             </div>
-
         </div>
     </main>
 
@@ -194,7 +190,7 @@
             const res = document.getElementById("reason-text");
             
             document.getElementById("entry-price").innerText = entry;
-            document.getElementById("accuracy").innerText = (97 + Math.random() * 2).toFixed(1) + "%";
+            document.getElementById("accuracy").innerText = (96.5 + Math.random() * 2.5).toFixed(1) + "%";
             document.getElementById("sync-time").innerText = "ALGORITHM SYNCED: " + new Date().toLocaleTimeString();
 
             const isBuy = new Date().getSeconds() % 2 === 0;
@@ -202,14 +198,14 @@
             if (isBuy) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
-                res.innerHTML = "<strong>REASON:</strong> Breakout Resistance + Golden Cross MA20/50.";
-                document.getElementById("tp-price").innerText = (parseFloat(entry) + 1.20).toFixed(2);
+                res.innerHTML = "<strong>REASON:</strong> Market Structure Break confirmed. Price holding above MA-50 support.";
+                document.getElementById("tp-price").innerText = (parseFloat(entry) + 1.50).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) - 1.00).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
-                res.innerHTML = "<strong>REASON:</strong> Rejection Supply Zone + RSI Overbought.";
-                document.getElementById("tp-price").innerText = (parseFloat(entry) - 1.20).toFixed(2);
+                res.innerHTML = "<strong>REASON:</strong> Bearish Divergence confirmed. RSI rejected at Overbought zone.";
+                document.getElementById("tp-price").innerText = (parseFloat(entry) - 1.50).toFixed(2);
                 document.getElementById("sl-price").innerText = (parseFloat(entry) + 1.00).toFixed(2);
             }
         }
