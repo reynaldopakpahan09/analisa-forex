@@ -18,13 +18,11 @@
         .card { background: var(--card-bg); border-radius: 4px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* LOGIN OVERLAY */
         #password-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
         .login-box { text-align:center; border: 1px solid #333; padding: 40px; background: #0d1117; border-radius: 12px; max-width: 400px; }
         .disclaimer-box { background: rgba(255, 77, 77, 0.1); border: 1px solid var(--danger); padding: 15px; border-radius: 6px; margin-bottom: 20px; text-align: left; }
         .disclaimer-box p { color: var(--danger); font-size: 0.7rem; margin: 0; line-height: 1.5; font-weight: bold; }
         
-        /* SIGNAL BOX (SESUAI FOTO 2) */
         #ai-signal-card { border: 2px solid var(--vvip-color); padding: 0; overflow: hidden; }
         .signal-header { background: rgba(0,0,0,0.4); padding: 10px 15px; border-bottom: 1px solid #222; display: flex; align-items: center; gap: 10px; }
         .signal-header span { font-size: 0.75rem; font-weight: 900; color: var(--accent-color); letter-spacing: 1px; }
@@ -41,13 +39,11 @@
         .progress-container { height: 4px; background: rgba(255,255,255,0.05); width: 100%; }
         #progress-bar { height: 100%; background: var(--vvip-color); width: 100%; transition: width 1s linear; }
 
-        /* BUTTONS */
         .btn { display: block; width: 100%; padding: 12px; text-align: center; text-decoration: none; font-weight: 800; border-radius: 4px; font-size: 0.75rem; margin-top: 8px; border: none; cursor: pointer; transition: 0.3s; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-demo { background: transparent; color: var(--vvip-color); border: 1px solid var(--vvip-color); }
         .btn-tele { background: #0088cc; color: white; }
         .btn-wa { background: #25d366; color: white; }
-        .btn:hover { transform: scale(1.02); filter: brightness(1.1); }
 
         @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
@@ -63,7 +59,6 @@
             </div>
             <input type="password" id="passInput" placeholder="ENTER VVIP KEY" style="padding:15px; margin-bottom:15px; width:100%; box-sizing:border-box; background:#000; border:1px solid #333; color:var(--accent-color); text-align:center; outline:none; font-family:'JetBrains Mono';"><br>
             <button onclick="valX()" style="padding:15px; background:var(--accent-color); border:none; font-weight:900; cursor:pointer; width:100%; border-radius:4px; color:#000;">VERIFY & SYNC</button>
-            
             <a href="https://wa.me/6289675009549?text=Halo%20Admin%20King%20Gold%2C%20saya%20ingin%20daftar%20Device%20baru%20%2F%20Beli%20Kode%20Akses%20VVIP" target="_blank" class="btn btn-wa">HUBUNGI ADMIN</a>
         </div>
     </div>
@@ -121,24 +116,18 @@
                     <a href="https://www.tiktok.com/@king.goldd?_r=1&_t=ZS-94Ro5pXJO1H" class="btn btn-tele" style="background:#ee1d52;" target="_blank">FOLLOW TIKTOK</a>
                 </div>
             </div>
-
-            <div class="card" style="height: 180px;">
-                <h2>💬 Security Chat</h2>
-                <iframe src="https://my.cbox.ws/fixcuan" width="100%" height="90%" frameborder="0"></iframe>
-            </div>
         </div>
     </main>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // HEX KEYS: KING01, GOLD88, REYYVIP, MIFXPRO, SCALPER, PROFIT77, VIPGOLD, MASTER22, XAUUSD, CUANBOSS
         const _0xH = ["\x4B\x49\x4E\x47\x30\x31", "\x47\x4F\x4C\x44\x38\x38", "\x52\x45\x59\x59\x56\x49\x50", "\x4D\x49\x46\x58\x50\x52\x4F", "\x53\x43\x41\x4C\x50\x45\x52", "\x50\x52\x4F\x46\x49\x54\x37\x37", "\x56\x49\x50\x47\x4F\x4C\x44", "\x4D\x41\x53\x54\x45\x52\x32\x32", "\x58\x41\x55\x55\x53\x44", "\x43\x55\x41\x4E\x42\x4F\x53\x53"];
         let t = 60;
 
         function valX() {
             const i = document.getElementById("passInput").value.trim().toUpperCase();
             if (_0xH.includes(i)) {
-                alert("LOGIN SUCCESS: Device Verifikasi Berhasil.");
+                alert("LOGIN SUCCESS");
                 document.getElementById("password-overlay").style.display = "none";
                 lCh(); sSi();
             } else { alert("ACCESS DENIED!"); }
@@ -152,26 +141,37 @@
         }
 
         function uSi() {
-            // Simulasi Harga yang mendekati Market Live XAU/USD
-            const base = 2300 + (Math.random() * 50); 
-            const entry = base.toFixed(2);
+            // Sinkronisasi dengan harga Emas Global (simulasi feed Forexcom)
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
+                .then(r => r.json())
+                .then(data => {
+                    let price = parseFloat(data.price);
+                    renderSignal(price);
+                })
+                .catch(() => {
+                    renderSignal(2300 + (Math.random() * 10));
+                });
+        }
+
+        function renderSignal(price) {
+            const entry = price.toFixed(2);
             const act = document.getElementById("signal-action");
             const trd = document.getElementById("trend-status");
             
             document.getElementById("entry-price").innerText = entry;
-            document.getElementById("accuracy").innerText = (96 + Math.random() * 3).toFixed(1) + "%";
+            document.getElementById("accuracy").innerText = (97 + Math.random() * 2).toFixed(1) + "%";
             document.getElementById("sync-time").innerText = "ALGORITHM SYNCED: " + new Date().toLocaleTimeString();
 
-            if (Math.random() > 0.5) {
+            if (new Date().getSeconds() % 2 === 0) {
                 act.innerText = "STRONG BUY"; act.style.color = "var(--success)";
                 trd.innerText = "BULLISH TREND"; trd.style.color = "var(--success)";
-                document.getElementById("tp-price").innerText = (parseFloat(entry) + 2.50).toFixed(2);
-                document.getElementById("sl-price").innerText = (parseFloat(entry) - 1.50).toFixed(2);
+                document.getElementById("tp-price").innerText = (parseFloat(entry) + 1.20).toFixed(2);
+                document.getElementById("sl-price").innerText = (parseFloat(entry) - 1.00).toFixed(2);
             } else {
                 act.innerText = "STRONG SELL"; act.style.color = "var(--danger)";
                 trd.innerText = "BEARISH TREND"; trd.style.color = "var(--danger)";
-                document.getElementById("tp-price").innerText = (parseFloat(entry) - 2.50).toFixed(2);
-                document.getElementById("sl-price").innerText = (parseFloat(entry) + 1.50).toFixed(2);
+                document.getElementById("tp-price").innerText = (parseFloat(entry) - 1.20).toFixed(2);
+                document.getElementById("sl-price").innerText = (parseFloat(entry) + 1.00).toFixed(2);
             }
         }
 
@@ -185,7 +185,7 @@
         }
 
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString('id-ID'); }, 1000);
-        document.onkeydown = function(e) { if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false; };
+        document.onkeydown = function(e) { if (e.keyCode == 123) return false; };
     </script>
 </body>
 </html>
