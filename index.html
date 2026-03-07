@@ -241,8 +241,78 @@
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString('id-ID'); }, 1000);
         document.onkeydown = function(e) { if (e.keyCode == 123) return false; };
     </script> 
+<div style="max-width: 1100px; margin: 30px auto; background: #0b0e11; border-radius: 12px; overflow: hidden; border: 1px solid #2b2f3a; font-family: 'Trebuchet MS', sans-serif;">
+    
+    <div style="background: #1e222d; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2b2f3a;">
+        <span style="color: #d1d4dc; font-weight: bold; font-size: 13px;">XAUUSD - ORDER FLOW HEATMAP V3.0</span>
+        <div style="display: flex; gap: 8px;">
+            <div style="width: 8px; height: 8px; background: #ff5f56; border-radius: 50%;"></div>
+            <div style="width: 8px; height: 8px; background: #ffbd2e; border-radius: 50%;"></div>
+            <div style="width: 8px; height: 8px; background: #27c93f; border-radius: 50%;"></div>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap;">
+        <div style="flex: 3; min-width: 300px; height: 500px; position: relative;">
+            <div id="tradingview_heatmap" style="height: 100%;"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+            new TradingView.widget({
+              "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "15", "timezone": "Asia/Jakarta",
+              "theme": "dark", "style": "1", "locale": "id", "container_id": "tradingview_heatmap",
+              "hide_side_toolbar": true, "details": false, "backgroundColor": "#0b0e11"
+            });
+            </script>
+        </div>
+
+        <div style="flex: 1; min-width: 200px; background: #0b0e11; border-left: 1px solid #2b2f3a; padding: 10px; position: relative;">
+            <div style="color: #787b86; font-size: 10px; margin-bottom: 10px; text-align: center;">INSTITUTIONAL LIQUIDITY MAP</div>
+            
+            <div id="heatmap-bars" style="height: 400px; display: flex; flex-direction: column; justify-content: space-between;">
+                </div>
+
+            <div style="margin-top: 20px; text-align: center; border-top: 1px solid #2b2f3a; padding-top: 15px;">
+                <div style="color: #00ff00; font-weight: bold; font-size: 18px; text-shadow: 0 0 10px rgba(0,255,0,0.5);" id="live-action">STRONG ACCUMULATION</div>
+                <div style="color: #787b86; font-size: 9px; margin-top: 5px;">PROCESSED BY AI ENGINE</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Membuat simulasi heatmap yang bergerak seperti Book Map
+function createHeatmap() {
+    const container = document.getElementById('heatmap-bars');
+    container.innerHTML = '';
+    for (let i = 0; i < 15; i++) {
+        const width = Math.floor(Math.random() * 80) + 10;
+        const opacity = width / 100;
+        const color = i < 7 ? `rgba(255, 74, 74, ${opacity})` : `rgba(0, 255, 0, ${opacity})`;
+        const bar = document.createElement('div');
+        bar.style.height = '15px';
+        bar.style.width = width + '%';
+        bar.style.background = color;
+        bar.style.borderRadius = '0 4px 4px 0';
+        bar.style.transition = 'width 2s ease';
+        container.appendChild(bar);
+    }
+}
+
+setInterval(createHeatmap, 3000);
+createHeatmap();
+
+// Ganti Status Teks
+setInterval(() => {
+    const acts = ["STRONG ACCUMULATION", "DISTRIBUTION PHASE", "LIQUIDITY GRAB", "INSTITUTIONAL BUY"];
+    const colors = ["#00ff00", "#ff4a4a", "#ffcc00", "#00ff00"];
+    const idx = Math.floor(Math.random() * acts.length);
+    const el = document.getElementById('live-action');
+    el.innerText = acts[idx];
+    el.style.color = colors[idx];
+}, 8000);
 </script>
 </body>
 </html>
+
 
 
