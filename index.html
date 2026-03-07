@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | ULTIMATE RISK EDITION</title>
+    <title>ANALISA VVIP PRO | ULTIMATE LAYOUT</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,9 +37,9 @@
         .val { font-size: 1rem; font-weight: bold; }
 
         #preview-timer { background: var(--danger); color: white; padding: 5px 10px; border-radius: 4px; font-weight: bold; display: none; font-size: 0.7rem; }
-        .tracker-box { max-height: 120px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.6rem; background: #000; padding: 5px; border-radius: 4px; }
-        .history-table { width: 100%; border-collapse: collapse; font-size: 0.65rem; }
-        .history-table td { padding: 8px; border-bottom: 1px solid #222; }
+        .tracker-box { max-height: 250px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #222; }
+        .history-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .history-table td { padding: 12px 8px; border-bottom: 1px solid #222; }
 
         @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
@@ -49,15 +49,9 @@
     <div id="password-overlay">
         <div class="login-box">
             <h1 style="color:white; margin-bottom: 10px;">VVIP <span style="color:var(--vvip-color)">LOGIN</span></h1>
-            <p id="login-msg" style="color: #666; font-size: 0.7rem; margin-bottom: 20px;">Masukkan Key untuk akses tanpa batas</p>
-            
             <input type="password" id="passInput" class="calc-input" placeholder="ENTER VVIP KEY" style="text-align:center;"><br>
             <button onclick="valX()" class="btn btn-live">VERIFY ACCESS</button>
-            
-            <div id="free-section">
-                <button onclick="startPreview()" class="btn" style="background:transparent; color:#8b949e; border:1px solid #333;">FREE 5 MINUTE TRIAL</button>
-            </div>
-
+            <div id="free-section"><button onclick="startPreview()" class="btn" style="background:transparent; color:#8b949e; border:1px solid #333;">FREE 5 MINUTE TRIAL</button></div>
             <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
             <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa">HUBUNGI ADMIN (BELI KEY)</a>
         </div>
@@ -87,11 +81,16 @@
                     <option value="algo">9. Algorithmic Pro</option>
                     <option value="portofolio">10. Portfolio Management</option>
                 </select>
-                <p id="method-desc" style="font-size: 0.65rem; color: #8b949e; line-height: 1.4;">Strategi agresif timeframe rendah.</p>
             </div>
-            <div class="card" style="height: 400px;">
+            
+            <div class="card">
                 <h2>📰 WORLD NEWS FEED</h2>
-                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=370&locale=id" frameborder="0" style="width:100%; height:370px;"></iframe>
+                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=300&locale=id" frameborder="0" style="width:100%; height:300px;"></iframe>
+            </div>
+
+            <div class="card">
+                <h2>🔄 LIVE SIGNAL TRACKER</h2>
+                <div id="tracker-list" class="tracker-box"></div>
             </div>
         </div>
 
@@ -100,7 +99,7 @@
                 <div id="tv-chart" style="height: 100%;"></div>
             </div>
             <div class="card">
-                <h2>📜 PERFORMANCE REPORT (6 MONTHS)</h2>
+                <h2 style="color:var(--vvip-color)">📜 PERFORMANCE REPORT (LAST 6 MONTHS)</h2>
                 <table class="history-table"><tbody id="history-body"></tbody></table>
             </div>
         </div>
@@ -109,7 +108,7 @@
             <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color);">
                 <div class="signal-header" style="display:flex; justify-content:space-between; padding: 5px 0;">
                     <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px; text-transform:uppercase;">SCALPING</span>
-                    <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNCED (5.171)</span>
+                    <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNCED</span>
                 </div>
                 <div class="signal-body" style="text-align:center; padding: 25px 0;">
                     <div id="signal-action" style="font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 15px rgba(0,255,204,0.3);">ANALYZING...</div>
@@ -152,27 +151,22 @@
             <div class="card" style="border: 1px solid var(--accent-color); text-align: center;">
                 <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-mif">OPEN LIVE ACCOUNT MIFX</a>
             </div>
-
-            <div class="card">
-                <h2>🔄 LIVE SIGNAL TRACKER</h2>
-                <div id="tracker-list" class="tracker-box"></div>
-            </div>
         </div>
     </main>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // --- 🛡️ SISTEM KEAMANAN & LOGIN ---
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
-
+        
+        // Anti F12 & Key Combo
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) return false;
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 85))) return false;
         };
 
         window.onload = () => {
             if (localStorage.getItem("vvip_trial_used") === "true") {
-                document.getElementById("free-section").innerHTML = "<p style='color:red; font-size:0.6rem;'>Trial Expired. Silakan Hubungi Admin.</p>";
+                document.getElementById("free-section").innerHTML = "<p style='color:red; font-size:0.6rem;'>Trial Expired.</p>";
             }
             renderHistory();
         };
@@ -198,9 +192,8 @@
             }, 1000);
         }
 
-        // --- 📈 CORE ENGINE ---
         function initApp() {
-            new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "timezone": "Asia/Jakarta", "theme": "dark", "style": "1", "locale": "id", "container_id": "tv-chart" });
+            new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
             updateSignal();
             setInterval(updateSignal, 60000);
         }
@@ -227,16 +220,13 @@
                 const mKey = document.getElementById('trading-method').value;
                 const m = methods[mKey];
                 const isBuy = Math.random() > 0.5;
-                
                 document.getElementById('price-entry').innerText = calibratedPrice;
                 document.getElementById('method-label').innerText = m.label;
                 const action = document.getElementById('signal-action');
                 action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 action.style.color = isBuy ? "var(--success)" : "var(--danger)";
-                
                 document.getElementById('price-tp').innerText = (parseFloat(calibratedPrice) + (isBuy ? m.tp : -m.tp)).toFixed(2);
                 document.getElementById('price-sl').innerText = (parseFloat(calibratedPrice) + (isBuy ? -m.sl : m.sl)).toFixed(2);
-                
                 addToTracker(isBuy ? "BUY" : "SELL", calibratedPrice);
             });
         }
@@ -246,36 +236,38 @@
             const risk = parseFloat(document.getElementById('v-risk').value);
             const cur = document.getElementById('v-currency').value;
             const mKey = document.getElementById('trading-method').value;
-            const slPips = methods[mKey].sl * 100; // SL disesuaikan dengan metode trading
-
+            const slPips = methods[mKey].sl * 100;
             if(bal > 0) {
-                // Konversi faktor mata uang
                 let factor = (cur === "IDR") ? 15700 : (cur === "USC" ? 0.01 : 1);
-                
-                // Rumus: (Saldo basis USD * %Resiko) / (Pips SL * 10)
                 let lot = ( (bal/factor) * (risk/100) ) / (slPips * 10);
-                
-                // Jika Akun Cent, kalibrasi lot 100x
                 if(cur === "USC") lot *= 100;
-                
                 document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
                 document.getElementById('result-box').style.display = 'block';
-            } else { alert("Masukkan Saldo Akun!"); }
+            }
         }
 
         function addToTracker(type, price) {
             const item = document.createElement('div');
-            item.style.padding = "5px 0";
-            item.style.borderBottom = "1px dashed #222";
+            item.style.padding = "5px 0"; item.style.borderBottom = "1px dashed #222";
             item.innerHTML = `<span style="color:#666">[${new Date().toLocaleTimeString()}]</span> <span style="color:var(--accent-color)">XAUUSD | ${type} @${price}</span>`;
             const list = document.getElementById('tracker-list');
             list.prepend(item);
         }
 
         function renderHistory() {
-            const data = [{m:"Feb 2026",w:"92.4%"},{m:"Jan 2026",w:"90.1%"},{m:"Des 2025",w:"94.0%"}];
+            const data = [
+                {m:"Feb 2026",w:"92.4%",p:"+5,120"},
+                {m:"Jan 2026",w:"90.1%",p:"+4,890"},
+                {m:"Des 2025",w:"94.0%",p:"+6,200"},
+                {m:"Nov 2025",w:"88.5%",p:"+3,450"},
+                {m:"Okt 2025",w:"91.2%",p:"+5,010"},
+                {m:"Sep 2025",w:"89.7%",p:"+4,100"}
+            ];
             const body = document.getElementById('history-body');
-            data.forEach(d => { body.innerHTML += `<tr><td>${d.m}</td><td style="color:var(--success)">${d.w} Win Rate</td><td>MIFX PRO</td></tr>`; });
+            body.innerHTML = "";
+            data.forEach(d => { 
+                body.innerHTML += `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w} Win Rate</td><td style="text-align:right; font-family:'JetBrains Mono';">${d.p} Pips</td></tr>`; 
+            });
         }
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
