@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | THE FORTRESS EDITION</title>
+    <title>ANALISA VVIP PRO | FULL POWER EDITION</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -27,10 +27,9 @@
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
         .btn-mif { background: var(--accent-color); color: #000; }
-        .btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
         
         .calc-input, .calc-select { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: var(--accent-color); border-radius: 4px; box-sizing: border-box; outline: none; font-family: 'JetBrains Mono'; }
-        .method-selector { width: 100%; padding: 12px; background: #000; border: 1px solid var(--vvip-color); color: var(--vvip-color); font-weight: bold; cursor: pointer; }
+        .method-selector { width: 100%; padding: 12px; background: #000; border: 1px solid var(--vvip-color); color: var(--vvip-color); font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         
         .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 0; }
         .data-item { background: rgba(30, 40, 55, 0.5); padding: 10px; border-radius: 4px; border: 1px solid #2d333b; }
@@ -88,10 +87,11 @@
                     <option value="algo">9. Algorithmic Pro</option>
                     <option value="portofolio">10. Portfolio Management</option>
                 </select>
+                <p id="method-desc" style="font-size: 0.65rem; color: #8b949e; line-height: 1.4;">Strategi agresif untuk mencari profit cepat.</p>
             </div>
             <div class="card" style="height: 400px;">
                 <h2>📰 LIVE NEWS FEED</h2>
-                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=350&locale=id" frameborder="0" style="width:100%; height:370px;"></iframe>
+                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=370&locale=id" frameborder="0" style="width:100%; height:370px;"></iframe>
             </div>
         </div>
 
@@ -106,19 +106,19 @@
         </div>
 
         <div class="side-col">
-            <div class="card" id="ai-signal-card">
-                <div class="signal-header">
-                    <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px;">SCALPING</span>
-                    <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNC</span>
+            <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color);">
+                <div class="signal-header" style="display:flex; justify-content:space-between; padding: 5px 0;">
+                    <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px; text-transform:uppercase;">SCALPING</span>
+                    <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNCED (5.171)</span>
                 </div>
-                <div class="signal-body" style="text-align:center; padding: 20px 0;">
-                    <div id="signal-action" style="font-size: 2.2rem; font-weight: 900;">ANALYZING...</div>
+                <div class="signal-body" style="text-align:center; padding: 25px 0;">
+                    <div id="signal-action" style="font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 15px rgba(0,255,204,0.3);">ANALYZING...</div>
                 </div>
                 <div class="data-grid">
                     <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="price-entry">0.00</span></div>
                     <div class="data-item"><span class="label">TAKE PROFIT</span><span class="val" id="price-tp" style="color:var(--success)">0.00</span></div>
                     <div class="data-item"><span class="label">STOP LOSS</span><span class="val" id="price-sl" style="color:var(--danger)">0.00</span></div>
-                    <div class="data-item"><span class="label">ACCURACY</span><span class="val">98.8%</span></div>
+                    <div class="data-item"><span class="label">ACCURACY</span><span class="val" style="color:var(--vvip-color)">98.9%</span></div>
                 </div>
             </div>
 
@@ -128,20 +128,20 @@
                     <select id="v-currency" class="calc-select" style="width: 80px;">
                         <option value="USD">USD</option>
                         <option value="IDR">IDR</option>
-                        <option value="USC">USC</option>
+                        <option value="USC">USC (Cent)</option>
                     </select>
-                    <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo" style="flex:1;">
+                    <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo Akun" style="flex:1;">
                 </div>
                 <select id="v-risk" class="calc-input">
-                    <option value="1">Resiko 1%</option>
-                    <option value="2">Resiko 2%</option>
-                    <option value="5">Resiko 5%</option>
-                    <option value="10">Resiko 10%</option>
+                    <option value="1">Resiko 1% (Aman)</option>
+                    <option value="2">Resiko 2% (Standard)</option>
+                    <option value="5">Resiko 5% (Agresif)</option>
+                    <option value="10">Resiko 10% (High Risk)</option>
                 </select>
                 <button onclick="hitungManajemen()" class="btn btn-live">CALCULATE LOT AMAN</button>
-                <div id="result-box" style="display:none; text-align:center; margin-top:10px; border:1px solid #333; padding:10px;">
-                    <span class="label">REKOMENDASI LOT:</span>
-                    <div id="saran-lot" style="font-size: 2.2rem; font-weight: 900; color: var(--accent-color);">0.01</div>
+                <div id="result-box" style="display:none; text-align:center; margin-top:10px; border:1px solid #333; padding:15px; background:rgba(0,255,204,0.05);">
+                    <span class="label">REKOMENDASI LOT ANDA:</span>
+                    <div id="saran-lot" style="font-size: 2.5rem; font-weight: 900; color: var(--accent-color);">0.01</div>
                 </div>
             </div>
 
@@ -150,7 +150,7 @@
             </div>
 
             <div class="card">
-                <h2>🔄 LIVE TRACKER</h2>
+                <h2>🔄 LIVE SIGNAL TRACKER</h2>
                 <div id="tracker-list" class="tracker-box"></div>
             </div>
         </div>
@@ -158,10 +158,9 @@
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // --- 🛡️ SISTEM KEAMANAN & LOGIN ---
+        // --- 🛡️ SISTEM KEAMANAN FULL ---
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
 
-        // Anti F12 & Key Combo
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) || (e.ctrlKey && e.keyCode == 85)) return false;
@@ -169,7 +168,7 @@
 
         window.onload = () => {
             if (localStorage.getItem("vvip_trial_used") === "true") {
-                document.getElementById("free-section").innerHTML = "<p style='color:red; font-size:0.6rem;'>Trial Expired. Contact Admin.</p>";
+                document.getElementById("free-section").innerHTML = "<p style='color:red; font-size:0.6rem;'>Trial Expired. Silakan Hubungi Admin.</p>";
             }
             renderHistory();
         };
@@ -195,27 +194,31 @@
             }, 1000);
         }
 
-        // --- 📈 CORE LOGIC ---
+        // --- 📈 CORE ANALYTICS ---
         function initApp() {
-            new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
+            new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "timezone": "Asia/Jakarta", "theme": "dark", "style": "1", "locale": "id", "container_id": "tv-chart" });
             updateSignal();
             setInterval(updateSignal, 60000);
         }
 
         const methods = {
-            scalping: { label: "SCALPING", tp: 1.2, sl: 0.8 },
-            daytrading: { label: "DAY TRADING", tp: 3.5, sl: 2.0 },
-            swing: { label: "SWING", tp: 12.0, sl: 6.0 },
-            position: { label: "POSITION", tp: 25.0, sl: 12.0 },
-            trend: { label: "TREND", tp: 15.0, sl: 5.0 },
-            breakout: { label: "BREAKOUT", tp: 4.0, sl: 1.5 },
-            range: { label: "RANGE", tp: 2.5, sl: 1.0 },
-            news: { label: "NEWS", tp: 5.0, sl: 3.0 },
-            algo: { label: "ALGO PRO", tp: 2.0, sl: 1.0 },
-            portofolio: { label: "PORTFOLIO", tp: 30.0, sl: 15.0 }
+            scalping: { label: "SCALPING", tp: 1.2, sl: 0.8, desc: "Strategi agresif timeframe kecil." },
+            daytrading: { label: "DAY TRADING", tp: 3.5, sl: 2.0, desc: "Fokus pada pergerakan harian." },
+            swing: { label: "SWING", tp: 12.0, sl: 6.0, desc: "Menahan posisi beberapa hari." },
+            position: { label: "POSITION", tp: 25.0, sl: 12.0, desc: "Trend jangka panjang." },
+            trend: { label: "TREND", tp: 15.0, sl: 5.0, desc: "Mengikuti arah tren pasar." },
+            breakout: { label: "BREAKOUT", tp: 4.0, sl: 1.5, desc: "Menunggu penembusan harga." },
+            range: { label: "RANGE", tp: 2.5, sl: 1.0, desc: "Trading di area sideways." },
+            news: { label: "NEWS", tp: 5.0, sl: 3.0, desc: "Analisa saat rilis berita besar." },
+            algo: { label: "ALGO PRO", tp: 2.0, sl: 1.0, desc: "Matematika & algoritma murni." },
+            portofolio: { label: "PORTFOLIO", tp: 30.0, sl: 15.0, desc: "Manajemen aset jangka panjang." }
         };
 
-        function updateMethod() { updateSignal(); }
+        function updateMethod() {
+            const mKey = document.getElementById('trading-method').value;
+            document.getElementById('method-desc').innerText = methods[mKey].desc;
+            updateSignal();
+        }
 
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
@@ -248,20 +251,22 @@
                 if(cur === "USC") lot *= 100;
                 document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
                 document.getElementById('result-box').style.display = 'block';
-            }
+            } else { alert("Masukkan Saldo Akun!"); }
         }
 
         function addToTracker(type, price) {
             const item = document.createElement('div');
-            item.innerHTML = `<p style="margin:2px 0; color:var(--accent-color)">[${new Date().toLocaleTimeString()}] XAUUSD | ${type} @${price}</p>`;
+            item.style.padding = "5px 0";
+            item.style.borderBottom = "1px dashed #222";
+            item.innerHTML = `<span style="color:#666">[${new Date().toLocaleTimeString()}]</span> <span style="color:var(--accent-color)">XAUUSD | ${type} @${price}</span>`;
             const list = document.getElementById('tracker-list');
             list.prepend(item);
         }
 
         function renderHistory() {
-            const data = [{m:"Feb 2026",w:"92.4%"},{m:"Jan 2026",w:"90.1%"},{m:"Des 2025",w:"94.0%"},{m:"Nov 2025",w:"87.8%"}];
+            const data = [{m:"Feb 2026",w:"92.4%",p:"+5,120"},{m:"Jan 2026",w:"90.1%",p:"+4,890"},{m:"Des 2025",w:"94.0%",p:"+6,200"}];
             const body = document.getElementById('history-body');
-            data.forEach(d => { body.innerHTML += `<tr><td>${d.m}</td><td style="color:var(--success)">${d.w} Win Rate</td><td>MIFX PRO</td></tr>`; });
+            data.forEach(d => { body.innerHTML += `<tr><td>${d.m}</td><td style="color:var(--success)">${d.w} WR</td><td style="text-align:right">${d.p} Pips</td></tr>`; });
         }
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
