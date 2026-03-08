@@ -145,15 +145,15 @@
                 <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px; margin-bottom:10px;">
                     <div>
                         <span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span>
-                        <input type="number" id="t-daily" class="form-ctrl" value="10">
+                        <input type="number" id="t-daily" class="form-ctrl" placeholder="Isi Hari">
                     </div>
                     <div>
                         <span style="font-size:0.5rem; color:var(--accent)">MINGGU (%)</span>
-                        <input type="number" id="t-weekly" class="form-ctrl" value="50">
+                        <input type="number" id="t-weekly" class="form-ctrl" readonly>
                     </div>
                     <div>
                         <span style="font-size:0.5rem; color:var(--green)">BULAN (%)</span>
-                        <input type="number" id="t-monthly" class="form-ctrl" value="200">
+                        <input type="number" id="t-monthly" class="form-ctrl" readonly>
                     </div>
                 </div>
 
@@ -162,7 +162,7 @@
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
                 
                 <div id="compounding-view" style="display:none; margin-top:10px; padding:8px; background:rgba(0,255,204,0.1); border-radius:8px; font-size:0.65rem; border:1px dashed var(--accent);">
-                    </div>
+                </div>
             </div>
             
             <div class="card"><h2>PELACAK PERFORMA</h2><div id="tracker" class="tracker-list"></div></div>
@@ -264,16 +264,22 @@
             });
         }
 
-        // FUNGSI KALKULATOR TARGET MANDIRI (UPDATE TERBARU)
+        // LOGIKA AUTO-SYNC TARGET UNTUK TRADER PEMULA
+        document.getElementById('t-daily').addEventListener('input', function() {
+            let daily = parseFloat(this.value) || 0;
+            document.getElementById('t-weekly').value = (daily * 5);
+            document.getElementById('t-monthly').value = (daily * 20);
+            if(document.getElementById('c-bal').value > 0) { calculateLot(); }
+        });
+
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
             const cur = document.getElementById('c-curr').value;
             
-            // Ambil input target mandiri
-            const tDaily = parseFloat(document.getElementById('t-daily').value) / 100;
-            const tWeekly = parseFloat(document.getElementById('t-weekly').value) / 100;
-            const tMonthly = parseFloat(document.getElementById('t-monthly').value) / 100;
+            const tDaily = parseFloat(document.getElementById('t-daily').value) / 100 || 0;
+            const tWeekly = parseFloat(document.getElementById('t-weekly').value) / 100 || 0;
+            const tMonthly = parseFloat(document.getElementById('t-monthly').value) / 100 || 0;
 
             if(bal > 0) {
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
@@ -284,7 +290,7 @@
                 
                 document.getElementById('c-res').innerHTML = `
                     <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
-                    <div style="font-size:0.8rem; color:#fff;">5 Layer @${lotPerLayer.toFixed(2)}</div>
+                    <div style="font-size:0.7rem; color:#fff;">Gunakan 5 Layer @${lotPerLayer.toFixed(2)}</div>
                     <div style="border:1px solid var(--green); padding:5px; border-radius:12px; font-size:0.6rem; margin-top:5px;">KETAHANAN: ${ketahanan.toFixed(0)} PIPS</div>
                 `;
 
@@ -292,20 +298,18 @@
                 compView.style.display = 'block';
                 compView.innerHTML = `
                     <div style="margin-bottom:5px; border-bottom:1px solid rgba(255,215,0,0.2); padding-bottom:5px;">
-                        <span style="color:var(--gold)">HASIL HARIAN:</span> 
+                        <span style="color:var(--gold)">EST. PROFIT HARI:</span> 
                         <b style="float:right; color:var(--green)">${cur} ${(bal * tDaily).toLocaleString()}</b>
                     </div>
                     <div style="margin-bottom:5px; border-bottom:1px solid rgba(0,255,204,0.2); padding-bottom:5px;">
-                        <span style="color:var(--accent)">HASIL MINGGUAN:</span> 
+                        <span style="color:var(--accent)">EST. PROFIT MINGGU:</span> 
                         <b style="float:right;">${cur} ${(bal * tWeekly).toLocaleString()}</b>
                     </div>
                     <div>
-                        <span style="color:var(--green)">HASIL BULANAN:</span> 
-                        <b style="float:right;">${cur} ${(bal * tMonthly).toLocaleString()}</b>
+                        <span style="color:var(--green)">TOTAL PROFIT BULAN:</span> 
+                        <b style="float:right; font-size:1rem; color:var(--green)">${cur} ${(bal * tMonthly).toLocaleString()}</b>
                     </div>
                 `;
-            } else {
-                alert("SILAHKAN ISI SALDO TERLEBIH DAHULU!");
             }
         }
     </script>
