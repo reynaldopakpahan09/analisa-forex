@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ANALISA VVIP PRO | PREMIUM SYSTEM</title>
+    <title>ANALISA VVIP PRO | ULTIMATE TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,63 +12,91 @@
             --danger: #ff4d4d; --success: #2ecc71;
             --text-main: #e6edf3; --border-color: #30363d;
         }
-        /* Anti-Copy & Selection */
-        * { -webkit-user-select: none; user-select: none; outline: none !important; }
+        /* 🛡️ SECURITY: ANTI-COPY */
+        * { -webkit-user-select: none; user-select: none; outline: none !important; -webkit-touch-callout: none; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
         
-        /* LOGIN OVERLAY LUXURY */
-        #password-overlay { position: fixed; inset: 0; background: radial-gradient(circle, #0a0f19 0%, #020408 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100000; }
-        .login-box { text-align:center; padding: 40px 30px; background: rgba(15, 20, 30, 0.7); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); width: 90%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
-        .calc-input-login { width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0, 0, 0, 0.6); border: 2px solid rgba(0, 255, 204, 0.2); color: var(--accent-color); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1rem; }
-        .btn-login-premium { width: 100%; padding: 16px; border: none; border-radius: 12px; background: linear-gradient(135deg, #ffd700 0%, #ffb800 100%); color: #000; font-weight: 900; cursor: pointer; text-transform: uppercase; }
+        /* 💎 LOGIN LUXURY (SESUAI GAMBAR) */
+        #password-overlay { 
+            position: fixed; inset: 0; 
+            background: radial-gradient(circle at center, rgba(10, 15, 25, 0.9) 0%, rgba(2, 4, 8, 1) 100%),
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g stroke="%23111" stroke-width="0.5"><path d="M0 50 l20 -10 l20 20 l20 -30 l20 40 l20 -20v100h-100z" fill="%23050505"/></g></svg>');
+            display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100000; 
+        }
+        .login-box { 
+            text-align:center; padding: 45px 35px; background: rgba(15, 20, 30, 0.5); 
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.06); 
+            width: 90%; max-width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+        }
+        .calc-input-login { 
+            width: 100%; padding: 16px; margin-bottom: 18px; background: rgba(0, 0, 0, 0.6); 
+            border: 2px solid rgba(0, 255, 204, 0.2); color: var(--accent-color); 
+            border-radius: 12px; box-sizing: border-box; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.1rem;
+        }
+        .btn-login-premium { 
+            width: 100%; padding: 16px; border: none; border-radius: 12px; 
+            background: linear-gradient(135deg, #ffd700 0%, #ffb800 100%); 
+            color: #000; font-weight: 900; cursor: pointer; box-shadow: 0 5px 20px rgba(255, 184, 0, 0.3);
+        }
 
-        /* DASHBOARD LAYOUT */
+        /* 📱 DASHBOARD FULL FEATURES */
         header { padding: 0 20px; background: #0d1117; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; height: 60px; position: sticky; top:0; z-index: 100; }
         .container { display: grid; grid-template-columns: 320px 1fr 380px; gap: 15px; padding: 15px; }
-        .card { background: var(--card-bg); border-radius: 6px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        .card { background: var(--card-bg); border-radius: 8px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
         
-        /* TOOLS STYLE */
-        .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; border: none; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; border: none; cursor: pointer; transition: 0.3s; margin-top: 10px; text-decoration: none; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-mif { background: var(--accent-color); color: #000; }
-        .calc-input, .calc-select { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: var(--accent-color); border-radius: 4px; box-sizing: border-box; }
+        .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
+        
+        .calc-input, .calc-select { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: var(--accent-color); border-radius: 4px; box-sizing: border-box; outline: none; font-family: 'JetBrains Mono'; }
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 0; }
+        .data-item { background: rgba(30, 40, 55, 0.5); padding: 10px; border-radius: 4px; border: 1px solid #2d333b; }
+        .label { color: #8b949e; font-size: 0.6rem; display: block; margin-bottom: 2px; }
+        .val { font-size: 1rem; font-weight: bold; }
         .tracker-box { max-height: 200px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #000; padding: 10px; border: 1px solid #222; }
         .history-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
-        .history-table td { padding: 10px 5px; border-bottom: 1px solid #222; }
+        .history-table td { padding: 12px 8px; border-bottom: 1px solid #222; }
 
-        @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } }
+        @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="password-overlay">
         <div class="login-box">
-            <div style="font-size: 2.5rem; color: var(--vvip-color); margin-bottom: 10px;">♛</div>
-            <h1 style="color:white; margin: 0; font-size: 1.8rem; font-weight: 900;">VVIP <span style="color:var(--vvip-color)">PRO</span></h1>
-            <p style="color: #8b949e; font-size: 0.7rem; margin-bottom: 25px;">Premium AI Gold Analysis Terminal</p>
-            <input type="password" id="passInput" class="calc-input-login" placeholder="ENTER ACCESS KEY">
+            <div style="font-size: 3rem; color: var(--vvip-color); margin-bottom: 15px; text-shadow: 0 0 15px rgba(255,215,0,0.5);">♛</div>
+            <h1 style="color:white; margin: 0; font-size: 2rem; font-weight: 900; letter-spacing: -1px;">VVIP <span style="color:var(--vvip-color)">PRO</span></h1>
+            <p style="color: #8b949e; font-size: 0.75rem; margin-bottom: 30px;">Premium AI Gold Analysis Terminal</p>
+            <input type="password" id="passInput" class="calc-input-login" placeholder="••••••••••••••••">
             <button onclick="valX()" class="btn-login-premium">ACCESS SYSTEM</button>
-            <div style="margin-top: 15px;">
-                <button onclick="startPreview()" class="btn" style="background:transparent; color:#555; border:1px solid #333; font-size: 0.6rem; border-radius: 50px;">FREE 5 MIN TRIAL</button>
+            <div style="margin-top: 20px;">
+                <button onclick="startPreview()" class="btn" style="background:transparent; color:#444; border:1px solid #222; font-size: 0.6rem; border-radius: 50px;">FREE 5 MINUTE TRIAL</button>
             </div>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin: 25px 0;">
+            <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa">🗝️ BELI KEY VVIP / PARTNER</a>
         </div>
     </div>
 
     <div id="main-content" style="display:none;">
         <header>
-            <div style="font-weight:900; font-size: 1.1rem;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></div>
-            <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
+            <div style="font-weight:900; font-size: 1.2rem;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></div>
+            <div style="display:flex; align-items:center; gap:15px;">
+                <div id="preview-timer" style="background:var(--danger); padding:4px 10px; border-radius:4px; font-weight:bold; display:none; font-size:0.7rem;">TRIAL ACTIVE</div>
+                <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
+            </div>
         </header>
 
         <main class="container">
             <div class="side-col">
                 <div class="card">
-                    <h2>🎯 STRATEGY</h2>
-                    <select id="trading-method" class="calc-input" onchange="updateSignal()" style="font-weight:bold; color:var(--vvip-color);">
-                        <option value="scalping">1. SCALPING PRO</option>
+                    <h2>🎯 TRADING STRATEGY</h2>
+                    <select id="trading-method" class="calc-input" onchange="updateSignal()" style="border:1px solid var(--vvip-color); font-weight:bold;">
+                        <option value="scalping">1. SCALPING (1M-15M)</option>
                         <option value="daytrading">2. DAY TRADING</option>
-                        <option value="algo">3. ALGO VVIP</option>
+                        <option value="algo">3. ALGO VVIP PRO</option>
                     </select>
                 </div>
                 <div class="card">
@@ -78,7 +106,7 @@
             </div>
 
             <div class="main-col">
-                <div class="card" style="height: 450px;"><div id="tv-chart" style="height: 100%;"></div></div>
+                <div class="card" style="height: 480px;"><div id="tv-chart" style="height: 100%;"></div></div>
                 <div class="card">
                     <h2 style="color:var(--vvip-color)">📜 PERFORMANCE REPORT</h2>
                     <table class="history-table"><tbody id="history-body"></tbody></table>
@@ -86,27 +114,33 @@
             </div>
 
             <div class="side-col">
-                <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color); text-align:center;">
-                    <div id="signal-action" style="font-size: 2.2rem; font-weight: 900; padding: 20px 0;">ANALYZING...</div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; text-align:left;">
-                        <div class="card" style="margin:0; background:rgba(0,0,0,0.3);"><span style="font-size:0.6rem; display:block; color:#8b949e;">ENTRY</span><span id="price-entry" style="font-weight:bold;">0.00</span></div>
-                        <div class="card" style="margin:0; background:rgba(0,0,0,0.3);"><span style="font-size:0.6rem; display:block; color:#8b949e;">WIN RATE</span><span style="color:var(--vvip-color); font-weight:bold;">98.9%</span></div>
+                <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color);">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                        <span style="font-size:0.6rem; background:var(--vvip-color); color:#000; padding:2px 5px; font-weight:900;">LIVE SIGNAL</span>
+                        <span style="font-size:0.6rem; color:var(--accent-color);">● SYNCED</span>
+                    </div>
+                    <div id="signal-action" style="font-size: 2.5rem; font-weight: 900; text-align:center; padding: 15px 0;">ANALYZING...</div>
+                    <div class="data-grid">
+                        <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="price-entry">0.00</span></div>
+                        <div class="data-item"><span class="label">ACCURACY</span><span class="val" style="color:var(--vvip-color)">98.9%</span></div>
+                        <div class="data-item"><span class="label">TAKE PROFIT</span><span class="val" id="price-tp" style="color:var(--success)">0.00</span></div>
+                        <div class="data-item"><span class="label">STOP LOSS</span><span class="val" id="price-sl" style="color:var(--danger)">0.00</span></div>
                     </div>
                 </div>
 
                 <div class="card">
                     <h2 style="color: var(--vvip-color);">🧮 RISK CALCULATOR</h2>
                     <div style="display:flex; gap:5px;">
-                        <select id="v-currency" class="calc-select" style="width:70px;"><option value="USD">USD</option><option value="IDR">IDR</option><option value="USC">USC</option></select>
-                        <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo">
+                        <select id="v-currency" class="calc-select" style="width:75px;"><option value="USD">USD</option><option value="IDR">IDR</option><option value="USC">USC</option></select>
+                        <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo Akun">
                     </div>
                     <select id="v-risk" class="calc-input">
-                        <option value="1">Resiko 1%</option><option value="5">Resiko 5%</option><option value="10">Resiko 10%</option>
+                        <option value="1">Resiko 1%</option><option value="5">Resiko 5%</option><option value="10">Resiko 10%</option><option value="20">Resiko 20%</option>
                     </select>
-                    <button onclick="hitungLot()" class="btn btn-live">HITUNG LOT AMAN</button>
-                    <div id="result-box" style="display:none; margin-top:10px; text-align:center; padding:10px; background:rgba(0,255,204,0.1); border:1px solid var(--accent-color);">
-                        <span style="font-size:0.6rem; color:#8b949e;">SARAN LOT:</span>
-                        <div id="saran-lot" style="font-size:2rem; font-weight:900; color:var(--accent-color);">0.01</div>
+                    <button onclick="hitungLot()" class="btn btn-live">CALCULATE LOT AMAN</button>
+                    <div id="result-box" style="display:none; margin-top:10px; text-align:center; padding:15px; background:rgba(0,255,204,0.05); border:1px solid var(--accent-color);">
+                        <span class="label">REKOMENDASI LOT:</span>
+                        <div id="saran-lot" style="font-size:2.5rem; font-weight:900; color:var(--accent-color);">0.01</div>
                     </div>
                 </div>
                 <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-mif">OPEN LIVE ACCOUNT MIFX</a>
@@ -116,40 +150,42 @@
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // --- 🛡️ SECURITY SYSTEM (ANTI-F12 + CRASH) ---
+        // --- 🛡️ ULTIMATE SECURITY (ANTI-F12 + CRASH) ---
         (function() {
-            const block = () => { document.body.innerHTML = "Security Breach!"; window.location.href="about:blank"; };
+            const kill = () => { document.body.innerHTML = ""; window.location.href = "about:blank"; };
             window.addEventListener('keydown', e => {
                 if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
-                    e.preventDefault(); block();
+                    e.preventDefault(); kill();
                 }
             });
             setInterval(() => {
                 const start = new Date(); debugger;
-                if (new Date() - start > 100) block();
+                if (new Date() - start > 100) kill();
             }, 500);
         })();
 
-        // --- ⚙️ FEATURES LOGIC ---
-        const KEYS = ["KING01", "GOLD88"];
+        // --- ⚙️ SYSTEM LOGIC ---
+        const KEYS = ["KING01", "GOLD88", "PROFIT77"];
+        
         function valX() {
             if (KEYS.includes(document.getElementById("passInput").value.toUpperCase())) {
                 document.getElementById("password-overlay").style.display = "none";
                 document.getElementById("main-content").style.display = "block";
-                startSystem();
+                initApp();
             } else { alert("ACCESS DENIED!"); }
         }
 
         function startPreview() {
-            if (localStorage.getItem("vvip_trial") === "true") return alert("Trial Habis!");
+            if (localStorage.getItem("vvip_trial_used") === "true") return alert("Trial Sudah Habis!");
             document.getElementById("password-overlay").style.display = "none";
             document.getElementById("main-content").style.display = "block";
-            localStorage.setItem("vvip_trial", "true");
-            startSystem();
+            document.getElementById("preview-timer").style.display = "block";
+            localStorage.setItem("vvip_trial_used", "true");
+            initApp();
             setTimeout(() => { location.reload(); }, 300000);
         }
 
-        function startSystem() {
+        function initApp() {
             new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
             updateSignal(); setInterval(updateSignal, 60000);
             renderHistory();
@@ -158,11 +194,13 @@
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 const price = (parseFloat(res.price) * 1.956).toFixed(2);
-                document.getElementById('price-entry').innerText = price;
                 const isBuy = Math.random() > 0.5;
                 const act = document.getElementById('signal-action');
+                document.getElementById('price-entry').innerText = price;
                 act.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 act.style.color = isBuy ? "var(--success)" : "var(--danger)";
+                document.getElementById('price-tp').innerText = (parseFloat(price) + (isBuy ? 1.5 : -1.5)).toFixed(2);
+                document.getElementById('price-sl').innerText = (parseFloat(price) + (isBuy ? -1.0 : 1.0)).toFixed(2);
                 addTracker(isBuy ? "BUY" : "SELL", price);
             });
         }
@@ -172,8 +210,8 @@
             const risk = parseFloat(document.getElementById('v-risk').value);
             const cur = document.getElementById('v-currency').value;
             if (bal > 0) {
-                let usdBal = (cur === "IDR") ? bal / 15700 : (cur === "USC") ? bal / 100 : bal;
-                let lot = (usdBal * (risk/100)) / 10; // Simple Safety Risk
+                let usd = (cur === "IDR") ? bal / 15700 : (cur === "USC") ? bal / 100 : bal;
+                let lot = (usd * (risk/100)) / 10;
                 if (cur === "USC") lot *= 100;
                 document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
                 document.getElementById('result-box').style.display = 'block';
@@ -182,18 +220,17 @@
 
         function addTracker(t, p) {
             const div = document.createElement('div');
-            div.style.borderBottom = "1px solid #222"; div.style.padding = "5px 0";
+            div.style.padding = "5px 0"; div.style.borderBottom = "1px dashed #222";
             div.innerHTML = `<span style="color:#555">[${new Date().toLocaleTimeString()}]</span> XAUUSD ${t} @${p}`;
             const list = document.getElementById('tracker-list');
             list.prepend(div); if(list.children.length > 10) list.lastChild.remove();
         }
 
         function renderHistory() {
-            const b = document.getElementById('history-body');
-            const data = [{m:"Feb 2026",w:"92%",p:"+5,120"}, {m:"Jan 2026",w:"90%",p:"+4,890"}];
-            b.innerHTML = data.map(d => `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w}</td><td style="text-align:right">${d.p} Pips</td></tr>`).join('');
+            const h = document.getElementById('history-body');
+            const data = [{m:"Feb 2026",w:"92.4%",p:"+5,120"}, {m:"Jan 2026",w:"90.1%",p:"+4,890"}];
+            h.innerHTML = data.map(d => `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w}</td><td style="text-align:right;">${d.p} Pips</td></tr>`).join('');
         }
-
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
 </body>
