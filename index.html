@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PREMIERE AI VVIP | PROFESSIONAL TRADING SYSTEM</title>
+    <title>PREMIERE AI VVIP | ULTIMATE TRADING SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
@@ -29,6 +29,7 @@
         .btn { display: block; width: 100%; padding: 14px; text-align: center; font-weight: 900; border-radius: 8px; cursor: pointer; border: none; text-decoration: none; font-size: 0.8rem; margin-top: 10px; box-sizing: border-box; transition: 0.3s; text-transform: uppercase; }
         .btn-gold { background: var(--gold); color: #000; }
         .btn-partner { background: var(--accent); color: #000; }
+        .btn-buy { background: #fff; color: #000; }
         .btn-copy { background: #1a1f26; color: var(--accent); font-size: 0.5rem; padding: 4px 8px; position: absolute; right: 10px; top: 10px; border: 1px solid var(--accent); width: auto; margin: 0; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
         
@@ -52,7 +53,7 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 15px;">Ultimate Gold Trading System</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Professional Gold Analysis System</p>
             <div class="promo-list">
                 <div class="promo-item">📊 <b>MULTI-STRATEGY:</b> Scalping & Swing Algorithms.</div>
                 <div class="promo-item">🪙 <b>CENT ACCOUNT:</b> Optimized for Micro Lot Trading.</div>
@@ -62,6 +63,11 @@
             <input type="password" id="passKey" class="key-input" placeholder="ACCESS KEY">
             <button onclick="unlock()" class="btn btn-gold">LOG IN SYSTEM</button>
             <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">START FREE TRIAL</button>
+            
+            <div style="margin-top:20px; display:flex; gap:10px;">
+                <a href="https://wa.me/6289675009549?text=Halo%20Admin,%20saya%20mau%20beli%20kunci%20VVIP" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
+                <a href="https://wa.me/6289675009549?text=Halo%20Admin,%20saya%20tertarik%20menjadi%20partner%20teknologi%20kita" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
+            </div>
         </div>
     </div>
 
@@ -140,7 +146,7 @@
             
             <div class="card"><h2>PERFORMANCE TRACKER</h2><div id="tracker" class="tracker-list"></div></div>
             <div class="card" style="text-align:center; padding:10px;">
-                <a href="https://wa.me/6289675009549" target="_blank" style="font-size:0.6rem; color:#888; text-decoration:none;">VVIP ACCESS SUPPORT</a>
+                <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">HUBUNGI OWNER</a>
             </div>
         </div>
     </div>
@@ -194,17 +200,12 @@
                 let dir = p > 2350 ? "STRONG BUY" : "STRONG SELL";
                 document.getElementById('sig-dir').innerText = dir;
                 document.getElementById('sig-dir').style.color = p > 2350 ? "var(--green)" : "var(--red)";
-                
-                let isNews = Math.random() > 0.8; 
                 let tp = (p + (p > 2350 ? 2.5 : -2.5)).toFixed(2);
                 let sl = (p + (p > 2350 ? -1.5 : 1.5)).toFixed(2);
-                
                 document.getElementById('v-tp').innerText = tp;
                 document.getElementById('v-sl').innerText = sl;
-                document.getElementById('ai-logic').innerText = isNews ? "⚠️ HIGH IMPACT: Broadening Profit Targets." : "Normal Volatility. Focusing on Overbought/Oversold areas.";
-                
+                document.getElementById('ai-logic').innerText = Math.random() > 0.8 ? "⚠️ HIGH IMPACT: Broadening Profit Targets." : "Normal Volatility. Focusing on Overbought/Oversold areas.";
                 if(dir !== lastDir && !isFirst) { speakSignal(dir, p.toFixed(0)); lastDir = dir; }
-
                 const tr = document.getElementById('tracker');
                 tr.innerHTML = `<div>[${new Date().toLocaleTimeString()}] XAUUSD ${dir} @${p.toFixed(2)} - <b style="color:var(--green)">SUCCESS</b></div>` + tr.innerHTML;
             });
