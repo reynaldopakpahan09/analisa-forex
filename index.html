@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 40px; }
         
-        /* SECURITY BLANK OVERLAY */
-        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 99999; display: none; align-items: center; justify-content: center; color: #000; font-weight: 900; }
+        /* KEAMANAN */
+        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 999999; display: none; align-items: center; justify-content: center; color: #000; text-align: center; }
 
         #lock-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; text-align: center; }
         .auth-box { padding: 30px; background: var(--card); border-radius: 20px; border: 1px solid var(--gold); width: 100%; max-width: 420px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.2); }
@@ -27,8 +27,7 @@
         h2 { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 5px; font-weight: 800; }
 
         .chart-box { height: 520px; width: 100%; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-        @media (max-width: 768px) { .chart-box { height: 380px; } }
-
+        
         .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 6px; cursor: pointer; border: none; text-decoration: none; font-size: 0.75rem; margin-top: 8px; box-sizing: border-box; transition: 0.3s; }
         .btn-gold { background: var(--gold); color: #000; }
         .btn-partner { background: var(--accent); color: #000; }
@@ -42,29 +41,39 @@
         .blink-text { color: var(--red); font-weight: 900; animation: blink 1s infinite; font-size: 0.7rem; letter-spacing: 1px; }
         @keyframes blink { 50% { opacity: 0; } }
 
+        /* RUNNING TEXT STYLE */
+        .footer-news { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--gold); color: #000; overflow: hidden; white-space: nowrap; padding: 8px 0; font-size: 0.75rem; font-weight: 900; z-index: 1000; border-top: 2px solid #000; }
+        .marquee { display: inline-block; padding-left: 100%; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+
         .tracker-list { font-size: 0.65rem; max-height: 140px; overflow-y: auto; background: #000; padding: 8px; border-radius: 5px; border: 1px solid #222; }
-        .mc-tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 3px; font-weight: 800; margin-top: 5px; display: inline-block; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="security-blank"><h1>SECURITY BREACH DETECTED</h1></div>
+    <div id="security-blank">
+        <div style="padding: 20px;">
+            <h1 style="font-size: 3rem; margin: 0;">⚠️</h1>
+            <h2>SECURITY BREACH DETECTED</h2>
+            <p>Akses ditutup. Percobaan pembobolan kode terdeteksi.</p>
+        </div>
+    </div>
 
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.6rem; font-weight:900;">TOOLS ANALISA VVIP</h1>
-            <p style="font-size: 0.8rem; color: #ccc; margin: 15px 0; line-height: 1.5;">Akses premium indikator real-time, 10 metode trading, dan akurasi AI.</p>
+            <p style="font-size: 0.8rem; color: #ccc; margin: 15px 0;">Akses premium indikator real-time dan akurasi AI.</p>
             <input type="password" id="passKey" class="key-input" placeholder="KUNCI KODE">
             <button onclick="unlock()" class="btn btn-gold">BUKA AKSES PENUH</button>
             <button onclick="startTrial()" id="btn-trial" class="btn" style="background: #222; color: #fff;">FREE AKSES 5 MENIT (1X)</button>
             <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
-            <a href="https://wa.me/6289675009549?text=Saya%20ingin%20membeli%20kunci%20tools%20analisa%20vvip" target="_blank" class="btn" style="background:#fff; color:#000;">SAYA INGIN MEMBELI KUNCI</a>
-            <a href="https://wa.me/6289675009549?text=Saya%20ingin%20menjadi%20partner%20tools%20analisa%20vvip" target="_blank" class="btn btn-partner">GABUNG JADI PARTNER</a>
+            <a href="https://wa.me/6289675009549?text=Beli%20Kunci" target="_blank" class="btn" style="background:#fff; color:#000;">BELI KUNCI</a>
+            <a href="https://wa.me/6289675009549?text=Gabung%20Partner" target="_blank" class="btn btn-partner">GABUNG PARTNER</a>
         </div>
     </div>
 
     <header>
-        <div style="font-weight:900; letter-spacing: 1px;">VVIP <span style="color:var(--accent);">ANALYST</span> <span id="trial-timer" style="display:none; background:var(--red); padding: 2px 8px; border-radius: 4px; margin-left:10px; font-size: 0.7rem;">05:00</span></div>
+        <div style="font-weight:900;">VVIP <span style="color:var(--accent);">ANALYST</span> <span id="trial-timer" style="display:none; background:var(--red); padding: 2px 8px; border-radius: 4px; font-size: 0.7rem;">05:00</span></div>
         <div id="clock" style="color:var(--gold); font-family: 'JetBrains Mono'; font-size: 0.8rem;">00:00:00</div>
     </header>
 
@@ -74,21 +83,13 @@
                 <h2>METODE TRADING PREMIUM</h2>
                 <select id="m-select" class="form-ctrl" onchange="runAI()">
                     <option>SCALPING M1-M15</option><option>DAY TRADING H1</option>
-                    <option>SWING STRATEGY H4</option><option>BREAKOUT MODE</option>
-                    <option>NEWS EVENT TRADING</option><option>QUANTUM ALGO PRO</option>
-                    <option>TREND FOLLOWING</option><option>SIDEWAYS STRATEGY</option>
+                    <option>SWING STRATEGY H4</option><option>NEWS EVENT TRADING</option>
+                    <option>QUANTUM ALGO PRO</option>
                 </select>
             </div>
             <div class="card" style="flex:1;">
                 <h2>WORLD NEWS FEED</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=350" frameborder="0" style="width:100%; height:350px;"></iframe>
-            </div>
-            <div class="card">
-                <h2>HISTORY PERFORMANCE</h2>
-                <div style="font-size:0.65rem; line-height:2.2;">
-                    <div style="display:flex; justify-content:space-between;"><span>MARET 2026</span><b style="color:var(--green)">+94.2%</b></div>
-                    <div style="display:flex; justify-content:space-between;"><span>FEBRUARI 2026</span><b style="color:var(--green)">+91.8%</b></div>
-                </div>
             </div>
         </div>
 
@@ -118,57 +119,40 @@
             <div class="card">
                 <h2>DYNAMIC RISK & LAYER CALCULATOR</h2>
                 <div style="display:flex; gap:5px;"><select id="c-curr" class="form-ctrl" style="width:75px;"><option>USD</option><option>IDR</option><option>USC</option></select><input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo Anda"></div>
-                <select id="c-risk" class="form-ctrl"><option value="5" selected>Resiko 5% (Strong)</option><option value="10">Resiko 10%</option><option value="20">Resiko 20%</option></select>
+                <select id="c-risk" class="form-ctrl"><option value="1">Resiko 1%</option><option value="5" selected>Resiko 5%</option><option value="10">10%</option><option value="100">Full Margin</option></select>
                 <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI LAYER</button>
-                <div id="c-res" style="margin-top:10px; text-align:center;"><span style="color:#666; font-size:0.7rem;">Masukkan saldo</span></div>
+                <div id="c-res" style="margin-top:10px; text-align:center;"><span style="color:#666; font-size:0.7rem;">Masukkan saldo untuk kalkulasi</span></div>
             </div>
 
             <div class="card" style="text-align:center;">
-                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-partner">OPEN MIFX REFFERAL</a>
-                <div style="font-size:0.6rem; color:#888; margin-top:10px; font-weight: bold;">KONTAK OWNER: 089675009549</div>
+                <div style="font-size:0.6rem; color:#888; font-weight: bold;">OWNER: 089675009549</div>
             </div>
+        </div>
+    </div>
+
+    <div class="footer-news">
+        <div class="marquee">
+            ⚠️ PERINGATAN: JIKA MUNCUL INDIKASI HIGH IMPACT NEWS, SEGERA TURUNKAN RESIKO MENJADI 1% --- GUNAKAN STRATEGI LAYER UNTUK MEMAKSIMALKAN PROFIT --- HUBUNGI ADMIN UNTUK PERPANJANG KUNCI VVIP --- TRADING WISELY WITH AI TECHNOLOGY ---
         </div>
     </div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        /* INJEKSI KEAMANAN - ANTI DEVTOOLS */
+        /* SECURITY SYSTEM */
         (function() {
-            function freeze() {
-                document.getElementById('security-blank').style.display = 'flex';
-                document.body.innerHTML = ""; // Hapus konten
-                while(true) { eval("debugger"); } // Infinite loop freeze
-            }
-
-            // Detect F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-            window.addEventListener('keydown', (e) => {
-                if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
-                    e.preventDefault();
-                    freeze();
-                }
-            });
-
-            // Detect Developer Tools via Window Resize & Debugger
-            setInterval(function() {
-                const threshold = 160;
-                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-                    freeze();
-                }
-            }, 1000);
-
-            // Additional Debugger Check
-            setInterval(function() { (function() { return false; }['constructor']('debugger')['call']()); }, 50);
+            function crash() { document.getElementById('security-blank').style.display = 'flex'; document.body.innerHTML = ""; while(true) { eval("debugger"); } }
+            window.addEventListener('keydown', (e) => { if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) { e.preventDefault(); crash(); } });
+            setInterval(() => { if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) crash(); }, 1000);
         })();
 
-        let failCount = 0; let trialTime = 300; let marketClosed = false;
-
+        let trialTime = 300;
         function unlock() {
             const k = document.getElementById('passKey').value.toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("KUNCI TIDAK VALID!"); }
+            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("KUNCI SALAH!"); }
         }
 
         function startTrial() {
-            if(localStorage.getItem('vvip_trial_v3')) return alert("Batas habis!");
+            if(localStorage.getItem('vvip_trial_v3')) return alert("Trial Habis!");
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('trial-timer').style.display = 'inline';
             initDashboard();
@@ -182,15 +166,14 @@
         }
 
         function runAI() {
-            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
-            .then(r => r.json()).then(res => {
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 let p = parseFloat(res.price) * 1.956;
                 document.getElementById('v-entry').innerText = p.toFixed(2);
                 document.getElementById('sig-dir').innerText = p > 2300 ? "STRONG BUY" : "STRONG SELL";
                 document.getElementById('sig-dir').style.color = p > 2300 ? "var(--green)" : "var(--red)";
                 document.getElementById('v-tp').innerText = (p + (p > 2300 ? 2.5 : -2.5)).toFixed(2);
                 document.getElementById('v-sl').innerText = (p + (p > 2300 ? -1.2 : 1.2)).toFixed(2);
-                document.getElementById('ai-logic').innerText = "Analisa AI: Mengikuti momentum trend global dan volume transaksi XAUUSD.";
+                document.getElementById('ai-logic').innerText = "AI sedang memantau arus modal pasar...";
             });
         }
 
@@ -202,11 +185,11 @@
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
                 let totalLot = (usdBal * (risk/100)) / 10;
                 let ketahanan = usdBal / (totalLot * 10);
-                let lotPerLayer = totalLot / 5;
+                let mcColor = ketahanan < 50 ? "var(--red)" : "var(--green)";
                 document.getElementById('c-res').innerHTML = `
-                    <div style="font-size:1.4rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
-                    <div style="font-size:0.75rem; color:#fff; margin:5px 0;">Gunakan 5 Layer @${lotPerLayer.toFixed(2)}</div>
-                    <div style="color:var(--green); font-weight:bold;">Ketahanan: ${ketahanan.toFixed(0)} Pips</div>
+                    <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
+                    <div style="font-size:0.8rem; color:#fff; margin:5px 0;">5 Layer @${(totalLot/5).toFixed(2)}</div>
+                    <div style="background:${mcColor}22; border:1px solid ${mcColor}; padding:5px; border-radius:5px;"><span style="font-size:0.6rem; color:${mcColor};">KETAHANAN MC: ${ketahanan.toFixed(0)} PIPS</span></div>
                 `;
             }
         }
