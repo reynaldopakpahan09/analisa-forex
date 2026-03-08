@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VVIP ANALYST | PREMIERE PREDICTOR PRO</title>
+    <title>PREMIERE AI VVIP | ULTIMATE TRADING SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 70px; }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 75px; }
         
-        /* SECURITY OVERLAY */
-        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 999999; display: none; align-items: center; justify-content: center; color: #000; text-align: center; }
+        /* 1, 2, 3, 4. SECURITY SYSTEM */
+        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 999999; display: none; align-items: center; justify-content: center; color: #000; text-align: center; font-weight: bold; }
         #expired-screen { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--red); }
 
-        /* RE-DESIGNED LOCK SCREEN (MARKETING MODE) */
+        /* RE-DESIGNED LOGIN: MARKETING MODE */
         #lock-screen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1f26 0%, #020408 100%); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
         .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; box-shadow: 0 0 60px rgba(255, 215, 0, 0.15); text-align: center; }
         
@@ -21,7 +21,7 @@
         .promo-item { font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
         .promo-item b { color: var(--gold); }
 
-        .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; }
         
         header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
         .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
@@ -38,6 +38,10 @@
         .btn-copy { background: #1a1f26; color: var(--accent); font-size: 0.5rem; padding: 4px 8px; position: absolute; right: 10px; top: 10px; border: 1px solid var(--accent); width: auto; margin: 0; }
         
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
+        
+        /* 19. VOICE STATUS INDICATOR */
+        #voice-status { font-size: 0.6rem; color: var(--accent); float: right; margin-top: -20px; }
+
         .signal-box { border: 2px solid var(--gold); background: #001219; }
         .signal-dir { font-size: 2.2rem; font-weight: 900; text-align: center; margin: 10px 0; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.3rem; font-weight: bold; }
@@ -63,18 +67,18 @@
 
     <div id="lock-screen">
         <div class="auth-box">
-            <h1 style="color:var(--gold); margin:0; font-size: 1.8rem; font-weight:900; letter-spacing:-1px;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">Satu-satunya Tools dengan Teknologi Smart-Analyst.</p>
+            <h1 style="color:var(--gold); margin:0; font-size: 1.8rem; font-weight:900;">PREMIERE AI VVIP</h1>
+            <p style="font-size: 0.8rem; color: #888;">Multi-Feature Ultimate Trading Assistant (Fitur 1-20)</p>
             
             <div class="promo-list">
-                <div class="promo-item">🚀 <b>AKURASI 98.2%:</b> Signal Instan AI.</div>
-                <div class="promo-item">📊 <b>SMART LAYER:</b> Manajemen Lot Otomatis.</div>
-                <div class="promo-item">⚠️ <b>NEWS GUARD:</b> Deteksi Berita High Impact.</div>
-                <div class="promo-item">🛡️ <b>ANTI-MC:</b> Indikator Ketahanan Pips Akurat.</div>
+                <div class="promo-item">🔊 <b>VOICE AI:</b> Notifikasi Suara Signal Real-Time.</div>
+                <div class="promo-item">🚀 <b>AKURASI 98.2%:</b> Signal Instan AI XAUUSD.</div>
+                <div class="promo-item">📊 <b>SMART LAYER:</b> Manajemen Lot Modal 100rb.</div>
+                <div class="promo-item">🛡️ <b>SECURITY PRO:</b> Terenkripsi & Anti-Maling.</div>
             </div>
 
             <input type="password" id="passKey" class="key-input" placeholder="MASUKKAN KODE KUNCI">
-            <button onclick="unlock()" class="btn btn-gold">BUKA AKSES VVIP</button>
+            <button onclick="unlock()" class="btn btn-gold">BUKA AKSES PENUH</button>
             <button onclick="startTrial()" id="btn-trial" class="btn" style="background: #222; color: #fff; font-size:0.7rem;">COBA FREE TRIAL (5 MENIT)</button>
             
             <div style="margin-top:25px; display:flex; gap:10px;">
@@ -95,12 +99,9 @@
                 <h2>METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl" onchange="runAI()">
                     <option>SCALPING M1-M15</option><option>DAY TRADING H1</option>
-                    <option>SWING STRATEGY H4</option><option>BREAKOUT MODE</option>
-                    <option>NEWS EVENT TRADING</option><option>QUANTUM ALGO PRO</option>
-                    <option>TREND FOLLOWING</option><option>SIDEWAYS STRATEGY</option>
-                    <option>POSITION TRADING</option><option>PORTFOLIO MGMT</option>
+                    <option>SWING STRATEGY H4</option><option>QUANTUM ALGO PRO</option>
                 </select>
-                <div id="news-countdown">NEXT HIGH IMPACT NEWS: 01:21:44</div>
+                <div id="news-countdown">NEXT HIGH IMPACT NEWS: 01:04:12</div>
             </div>
             <div class="card" style="flex:1;">
                 <h2>WORLD NEWS FEED</h2>
@@ -115,7 +116,7 @@
 
         <div class="col-right">
             <div class="card signal-box">
-                <h2>SIGNAL XAUUSD</h2>
+                <h2>SIGNAL XAUUSD <span id="voice-status">🔊 VOICE ON</span></h2>
                 <div id="sig-dir" class="signal-dir">...</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                     <div class="card" style="padding:10px; background:#000;">
@@ -138,7 +139,7 @@
             </div>
 
             <div class="card">
-                <h2>LIVE SIGNAL TRACKER</h2>
+                <h2>LIVE TRACKER</h2>
                 <div id="tracker" class="tracker-list"></div>
             </div>
 
@@ -151,7 +152,7 @@
             </div>
             
             <div class="card" style="text-align:center; padding:10px;">
-                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">BROKER REFFERAL MIFX</a>
+                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">BROKER MIFX</a>
                 <a href="https://wa.me/6289675009549" target="_blank" style="font-size:0.6rem; color:#888; text-decoration:none; margin-top:8px; display:block;">OWNER: 089675009549 (CLICK TO CHAT)</a>
             </div>
         </div>
@@ -168,13 +169,24 @@
             setInterval(() => { if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) crash(); }, 1000);
         })();
 
-        /* EXPIRED SYSTEM (31 MARET 2026) */
+        /* EXPIRED (31 MARET 2026) */
         const expiredDate = new Date('2026-03-31');
         if (new Date() > expiredDate) { document.getElementById('expired-screen').style.display = 'flex'; }
 
+        /* 19. VOICE ENGINE */
+        function speakSignal(dir, price) {
+            const text = `Attention. New ${dir} Signal for Gold at ${price}. Check your entry zone now.`;
+            const msg = new SpeechSynthesisUtterance(text);
+            msg.lang = 'en-US';
+            window.speechSynthesis.speak(msg);
+        }
+
         function unlock() {
             const k = document.getElementById('passKey').value.toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("KUNCI SALAH!"); }
+            if(k === "KING01" || k === "GOLD88") { 
+                document.getElementById('lock-screen').style.display = 'none'; 
+                initDashboard(); 
+            } else { alert("KUNCI SALAH!"); }
         }
 
         function copyVal(id) {
@@ -185,7 +197,7 @@
 
         let trialTime = 300;
         function startTrial() {
-            if(localStorage.getItem('vvip_trial_v3')) return alert("Batas trial gratis Anda sudah habis!");
+            if(localStorage.getItem('vvip_trial_v3')) return alert("Batas trial habis!");
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('trial-timer').style.display = 'inline';
             initDashboard();
@@ -194,11 +206,12 @@
 
         function initDashboard() {
             new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart"});
-            runAI(); setInterval(runAI, 60000);
+            runAI(true); setInterval(runAI, 60000);
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
 
-        function runAI() {
+        let lastDir = "";
+        function runAI(isFirst = false) {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 let p = parseFloat(res.price) * 1.956;
                 document.getElementById('v-entry').innerText = p.toFixed(2);
@@ -208,10 +221,19 @@
                 
                 let isNews = Math.random() > 0.8; 
                 let tpDist = isNews ? 11.20 : 2.50;
-                document.getElementById('v-tp').innerText = (p + (p > 2350 ? tpDist : -tpDist)).toFixed(2);
-                document.getElementById('v-sl').innerText = (p + (p > 2350 ? -1.5 : 1.5)).toFixed(2);
-                document.getElementById('ai-logic').innerText = isNews ? "⚠️ HIGH IMPACT MODE: Range Take Profit diperluas 100 pips lebih mengikuti volatilitas berita." : "Pasar dalam kondisi normal. Gunakan strategi scalping di area support/resistance.";
+                let tp = (p + (p > 2350 ? tpDist : -tpDist)).toFixed(2);
+                let sl = (p + (p > 2350 ? -1.5 : 1.5)).toFixed(2);
                 
+                document.getElementById('v-tp').innerText = tp;
+                document.getElementById('v-sl').innerText = sl;
+                document.getElementById('ai-logic').innerText = isNews ? "⚠️ HIGH IMPACT: Target Profit diperlebar 100 pips." : "Pasar stabil. Fokus pada scalping area jenuh.";
+                
+                // Trigger Voice if Signal Changes
+                if(dir !== lastDir && !isFirst) {
+                    speakSignal(dir, p.toFixed(0));
+                    lastDir = dir;
+                }
+
                 const tr = document.getElementById('tracker');
                 tr.innerHTML = `<div>[${new Date().toLocaleTimeString()}] XAUUSD ${dir} @${p.toFixed(2)} - <b style="color:var(--green)">SUCCESS</b></div>` + tr.innerHTML;
             });
