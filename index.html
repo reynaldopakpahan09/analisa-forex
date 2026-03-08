@@ -132,15 +132,31 @@
             </div>
 
             <div class="card">
-                <h2>MANAJEMEN RISIKO & USC</h2>
+                <h2>MANAJEMEN RISIKO & TARGET PROFIT</h2>
                 <div style="display:flex; gap:5px;">
                     <select id="c-curr" class="form-ctrl" style="width:85px;">
                         <option value="IDR">IDR</option>
                         <option value="USD">USD</option>
-                        <option value="USC">USC/CENT</option>
+                        <option value="USC" selected>USC/CENT</option>
                     </select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px; margin-bottom:10px;">
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span>
+                        <input type="number" id="t-daily" class="form-ctrl" value="10">
+                    </div>
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--accent)">MINGGU (%)</span>
+                        <input type="number" id="t-weekly" class="form-ctrl" value="50">
+                    </div>
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--green)">BULAN (%)</span>
+                        <input type="number" id="t-monthly" class="form-ctrl" value="200">
+                    </div>
+                </div>
+
                 <select id="c-risk" class="form-ctrl"><option value="1">Resiko 1%</option><option value="5" selected>Resiko 5%</option><option value="10">Resiko 10%</option></select>
                 <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
@@ -248,11 +264,17 @@
             });
         }
 
-        // BAGIAN YANG DIUPDATE AGAR AGRESIF TANPA MERUBAH STRUKTUR LAIN
+        // FUNGSI KALKULATOR TARGET MANDIRI (UPDATE TERBARU)
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
             const cur = document.getElementById('c-curr').value;
+            
+            // Ambil input target mandiri
+            const tDaily = parseFloat(document.getElementById('t-daily').value) / 100;
+            const tWeekly = parseFloat(document.getElementById('t-weekly').value) / 100;
+            const tMonthly = parseFloat(document.getElementById('t-monthly').value) / 100;
+
             if(bal > 0) {
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
                 let totalLot = (usdBal * (risk/100)) / 10;
@@ -263,23 +285,27 @@
                 document.getElementById('c-res').innerHTML = `
                     <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
                     <div style="font-size:0.8rem; color:#fff;">5 Layer @${lotPerLayer.toFixed(2)}</div>
-                    <div style="border:1px solid var(--green); padding:5px; border-radius:12px; font-size:0.6rem;">KETAHANAN: ${ketahanan.toFixed(0)} PIPS</div>
+                    <div style="border:1px solid var(--green); padding:5px; border-radius:12px; font-size:0.6rem; margin-top:5px;">KETAHANAN: ${ketahanan.toFixed(0)} PIPS</div>
                 `;
 
-                // Tampilan Profit Agresif: Harian & Mingguan
                 const compView = document.getElementById('compounding-view');
                 compView.style.display = 'block';
                 compView.innerHTML = `
+                    <div style="margin-bottom:5px; border-bottom:1px solid rgba(255,215,0,0.2); padding-bottom:5px;">
+                        <span style="color:var(--gold)">HASIL HARIAN:</span> 
+                        <b style="float:right; color:var(--green)">${cur} ${(bal * tDaily).toLocaleString()}</b>
+                    </div>
                     <div style="margin-bottom:5px; border-bottom:1px solid rgba(0,255,204,0.2); padding-bottom:5px;">
-                        <span style="color:var(--gold)">TARGET HARIAN (EST):</span> 
-                        <b style="float:right; color:var(--green)">${cur} ${(bal * 0.15).toLocaleString()}</b>
+                        <span style="color:var(--accent)">HASIL MINGGUAN:</span> 
+                        <b style="float:right;">${cur} ${(bal * tWeekly).toLocaleString()}</b>
                     </div>
                     <div>
-                        <span style="color:var(--accent)">TARGET MINGGUAN (GASPOL):</span> 
-                        <b style="float:right;">${cur} ${(bal * 0.80).toLocaleString()}</b>
+                        <span style="color:var(--green)">HASIL BULANAN:</span> 
+                        <b style="float:right;">${cur} ${(bal * tMonthly).toLocaleString()}</b>
                     </div>
-                    <div style="margin-top:5px; font-size:0.55rem; color:#888;">*Berdasarkan Akurasi AI 98% & Fast Compound</div>
                 `;
+            } else {
+                alert("SILAHKAN ISI SALDO TERLEBIH DAHULU!");
             }
         }
     </script>
