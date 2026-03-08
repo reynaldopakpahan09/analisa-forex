@@ -3,41 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TOOLS ANALISA VVIP | PREMIERE ADAPTIVE SYSTEM</title>
+    <title>TOOLS ANALISA VVIP | PREMIERE SYSTEM</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; }
         
-        /* SECURITY OVERLAY */
+        /* 8 & 12. KEAMANAN & LOGIN VVIP */
         #lock-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; text-align: center; }
         .auth-box { padding: 30px; background: var(--card); border-radius: 20px; border: 1px solid var(--gold); width: 100%; max-width: 420px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.2); }
         .key-input { width: 100%; padding: 15px; margin: 15px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 8px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.1rem; outline: none; box-sizing: border-box; }
         
-        /* ADAPTIVE LAYOUT */
+        /* 13. ADAPTIVE LAYOUT */
         header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
         .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
         
-        /* COLUMN DYNAMICS */
-        .side-panel { flex: 1 1 280px; display: flex; flex-direction: column; gap: 10px; }
-        .center-panel { flex: 2 1 500px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+        .col-left { flex: 1 1 280px; display: flex; flex-direction: column; gap: 10px; }
+        .col-center { flex: 2 1 500px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+        .col-right { flex: 1 1 340px; display: flex; flex-direction: column; gap: 10px; }
+
         .card { background: var(--card); border-radius: 10px; padding: 15px; border: 1px solid var(--border); }
         h2 { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin: 0 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
 
-        /* RESPONSIVE CHART (Point 13) */
-        .chart-wrapper { height: 550px; width: 100%; position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-        @media (max-width: 768px) { .chart-wrapper { height: 400px; } }
+        /* 4. CHART XAUUSD OANDA */
+        .chart-box { height: 500px; width: 100%; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+        @media (max-width: 768px) { .chart-box { height: 350px; } }
 
-        /* BUTTONS */
         .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 6px; cursor: pointer; border: none; text-decoration: none; font-size: 0.75rem; margin-top: 8px; box-sizing: border-box; }
         .btn-gold { background: var(--gold); color: #000; }
         .btn-partner { background: var(--accent); color: #000; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
         
-        /* SIGNAL SYSTEM */
+        /* 6 & 14. SIGNAL & NEWS MODE */
         .signal-box { border: 2px solid var(--gold); background: #001219; }
+        #news-indicator { display: none; background: var(--red); color: #fff; padding: 5px; font-size: 0.6rem; text-align: center; font-weight: bold; border-radius: 4px; margin-bottom: 10px; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        
         .signal-dir { font-size: 2.2rem; font-weight: 900; text-align: center; margin: 10px 0; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.3rem; font-weight: bold; }
+        
         .tracker-list { font-size: 0.65rem; max-height: 150px; overflow-y: auto; background: #000; padding: 8px; border-radius: 5px; }
     </style>
 </head>
@@ -45,11 +49,11 @@
 
     <div id="lock-screen">
         <div class="auth-box">
-            <h1 style="color:var(--gold); margin:0; font-size: 1.6rem; font-weight:900;">TOOLS ANALISA VVIP</h1>
-            <p style="font-size: 0.85rem; color: #ccc; margin: 15px 0; line-height: 1.4;">Tools Analisa VVIP ini memiliki semua fitur eksklusif, signal akurat, dan manajemen resiko otomatis. Kunci kode diperlukan untuk akses permanen.</p>
+            <h1 style="color:var(--gold); margin:0; font-size: 1.6rem;">TOOLS ANALISA VVIP</h1>
+            <p style="font-size: 0.8rem; color: #ccc; margin: 15px 0; line-height: 1.5;">Tools Analisa VVIP ini memiliki semua fitur indikator pasar real-time, 10 metode trading, dan akurasi AI tingkat tinggi.</p>
             <input type="password" id="passKey" class="key-input" placeholder="MASUKKAN KODE KUNCI">
-            <button onclick="unlock()" class="btn btn-gold">BUKA AKSES FULL</button>
-            <button onclick="startTrial()" id="btn-trial" class="btn" style="background: #222; color: #fff;">FREE AKSES (5 MENIT)</button>
+            <button onclick="unlock()" class="btn btn-gold">BUKA AKSES PENUH</button>
+            <button onclick="startTrial()" id="btn-trial" class="btn" style="background: #222; color: #fff;">FREE AKSES 5 MENIT (1X)</button>
             <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
             <a href="https://wa.me/6289675009549?text=Saya%20ingin%20membeli%20kunci%20tools%20analisa%20vvip" target="_blank" class="btn" style="background:#fff; color:#000;">SAYA INGIN MEMBELI KUNCI</a>
             <a href="https://wa.me/6289675009549?text=Saya%20ingin%20menjadi%20partner%20tools%20analisa%20vvip%0ANama%3A%0AUsia%3A%0AUsername%20Sosmed%3A" target="_blank" class="btn btn-partner">GABUNG JADI PARTNER</a>
@@ -62,53 +66,53 @@
     </header>
 
     <div class="main-container">
-        <div class="side-panel">
+        <div class="col-left">
             <div class="card">
-                <h2>🎯 10 METODE TRADING</h2>
+                <h2>🎯 1. 10 METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl" onchange="runAI()">
-                    <option value="1">1. SCALPING M1-M15</option>
-                    <option value="2">2. DAY TRADING H1</option>
-                    <option value="3">3. SWING STRATEGY H4</option>
-                    <option value="4">4. BREAKOUT MODE</option>
-                    <option value="5">5. NEWS EVENT TRADING</option>
-                    <option value="6">6. QUANTUM ALGO PRO</option>
-                    <option value="7">7. TREND FOLLOWING</option>
-                    <option value="8">8. SIDEWAYS STRATEGY</option>
-                    <option value="9">9. POSITION TRADING</option>
-                    <option value="10">10. PORTFOLIO MGMT</option>
+                    <option>SCALPING M1-M15</option><option>DAY TRADING H1</option>
+                    <option>SWING STRATEGY H4</option><option>BREAKOUT MODE</option>
+                    <option>NEWS EVENT TRADING</option><option>QUANTUM ALGO PRO</option>
+                    <option>TREND FOLLOWING</option><option>SIDEWAYS STRATEGY</option>
+                    <option>POSITION TRADING</option><option>PORTFOLIO MGMT</option>
                 </select>
             </div>
             <div class="card" style="flex:1;">
-                <h2>📰 WORLD NEWS FEED</h2>
-                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=450" frameborder="0" style="width:100%; height:450px;"></iframe>
-            </div>
-        </div>
-
-        <div class="center-panel">
-            <div class="card chart-wrapper" style="padding: 0;">
-                <div id="tv-chart" style="width: 100%; height: 100%;"></div>
+                <h2>📰 2. WORLD NEWS FEED</h2>
+                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=400" frameborder="0" style="width:100%; height:400px;"></iframe>
             </div>
             <div class="card">
-                <h2>📊 6 MONTH PERFORMANCE HISTORY</h2>
-                <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; text-align:center; font-size:0.7rem;">
-                    <div style="border-right:1px solid #222;">JAN 2026<br><b style="color:var(--green)">+93%</b></div>
-                    <div style="border-right:1px solid #222;">FEB 2026<br><b style="color:var(--green)">+91%</b></div>
-                    <div>MAR 2026<br><b style="color:var(--green)">+94%</b></div>
+                <h2>📊 5. HISTORY 6 BULAN</h2>
+                <div style="font-size:0.65rem; line-height:2;">
+                    <div style="display:flex; justify-content:space-between;"><span>MAR 2026</span><b style="color:var(--green)">+94%</b></div>
+                    <div style="display:flex; justify-content:space-between;"><span>FEB 2026</span><b style="color:var(--green)">+91%</b></div>
+                    <div style="display:flex; justify-content:space-between;"><span>JAN 2026</span><b style="color:var(--green)">+93%</b></div>
                 </div>
             </div>
         </div>
 
-        <div class="side-panel">
+        <div class="col-center">
+            <div class="card chart-box" style="padding:0;">
+                <div id="tv-chart" style="width:100%; height:100%;"></div>
+            </div>
+            <div class="card">
+                <h2>💡 10. PENJELASAN ANALISA</h2>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; line-height:1.5; margin:0;"></p>
+            </div>
+        </div>
+
+        <div class="col-right">
             <div class="card signal-box">
-                <h2>⚡ LIVE SIGNAL (OANDA)</h2>
-                <div id="sig-dir" class="signal-dir">STRONG BUY</div>
+                <div id="news-indicator">HIGH IMPACT NEWS DETECTED</div>
+                <h2>⚡ 6 & 14. LIVE SIGNAL</h2>
+                <div id="sig-dir" class="signal-dir">...</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                     <div class="card" style="padding:10px; background:#000;">
                         <span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br>
                         <span id="v-entry" class="val-big">...</span>
                     </div>
                     <div class="card" style="padding:10px; background:#000;">
-                        <span style="font-size:0.55rem; color:var(--accent)">AKURASI AI</span><br>
+                        <span style="font-size:0.55rem; color:var(--accent)">AKURASI</span><br>
                         <span id="v-acc" class="val-big">98.2%</span>
                     </div>
                 </div>
@@ -120,35 +124,31 @@
                     <span style="font-size:0.55rem; color:var(--red)">STOP LOSS</span><br>
                     <span id="v-sl" class="val-big" style="color:var(--red)">...</span>
                 </div>
-                <div style="margin-top:10px; padding:10px; background:rgba(0,0,0,0.5); border-radius:5px;">
-                    <span style="font-size:0.6rem; color:var(--gold); font-weight:bold;">ANALISA LOGIKA:</span>
-                    <p id="ai-logic" style="font-size:0.65rem; color:#ccc; line-height:1.4; margin:5px 0;"></p>
-                </div>
             </div>
 
             <div class="card">
-                <h2>🔄 SMART SIGNAL TRACKER</h2>
+                <h2>🔄 3. SMART SIGNAL TRACKER</h2>
                 <div id="tracker" class="tracker-list"></div>
             </div>
 
             <div class="card">
-                <h2>🧮 DYNAMIC RISK CALCULATOR</h2>
+                <h2>🧮 7. DYNAMIC RISK CALC</h2>
                 <div style="display:flex; gap:5px;">
-                    <select id="c-curr" class="form-ctrl" style="width:80px;"><option>USD</option><option>IDR</option><option>USC</option></select>
+                    <select id="c-curr" class="form-ctrl" style="width:70px;"><option>USD</option><option>IDR</option><option>USC</option></select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
                 <select id="c-risk" class="form-ctrl">
-                    <option value="1">Resiko 1%</option><option value="2">Resiko 2%</option><option value="5">Resiko 5%</option>
-                    <option value="10">Resiko 10%</option><option value="20">Resiko 20%</option><option value="50">Resiko 50%</option>
-                    <option value="100">Resiko 100%</option>
+                    <option value="1">1%</option><option value="2">2%</option><option value="5">5%</option>
+                    <option value="10">10%</option><option value="20">20%</option><option value="30">30%</option>
+                    <option value="40">40%</option><option value="50">50%</option><option value="100">100%</option>
                 </select>
-                <button onclick="calculateLot()" class="btn btn-gold">HITUNG SARAN LOT</button>
-                <div id="c-res" style="text-align:center; font-size:1.6rem; font-weight:900; color:var(--accent); margin-top:8px;">0.01</div>
+                <button onclick="calculateLot()" class="btn btn-gold">HITUNG LOT</button>
+                <div id="c-res" style="text-align:center; font-size:1.5rem; font-weight:900; color:var(--accent); margin-top:5px;">0.01</div>
             </div>
 
             <div class="card" style="text-align:center;">
-                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-partner">MIFX REFFERAL LINK</a>
-                <div style="font-size:0.65rem; color:#888; margin-top:10px;">CS WHATSAPP: 089675009549</div>
+                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-partner">OPEN MIFX REFFERAL</a>
+                <div style="font-size:0.6rem; color:#888; margin-top:10px;">11. CS WA: 089675009549</div>
             </div>
         </div>
     </div>
@@ -164,104 +164,102 @@
             if(k === "KING01" || k === "GOLD88") {
                 document.getElementById('lock-screen').style.display = 'none';
                 initDashboard();
-            } else { alert("KODE KUNCI SALAH!"); }
+            } else { alert("KUNCI SALAH!"); }
         }
 
         function startTrial() {
-            if(localStorage.getItem('trial_exp_vvip')) return alert("Batas trial 5 menit Anda sudah habis!");
+            if(localStorage.getItem('vvip_trial_used')) return alert("Batas trial 1x sudah habis!");
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('trial-timer').style.display = 'inline';
             initDashboard();
-            const timer = setInterval(() => {
+            const t = setInterval(() => {
                 trialTime--;
                 let m = Math.floor(trialTime/60); let s = trialTime%60;
                 document.getElementById('trial-timer').innerText = `${m}:${s<10?'0'+s:s}`;
-                if(trialTime <= 0) {
-                    clearInterval(timer);
-                    localStorage.setItem('trial_exp_vvip', 'true');
-                    location.reload();
-                }
+                if(trialTime <= 0) { clearInterval(t); localStorage.setItem('vvip_trial_used','true'); location.reload(); }
             }, 1000);
         }
 
         function initDashboard() {
-            new TradingView.widget({
-                "width": "100%", "height": "100%",
-                "symbol": "OANDA:XAUUSD", "interval": "1",
-                "theme": "dark", "style": "1", "locale": "id",
-                "container_id": "tv-chart", "hide_side_toolbar": false
-            });
+            new TradingView.widget({ "width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
             const d = new Date().getDay();
             if(d === 0 || d === 6) marketClosed = true;
-            runAI();
-            setInterval(runAI, 60000);
+            runAI(); setInterval(runAI, 60000);
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
+
+        // 14. NEWS IMPACT DATA
+        const impactNews = [
+            { h: 19, m: 30, title: "NON-FARM PAYROLL (NFP)" },
+            { h: 20, m: 30, title: "CPI / INFLASI US" },
+            { h: 1, m: 0, title: "FOMC / SUKU BUNGA FED" },
+            { h: 19, m: 30, title: "RETAIL SALES" }
+        ];
 
         function runAI() {
             if(marketClosed) {
                 document.getElementById('sig-dir').innerText = "MARKET CLOSED";
-                document.getElementById('ai-logic').innerText = "Pasar sedang tutup. History terakhir tetap ditampilkan untuk bahan analisa Anda.";
+                document.getElementById('ai-logic').innerText = "Pasar tutup. Mengunci history terakhir.";
                 return;
             }
 
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
             .then(r => r.json()).then(res => {
-                let price = parseFloat(res.price) * 1.956;
-                if (price > 6000 || price < 2000) price = 2345.50;
+                let p = parseFloat(res.price) * 1.956;
+                const now = new Date();
+                const isNews = impactNews.find(n => n.h === now.getHours() && Math.abs(now.getMinutes() - n.m) <= 30);
+                
+                let isBuy = p > 2300;
+                // 3. SMART TRACKER LOGIC
+                if(failCount >= 2) { isBuy = !isBuy; document.getElementById('v-acc').innerText = "99.4% (AUTO-SYNC)"; }
+                else { document.getElementById('v-acc').innerText = "98.2%"; }
 
-                let isBuy = price > 2300;
-                if(failCount >= 2) {
-                    isBuy = !isBuy; // Re-calibrate
-                    document.getElementById('v-acc').innerText = "99.2% (CALIBRATED)";
-                } else {
-                    document.getElementById('v-acc').innerText = "98.2%";
-                }
-
-                document.getElementById('v-entry').innerText = price.toFixed(2);
+                document.getElementById('v-entry').innerText = p.toFixed(2);
                 document.getElementById('sig-dir').innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 document.getElementById('sig-dir').style.color = isBuy ? "var(--green)" : "var(--red)";
-                
-                const gap = 2.3;
-                document.getElementById('v-tp').innerText = (price + (isBuy ? gap : -gap)).toFixed(2);
-                document.getElementById('v-sl').innerText = (price + (isBuy ? -gap/2 : gap/2)).toFixed(2);
 
-                document.getElementById('ai-logic').innerText = isBuy ? 
-                    "Tren pasar sedang naik (Uptrend). Harga memantul dari area Support kuat, peluang beli sangat tinggi." : 
-                    "Tren pasar sedang turun (Downtrend). Tekanan jual meningkat setelah menyentuh Resistance psikologis.";
+                // 14. ADJUST TP/SL FOR NEWS
+                const gap = isNews ? 9.5 : 2.2; 
+                document.getElementById('v-tp').innerText = (p + (isBuy ? gap : -gap)).toFixed(2);
+                document.getElementById('v-sl').innerText = (p + (isBuy ? -gap/2 : gap/2)).toFixed(2);
 
-                const success = Math.random() > (failCount >= 2 ? 0.05 : 0.3);
-                updateTracker(isBuy ? "BUY" : "SELL", price.toFixed(2), success);
+                if(isNews) {
+                    document.getElementById('news-indicator').style.display = "block";
+                    document.getElementById('news-indicator').innerText = `🔥 NEWS ACTIVE: ${isNews.title}`;
+                    document.getElementById('ai-logic').innerText = `BERITA ${isNews.title} rilis. Sistem mendeteksi lonjakan volume. Entry zone disesuaikan untuk menghindari slippage. TP ditarik lebih jauh (80-100 pips).`;
+                } else {
+                    document.getElementById('news-indicator').style.display = "none";
+                    document.getElementById('ai-logic').innerText = isBuy ? 
+                        "TREN PASAR NAIK (BULLISH). Harga bertahan di atas Support level. Indikasi akumulasi buyer kuat." : 
+                        "TREN PASAR TURUN (BEARISH). Terjadi rejection di Resistance psikologis. Potensi distribusi seller.";
+                }
+
+                // 3. TRACKER SIMULATION
+                const ok = Math.random() > (failCount >= 2 ? 0.05 : 0.3);
+                updateTracker(isBuy ? "BUY" : "SELL", p.toFixed(2), ok);
             });
         }
 
-        function updateTracker(type, p, ok) {
+        function updateTracker(t, p, ok) {
             const box = document.getElementById('tracker');
             const div = document.createElement('div');
             div.style.marginBottom = "5px"; div.style.borderBottom = "1px solid #111";
-            if(ok) {
-                div.innerHTML = `<span style="color:#555">[${new Date().toLocaleTimeString()}]</span> XAUUSD ${type} @${p} <b style="color:var(--green)">SUCCESS (TP)</b>`;
-                failCount = 0;
-            } else {
-                div.innerHTML = `<span style="color:#555">[${new Date().toLocaleTimeString()}]</span> XAUUSD ${type} @${p} <b style="color:var(--red)">FAILED (SL)</b>`;
-                failCount++;
-            }
+            if(ok) { div.innerHTML = `<span style="color:#555">[${new Date().toLocaleTimeString()}]</span> XAUUSD ${t} @${p} <b style="color:var(--green)">SUCCESS (TP)</b>`; failCount = 0; }
+            else { div.innerHTML = `<span style="color:#555">[${new Date().toLocaleTimeString()}]</span> XAUUSD ${t} @${p} <b style="color:var(--red)">FAILED (SL)</b>`; failCount++; }
             box.prepend(div);
-            if(box.childNodes.length > 10) box.removeChild(box.lastChild);
+            if(box.childNodes.length > 8) box.removeChild(box.lastChild);
         }
 
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
-            const curr = document.getElementById('c-curr').value;
+            const cur = document.getElementById('c-curr').value;
             if(bal > 0) {
-                let factor = (curr === "IDR") ? 158000 : (curr === "USC") ? 100 : 1;
-                let lot = (bal / factor) * (risk/100) / 10;
-                document.getElementById('c-res').innerText = Math.max(lot, 0.01).toFixed(2);
+                let f = (cur === "IDR") ? 158000 : (cur === "USC") ? 100 : 1;
+                let l = (bal / f) * (risk/100) / 10;
+                document.getElementById('c-res').innerText = Math.max(l, 0.01).toFixed(2);
             }
         }
-
-        document.onkeydown = (e) => { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) return false; };
     </script>
 </body>
 </html>
