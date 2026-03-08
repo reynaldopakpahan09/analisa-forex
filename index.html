@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | FULL POWER EDITION</title>
+    <title>ANALISA VVIP PRO | ULTIMATE RISK EDITION</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -87,10 +87,10 @@
                     <option value="algo">9. Algorithmic Pro</option>
                     <option value="portofolio">10. Portfolio Management</option>
                 </select>
-                <p id="method-desc" style="font-size: 0.65rem; color: #8b949e; line-height: 1.4;">Strategi agresif untuk mencari profit cepat.</p>
+                <p id="method-desc" style="font-size: 0.65rem; color: #8b949e; line-height: 1.4;">Strategi agresif timeframe rendah.</p>
             </div>
             <div class="card" style="height: 400px;">
-                <h2>📰 LIVE NEWS FEED</h2>
+                <h2>📰 WORLD NEWS FEED</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=370&locale=id" frameborder="0" style="width:100%; height:370px;"></iframe>
             </div>
         </div>
@@ -132,12 +132,16 @@
                     </select>
                     <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo Akun" style="flex:1;">
                 </div>
+                
+                <label class="label">PILIH RISIKO (%)</label>
                 <select id="v-risk" class="calc-input">
-                    <option value="1">Resiko 1% (Aman)</option>
-                    <option value="2">Resiko 2% (Standard)</option>
-                    <option value="5">Resiko 5% (Agresif)</option>
-                    <option value="10">Resiko 10% (High Risk)</option>
+                    <option value="1">1%</option><option value="2">2%</option><option value="5">5%</option>
+                    <option value="10">10%</option><option value="20">20%</option><option value="30">30%</option>
+                    <option value="40">40%</option><option value="50">50%</option><option value="60">60%</option>
+                    <option value="70">70%</option><option value="80">80%</option><option value="90">90%</option>
+                    <option value="100">100% (ALL IN)</option>
                 </select>
+
                 <button onclick="hitungManajemen()" class="btn btn-live">CALCULATE LOT AMAN</button>
                 <div id="result-box" style="display:none; text-align:center; margin-top:10px; border:1px solid #333; padding:15px; background:rgba(0,255,204,0.05);">
                     <span class="label">REKOMENDASI LOT ANDA:</span>
@@ -158,7 +162,7 @@
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // --- 🛡️ SISTEM KEAMANAN FULL ---
+        // --- 🛡️ SISTEM KEAMANAN & LOGIN ---
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
 
         document.addEventListener('contextmenu', e => e.preventDefault());
@@ -194,7 +198,7 @@
             }, 1000);
         }
 
-        // --- 📈 CORE ANALYTICS ---
+        // --- 📈 CORE ENGINE ---
         function initApp() {
             new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "timezone": "Asia/Jakarta", "theme": "dark", "style": "1", "locale": "id", "container_id": "tv-chart" });
             updateSignal();
@@ -202,23 +206,19 @@
         }
 
         const methods = {
-            scalping: { label: "SCALPING", tp: 1.2, sl: 0.8, desc: "Strategi agresif timeframe kecil." },
-            daytrading: { label: "DAY TRADING", tp: 3.5, sl: 2.0, desc: "Fokus pada pergerakan harian." },
-            swing: { label: "SWING", tp: 12.0, sl: 6.0, desc: "Menahan posisi beberapa hari." },
-            position: { label: "POSITION", tp: 25.0, sl: 12.0, desc: "Trend jangka panjang." },
-            trend: { label: "TREND", tp: 15.0, sl: 5.0, desc: "Mengikuti arah tren pasar." },
-            breakout: { label: "BREAKOUT", tp: 4.0, sl: 1.5, desc: "Menunggu penembusan harga." },
-            range: { label: "RANGE", tp: 2.5, sl: 1.0, desc: "Trading di area sideways." },
-            news: { label: "NEWS", tp: 5.0, sl: 3.0, desc: "Analisa saat rilis berita besar." },
-            algo: { label: "ALGO PRO", tp: 2.0, sl: 1.0, desc: "Matematika & algoritma murni." },
-            portofolio: { label: "PORTFOLIO", tp: 30.0, sl: 15.0, desc: "Manajemen aset jangka panjang." }
+            scalping: { label: "SCALPING", tp: 1.2, sl: 0.8 },
+            daytrading: { label: "DAY TRADING", tp: 3.5, sl: 2.0 },
+            swing: { label: "SWING", tp: 12.0, sl: 6.0 },
+            position: { label: "POSITION", tp: 25.0, sl: 12.0 },
+            trend: { label: "TREND", tp: 15.0, sl: 5.0 },
+            breakout: { label: "BREAKOUT", tp: 4.0, sl: 1.5 },
+            range: { label: "RANGE", tp: 2.5, sl: 1.0 },
+            news: { label: "NEWS", tp: 5.0, sl: 3.0 },
+            algo: { label: "ALGO PRO", tp: 2.0, sl: 1.0 },
+            portofolio: { label: "PORTFOLIO", tp: 30.0, sl: 15.0 }
         };
 
-        function updateMethod() {
-            const mKey = document.getElementById('trading-method').value;
-            document.getElementById('method-desc').innerText = methods[mKey].desc;
-            updateSignal();
-        }
+        function updateMethod() { updateSignal(); }
 
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
@@ -245,10 +245,19 @@
             const bal = parseFloat(document.getElementById('v-balance').value);
             const risk = parseFloat(document.getElementById('v-risk').value);
             const cur = document.getElementById('v-currency').value;
+            const mKey = document.getElementById('trading-method').value;
+            const slPips = methods[mKey].sl * 100; // SL disesuaikan dengan metode trading
+
             if(bal > 0) {
+                // Konversi faktor mata uang
                 let factor = (cur === "IDR") ? 15700 : (cur === "USC" ? 0.01 : 1);
-                let lot = ( (bal/factor) * (risk/100) ) / 500;
+                
+                // Rumus: (Saldo basis USD * %Resiko) / (Pips SL * 10)
+                let lot = ( (bal/factor) * (risk/100) ) / (slPips * 10);
+                
+                // Jika Akun Cent, kalibrasi lot 100x
                 if(cur === "USC") lot *= 100;
+                
                 document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
                 document.getElementById('result-box').style.display = 'block';
             } else { alert("Masukkan Saldo Akun!"); }
@@ -264,9 +273,9 @@
         }
 
         function renderHistory() {
-            const data = [{m:"Feb 2026",w:"92.4%",p:"+5,120"},{m:"Jan 2026",w:"90.1%",p:"+4,890"},{m:"Des 2025",w:"94.0%",p:"+6,200"}];
+            const data = [{m:"Feb 2026",w:"92.4%"},{m:"Jan 2026",w:"90.1%"},{m:"Des 2025",w:"94.0%"}];
             const body = document.getElementById('history-body');
-            data.forEach(d => { body.innerHTML += `<tr><td>${d.m}</td><td style="color:var(--success)">${d.w} WR</td><td style="text-align:right">${d.p} Pips</td></tr>`; });
+            data.forEach(d => { body.innerHTML += `<tr><td>${d.m}</td><td style="color:var(--success)">${d.w} Win Rate</td><td>MIFX PRO</td></tr>`; });
         }
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
