@@ -9,12 +9,10 @@
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; }
         
-        /* LOGIN & SECURITY */
         #lock-screen { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; text-align: center; }
         .auth-box { padding: 30px; background: var(--card); border-radius: 20px; border: 1px solid var(--gold); width: 100%; max-width: 420px; box-shadow: 0 0 50px rgba(255, 215, 0, 0.2); }
         .key-input { width: 100%; padding: 15px; margin: 15px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 8px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.1rem; outline: none; box-sizing: border-box; }
         
-        /* ADAPTIVE LAYOUT */
         header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
         .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
         
@@ -33,7 +31,6 @@
         .btn-partner { background: var(--accent); color: #000; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
         
-        /* SIGNAL & NEWS IMPACT */
         .signal-box { border: 2px solid var(--gold); background: #001219; }
         .signal-dir { font-size: 2.2rem; font-weight: 900; text-align: center; margin: 10px 0; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.3rem; font-weight: bold; }
@@ -43,6 +40,9 @@
         @keyframes blink { 50% { opacity: 0; } }
 
         .tracker-list { font-size: 0.65rem; max-height: 140px; overflow-y: auto; background: #000; padding: 8px; border-radius: 5px; border: 1px solid #222; }
+        
+        /* MC ALERT STYLE */
+        .mc-tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 3px; font-weight: 800; margin-top: 5px; display: inline-block; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -56,7 +56,7 @@
             <button onclick="startTrial()" id="btn-trial" class="btn" style="background: #222; color: #fff;">FREE AKSES 5 MENIT (1X)</button>
             <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
             <a href="https://wa.me/6289675009549?text=Saya%20ingin%20membeli%20kunci%20tools%20analisa%20vvip" target="_blank" class="btn" style="background:#fff; color:#000;">SAYA INGIN MEMBELI KUNCI</a>
-            <a href="https://wa.me/6289675009549?text=Saya%20ingin%20menjadi%20partner%20tools%20analisa%20vvip%0ANama%3A%0AUsia%3A%0AUsername%20Sosmed%3A" target="_blank" class="btn btn-partner">GABUNG JADI PARTNER</a>
+            <a href="https://wa.me/6289675009549?text=Saya%20ingin%20menjadi%20partner%20tools%20analisa%20vvip" target="_blank" class="btn btn-partner">GABUNG JADI PARTNER</a>
         </div>
     </div>
 
@@ -137,18 +137,24 @@
             </div>
 
             <div class="card">
-                <h2>DYNAMIC RISK CALCULATOR</h2>
+                <h2>DYNAMIC RISK & LAYER CALCULATOR</h2>
                 <div style="display:flex; gap:5px;">
                     <select id="c-curr" class="form-ctrl" style="width:75px;"><option>USD</option><option>IDR</option><option>USC</option></select>
-                    <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
+                    <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo Anda">
                 </div>
                 <select id="c-risk" class="form-ctrl">
-                    <option value="1">Resiko 1%</option><option value="2">2%</option><option value="5">5%</option>
-                    <option value="10">10%</option><option value="20">20%</option><option value="50">50%</option>
-                    <option value="100">100%</option>
+                    <option value="1">Resiko 1% (Low)</option>
+                    <option value="2">Resiko 2% (Medium)</option>
+                    <option value="5" selected>Resiko 5% (Strong)</option>
+                    <option value="10">Resiko 10% (High)</option>
+                    <option value="20">Resiko 20% (Aggressive)</option>
+                    <option value="50">Resiko 50% (Gambling)</option>
+                    <option value="100">Resiko 100% (All-In)</option>
                 </select>
-                <button onclick="calculateLot()" class="btn btn-gold">HITUNG LOT AMAN</button>
-                <div id="c-res" style="text-align:center; font-size:1.4rem; font-weight:900; color:var(--accent); margin-top:5px;">0.01</div>
+                <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI LAYER</button>
+                <div id="c-res" style="margin-top:10px; text-align:center;">
+                    <span style="color:#666; font-size:0.7rem;">Masukkan saldo untuk kalkulasi</span>
+                </div>
             </div>
 
             <div class="card" style="text-align:center;">
@@ -234,12 +240,12 @@
                 if(isNews) {
                     document.getElementById('news-impact-zone').style.display = "block";
                     document.getElementById('news-name').innerText = isNews.t;
-                    document.getElementById('ai-logic').innerText = `Menganalisa rilis data ${isNews.t}. Terdeteksi volatilitas tinggi di pasar Gold. Signal disesuaikan untuk target profit maksimal mengikuti arah rilis data.`;
+                    document.getElementById('ai-logic').innerText = `Menganalisa rilis data ${isNews.t}. Terdeteksi volatilitas tinggi di pasar Gold. Signal disesuaikan untuk target profit maksimal.`;
                 } else {
                     document.getElementById('news-impact-zone').style.display = "none";
                     document.getElementById('ai-logic').innerText = isBuy ? 
-                        "Logika: Tren pasar BULLISH. Harga bertahan di area Support. Struktur pasar menunjukkan akumulasi buyer untuk kenaikan lanjut." : 
-                        "Logika: Tren pasar BEARISH. Terdeteksi rejection di area Resistance psikologis. Peluang penurunan menuju level Support terbuka.";
+                        "Logika: Tren pasar BULLISH. Harga bertahan di area Support. Struktur pasar menunjukkan akumulasi buyer." : 
+                        "Logika: Tren pasar BEARISH. Terdeteksi rejection di area Resistance psikologis. Peluang penurunan terbuka.";
                 }
 
                 const ok = Math.random() > (failCount >= 2 ? 0.05 : 0.3);
@@ -262,14 +268,47 @@
             if(box.childNodes.length > 8) box.removeChild(box.lastChild);
         }
 
+        // FUNGSI BARU: LAYER & MC CALCULATOR
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
             const cur = document.getElementById('c-curr').value;
+            
             if(bal > 0) {
-                let div = (cur === "IDR") ? 158000 : (cur === "USC") ? 100 : 1;
-                let lot = (bal / div) * (risk/100) / 10;
-                document.getElementById('c-res').innerText = Math.max(lot, 0.01).toFixed(2);
+                // Konversi Saldo ke USD Standar
+                let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
+                
+                // Total Lot Keseluruhan Berdasarkan Resiko
+                let totalLot = (usdBal * (risk/100)) / 10;
+                if(totalLot < 0.01) totalLot = 0.01;
+
+                // Hitung Ketahanan Dana (Pips)
+                let ketahanan = usdBal / (totalLot * 10);
+                let mcStatus = ketahanan < 50 ? "SANGAT BERESIKO MC" : (ketahanan < 100 ? "RISIKO SEDANG" : "AMAN (TAHAN SWING)");
+                let mcColor = ketahanan < 50 ? "var(--red)" : (ketahanan < 100 ? "var(--gold)" : "var(--green)");
+
+                // Bagi menjadi 5 Layer (Standard Trading Pro)
+                let layerCount = 5;
+                let lotPerLayer = totalLot / layerCount;
+                if(lotPerLayer < 0.01) {
+                    lotPerLayer = 0.01;
+                    layerCount = Math.floor(totalLot / 0.01) || 1;
+                }
+
+                document.getElementById('c-res').innerHTML = `
+                    <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">Total: ${totalLot.toFixed(2)} Lot</div>
+                    <div style="font-size:0.8rem; color:#fff; margin:10px 0; background:#000; padding:8px; border-radius:5px;">
+                        SARAN: <b>${layerCount} LAYER</b> x <b>${lotPerLayer.toFixed(2)}</b><br>
+                        <span style="color:#888;">Jarak antar layer: 15-20 Pips</span>
+                    </div>
+                    <div style="background:${mcColor}22; border:1px solid ${mcColor}; padding:10px; border-radius:5px;">
+                        <span style="font-size:0.6rem; color:${mcColor}; font-weight:bold; letter-spacing:1px;">KETAHANAN MARGIN</span><br>
+                        <b style="font-size:1.2rem; color:${mcColor};">${ketahanan.toFixed(0)} PIPS</b><br>
+                        <span class="mc-tag" style="background:${mcColor}; color:#000;">${mcStatus}</span>
+                    </div>
+                `;
+            } else {
+                alert("Masukkan jumlah saldo terlebih dahulu!");
             }
         }
     </script>
