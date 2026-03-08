@@ -208,7 +208,21 @@
         }
 
         function initDashboard() {
-            new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart"});
+            new TradingView.widget({
+                "width": "100%", 
+                "height": "100%", 
+                "symbol": "OANDA:XAUUSD", 
+                "interval": "1", 
+                "theme": "dark", 
+                "container_id": "tv-chart",
+                "style": "1",
+                "locale": "id",
+                "studies": [
+                    "RSI@tv-basicstudies",
+                    "MASimple@tv-basicstudies",
+                    "BBands@tv-basicstudies"
+                ]
+            });
             runAI(true); setInterval(runAI, 60000);
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
@@ -264,7 +278,6 @@
             });
         }
 
-        // LOGIKA AUTO-SYNC TARGET UNTUK TRADER PEMULA
         document.getElementById('t-daily').addEventListener('input', function() {
             let daily = parseFloat(this.value) || 0;
             document.getElementById('t-weekly').value = (daily * 5);
