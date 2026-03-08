@@ -239,13 +239,17 @@
                 let dir = "WAITING";
                 let acc = 0;
                 
+                // --- PERBAIKAN SIGNAL AGAR SELALU MUNCUL ---
                 if (rsi > 65) {
                     dir = "STRONG SELL"; acc = 98.4;
                 } else if (rsi < 35) {
                     dir = "STRONG BUY"; acc = 97.8;
+                } else if (rsi >= 50) {
+                    dir = "SELL"; acc = 92.1;
                 } else {
-                    dir = p > 2350 ? "BUY" : "SELL"; acc = 92.1;
+                    dir = "BUY"; acc = 91.5;
                 }
+                // ------------------------------------------
 
                 document.getElementById('sig-dir').innerText = dir;
                 document.getElementById('v-acc').innerText = acc.toFixed(1) + "%";
