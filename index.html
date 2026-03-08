@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | PREMIUM TERMINAL</title>
+    <title>ANALISA VVIP PRO | ULTIMATE TERMINAL</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,88 +14,61 @@
         }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text-main); user-select: none; overflow-x: hidden; }
         
-        /* --- 🛡️ PREMIUM LOGIN OVERLAY STYLE (DITINGKATKAN AGAR MIRIP GAMBAR) --- */
+        /* --- PREMIUM LOGIN OVERLAY STYLE --- */
         #password-overlay { 
             position: fixed; inset: 0; 
-            /* Background Gelap dengan Gelombang Chart Halus */
-            background: radial-gradient(circle at center, rgba(10, 15, 25, 0.9) 0%, rgba(2, 4, 8, 1) 100%),
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g stroke="%23111" stroke-width="0.5"><path d="M0 50 l20 -10 l20 20 l20 -30 l20 40 l20 -20v100h-100z" fill="%23050505"/></g></svg>');
+            background: linear-gradient(rgba(2, 4, 8, 0.85), rgba(2, 4, 8, 0.95)), 
+                        url('https://images.unsplash.com/photo-1611974782865-8db7dd7c31e2?q=80&w=1920') no-repeat center center;
+            background-size: cover;
             display: flex; align-items: center; justify-content: center; 
-            z-index: 10000; backdrop-filter: blur(5px);
+            z-index: 10000; backdrop-filter: blur(8px);
         }
-        
-        /* KOTAK LOGIN GLASSMORPHISM LEBIH HALUS */
         .login-box { 
-            text-align:center; padding: 45px 35px; 
-            background: rgba(15, 20, 30, 0.5); /* Lebih Transparan */
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); /* Blur Lebih Kuat */
-            border-radius: 24px; /* Sudut Lebih Melengkung Sesuai Gambar */
-            border: 1px solid rgba(255, 255, 255, 0.06); 
-            width: 360px; 
-            box-shadow: 0 20px 60px rgba(0,0,0,0.7); /* Bayangan Lebih Lembut */
+            text-align:center; padding: 50px 40px; 
+            background: rgba(13, 17, 23, 0.6); 
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            width: 380px; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             animation: fadeIn 0.8s ease-out;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* INPUT FIELD DENGAN BORDER NEON TEAL SIKRON GAMBAR */
         .calc-input-login { 
-            width: 100%; padding: 16px; margin-bottom: 18px; 
-            background: rgba(0, 0, 0, 0.6); 
-            border: 2px solid rgba(0, 255, 204, 0.2); /* Border Tipis Awal */
-            color: var(--accent-color); 
-            border-radius: 12px; box-sizing: border-box; outline: none; 
-            font-family: 'JetBrains Mono'; text-align: center; font-size: 1.1rem;
-            transition: 0.3s;
+            width: 100%; padding: 15px; margin-bottom: 15px; background: rgba(0, 0, 0, 0.5); 
+            border: 1px solid rgba(0, 255, 204, 0.3); color: var(--accent-color); 
+            border-radius: 8px; box-sizing: border-box; outline: none; 
+            font-family: 'JetBrains Mono'; text-align: center; font-size: 1rem;
         }
-        .calc-input-login:focus {
-            border-color: rgba(0, 255, 204, 0.8); /* Border Menyala Saat Diklik */
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+        .trust-badges { 
+            display: flex; justify-content: center; gap: 12px; margin-top: 25px; 
+            padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); 
         }
+        .badge-item { font-size: 0.55rem; color: #8b949e; display: flex; align-items: center; gap: 4px; }
 
-        /* TOMBOL LOGIN EMAS MENYALA (GLOW) SIKRON GAMBAR */
-        .btn-login-premium {
-            background: linear-gradient(135deg, #ffd700 0%, #ffb800 100%);
-            color: #000; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 5px 20px rgba(255, 184, 0, 0.4);
-            transition: 0.3s; padding: 16px;
-        }
-        .btn-login-premium:hover {
-            box-shadow: 0 8px 30px rgba(255, 184, 0, 0.6);
-            transform: translateY(-2px);
-        }
-        
-        /* TRUST BADGES DIBAWAH KOTAK */
-        .trust-badges-area {
-            position: absolute; bottom: 30px; left: 0; right: 0;
-            display: flex; justify-content: center; gap: 20px;
-        }
-        .badge-premium {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 8px 15px; border-radius: 50px;
-            font-size: 0.6rem; color: #8b949e;
-            display: flex; align-items: center; gap: 6px;
-        }
-
-        /* --- DASHBOARD STYLE (TIDAK BERUBAH) --- */
+        /* --- DASHBOARD STYLE --- */
         header { padding: 0 25px; background: #0d1117; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; height: 60px; position: sticky; top: 0; z-index: 100; }
         .container { display: grid; grid-template-columns: 320px 1fr 380px; gap: 15px; padding: 15px; }
         .card { background: var(--card-bg); border-radius: 6px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
+
         .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; text-decoration: none; cursor: pointer; border: none; margin-top: 10px; transition: 0.3s; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
         .btn-mif { background: var(--accent-color); color: #000; }
+        
         .calc-input, .calc-select { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: var(--accent-color); border-radius: 4px; box-sizing: border-box; outline: none; font-family: 'JetBrains Mono'; }
         .method-selector { width: 100%; padding: 12px; background: #000; border: 1px solid var(--vvip-color); color: var(--vvip-color); font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        
         .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 0; }
         .data-item { background: rgba(30, 40, 55, 0.5); padding: 10px; border-radius: 4px; border: 1px solid #2d333b; }
         .label { color: #8b949e; font-size: 0.6rem; display: block; margin-bottom: 2px; }
         .val { font-size: 1rem; font-weight: bold; }
+
         #preview-timer { background: var(--danger); color: white; padding: 5px 10px; border-radius: 4px; font-weight: bold; display: none; font-size: 0.7rem; }
         .tracker-box { max-height: 250px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #222; }
         .history-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
         .history-table td { padding: 12px 8px; border-bottom: 1px solid #222; }
+
         @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -103,27 +76,25 @@
 
     <div id="password-overlay">
         <div class="login-box">
-            <div style="font-size: 3rem; color: var(--vvip-color); margin-bottom: 15px; text-shadow: 0 0 15px rgba(255,215,0,0.6);">♛</div>
+            <div style="font-size: 2.5rem; color: var(--vvip-color); margin-bottom: 10px;">♛</div>
+            <h1 style="color:white; margin: 0; font-size: 1.8rem; font-weight: 900;">VVIP <span style="color:var(--vvip-color)">PRO</span></h1>
+            <p style="color: #8b949e; font-size: 0.7rem; margin-bottom: 30px;">Terminal Analisa Emas Eksklusif bertenaga AI.</p>
             
-            <h1 style="color:white; margin: 0; font-size: 2rem; font-weight: 900; letter-spacing: -1px;">VVIP <span style="color:var(--vvip-color)">PRO</span></h1>
-            <p style="color: #8b949e; font-size: 0.75rem; margin-bottom: 35px; margin-top: 5px;">Terminal Analisa Emas Eksklusif bertenaga AI.</p>
+            <input type="password" id="passInput" class="calc-input-login" placeholder="ENTER SECRET KEY"><br>
+            <button onclick="valX()" class="btn btn-live" style="padding: 15px;">AKSES SISTEM</button>
             
-            <input type="password" id="passInput" class="calc-input-login" placeholder="••••••••••••••••">
-            
-            <button onclick="valX()" class="btn btn-login-premium">ACCESS SYSTEM</button>
-            
-            <div id="free-section" style="margin-top: 20px;">
-                <button onclick="startPreview()" class="btn" style="background:transparent; color:#555; border:1px solid #222; font-size: 0.6rem; border-radius: 50px; padding: 8px;">FREE 5 MINUTE TRIAL</button>
+            <div id="free-section" style="margin-top: 15px;">
+                <button onclick="startPreview()" class="btn" style="background:transparent; color:#666; border:1px solid #333; font-size: 0.6rem;">FREE 5 MINUTE TRIAL</button>
             </div>
 
-            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.03); margin: 30px 0;">
-            <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa" style="font-size: 0.75rem; border-radius: 8px;">🗝️ BELI KEY VVIP / PARTNER MIFX</a>
-        </div>
+            <hr style="border:0; border-top:1px solid rgba(255,255,255,0.05); margin: 25px 0;">
+            <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa" style="font-size: 0.75rem;">🗝️ BELI KEY VVIP / PARTNER</a>
 
-        <div class="trust-badges-area">
-            <div class="badge-premium">🛡️ SECURE ACCESS</div>
-            <div class="badge-premium">🤖 AI POWERED</div>
-            <div class="badge-premium">📈 VERIFIED</div>
+            <div class="trust-badges">
+                <div class="badge-item">🛡️ SECURE</div>
+                <div class="badge-item">🤖 AI POWERED</div>
+                <div class="badge-item">📈 VERIFIED</div>
+            </div>
         </div>
     </div>
 
@@ -338,4 +309,7 @@
                 body.innerHTML += `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w} Win Rate</td><td style="text-align:right;">${d.p} Pips</td></tr>`; 
             });
         }
-        setInterval(()
+        setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
+    </script>
+</body>
+</html>
