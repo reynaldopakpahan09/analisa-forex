@@ -18,11 +18,9 @@
         .card { background: var(--card-bg); border-radius: 6px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* LOGIN OVERLAY */
         #password-overlay { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
         .login-box { text-align:center; padding: 40px; background: #0d1117; border-radius: 12px; border: 1px solid #333; width: 350px; }
         
-        /* UI COMPONENTS */
         .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; text-decoration: none; cursor: pointer; border: none; margin-top: 10px; transition: 0.3s; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
@@ -111,7 +109,7 @@
                     <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNCED</span>
                 </div>
                 <div class="signal-body" style="text-align:center; padding: 25px 0;">
-                    <div id="signal-action" style="font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 15px rgba(0,255,204,0.3);">ANALYZING...</div>
+                    <div id="signal-action" style="font-size: 2.8rem; font-weight: 900;">ANALYZING...</div>
                 </div>
                 <div class="data-grid">
                     <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="price-entry">0.00</span></div>
@@ -138,7 +136,7 @@
                     <option value="10">10%</option><option value="20">20%</option><option value="30">30%</option>
                     <option value="40">40%</option><option value="50">50%</option><option value="60">60%</option>
                     <option value="70">70%</option><option value="80">80%</option><option value="90">90%</option>
-                    <option value="100">100% (ALL IN)</option>
+                    <option value="100">100%</option>
                 </select>
 
                 <button onclick="hitungManajemen()" class="btn btn-live">CALCULATE LOT AMAN</button>
@@ -158,7 +156,6 @@
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
         
-        // Anti F12 & Key Combo
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 85))) return false;
@@ -231,19 +228,40 @@
             });
         }
 
+        // --- 🛠️ PERBAIKAN LOGIKA HITUNGAN LOT (FIXED) ---
         function hitungManajemen() {
             const bal = parseFloat(document.getElementById('v-balance').value);
             const risk = parseFloat(document.getElementById('v-risk').value);
             const cur = document.getElementById('v-currency').value;
             const mKey = document.getElementById('trading-method').value;
-            const slPips = methods[mKey].sl * 100;
+            const slPips = methods[mKey].sl * 100; 
+
             if(bal > 0) {
-                let factor = (cur === "IDR") ? 15700 : (cur === "USC" ? 0.01 : 1);
-                let lot = ( (bal/factor) * (risk/100) ) / (slPips * 10);
-                if(cur === "USC") lot *= 100;
+                let saldoDalamUSD = 0;
+
+                // 1. Konversi saldo ke basis USD
+                if (cur === "IDR") {
+                    saldoDalamUSD = bal / 15700; 
+                } else if (cur === "USC") {
+                    saldoDalamUSD = bal / 100;   
+                } else {
+                    saldoDalamUSD = bal;         
+                }
+
+                // 2. Hitung jumlah uang yang siap hilang ($)
+                let dollarRisk = saldoDalamUSD * (risk / 100);
+
+                // 3. Hitung Lot Dasar (Standard)
+                let lot = dollarRisk / (slPips * 10);
+
+                // 4. Kalibrasi untuk Tampilan Akun Cent
+                if (cur === "USC") {
+                    lot = lot * 100; 
+                }
+
                 document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
                 document.getElementById('result-box').style.display = 'block';
-            }
+            } else { alert("Masukkan Saldo Akun!"); }
         }
 
         function addToTracker(type, price) {
@@ -256,17 +274,14 @@
 
         function renderHistory() {
             const data = [
-                {m:"Feb 2026",w:"92.4%",p:"+5,120"},
-                {m:"Jan 2026",w:"90.1%",p:"+4,890"},
-                {m:"Des 2025",w:"94.0%",p:"+6,200"},
-                {m:"Nov 2025",w:"88.5%",p:"+3,450"},
-                {m:"Okt 2025",w:"91.2%",p:"+5,010"},
-                {m:"Sep 2025",w:"89.7%",p:"+4,100"}
+                {m:"Feb 2026",w:"92.4%",p:"+5,120"}, {m:"Jan 2026",w:"90.1%",p:"+4,890"},
+                {m:"Des 2025",w:"94.0%",p:"+6,200"}, {m:"Nov 2025",w:"88.5%",p:"+3,450"},
+                {m:"Okt 2025",w:"91.2%",p:"+5,010"}, {m:"Sep 2025",w:"89.7%",p:"+4,100"}
             ];
             const body = document.getElementById('history-body');
             body.innerHTML = "";
             data.forEach(d => { 
-                body.innerHTML += `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w} Win Rate</td><td style="text-align:right; font-family:'JetBrains Mono';">${d.p} Pips</td></tr>`; 
+                body.innerHTML += `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w} Win Rate</td><td style="text-align:right;">${d.p} Pips</td></tr>`; 
             });
         }
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
