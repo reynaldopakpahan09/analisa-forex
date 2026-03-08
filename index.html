@@ -44,7 +44,7 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="security-blank"><h1>⚠️ SECURITY BREACH DETECTED</h1></div>
+    <div id="security-blank"><h1>⚠️ PELANGGARAN KEAMANAN TERDETEKSI</h1></div>
     <div id="expired-screen">
         <h1>❌ MASA AKTIF HABIS</h1>
         <a href="https://wa.me/6289675009549" class="btn btn-gold">HUBUNGI ADMIN</a>
@@ -53,16 +53,16 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Professional Gold Analysis System</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa Gold Profesional</p>
             <div class="promo-list">
-                <div class="promo-item">📊 <b>MULTI-STRATEGY:</b> Scalping & Swing Algorithms.</div>
-                <div class="promo-item">🪙 <b>CENT ACCOUNT:</b> Optimized for Micro Lot Trading.</div>
-                <div class="promo-item">🔊 <b>VOICE ALERTS:</b> Real-Time Voice Notifications.</div>
-                <div class="promo-item">🛡️ <b>RISK GUARD:</b> Advanced Drawdown Protection.</div>
+                <div class="promo-item">📊 <b>MULTI-STRATEGY:</b> Algoritma Scalping & Swing.</div>
+                <div class="promo-item">🪙 <b>AKUN CENT:</b> Optimal untuk Trading Micro Lot.</div>
+                <div class="promo-item">🔊 <b>VOICE ALERTS:</b> Notifikasi Suara Real-Time.</div>
+                <div class="promo-item">🛡️ <b>RISK GUARD:</b> Perlindungan Drawdown Tingkat Lanjut.</div>
             </div>
-            <input type="password" id="passKey" class="key-input" placeholder="ACCESS KEY">
-            <button onclick="unlock()" class="btn btn-gold">LOG IN SYSTEM</button>
-            <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">START FREE TRIAL</button>
+            <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
+            <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
+            <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS</button>
             
             <div style="margin-top:20px; display:flex; gap:10px;">
                 <a href="https://wa.me/6289675009549?text=Halo%20Admin,%20saya%20mau%20beli%20kunci%20VVIP" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
@@ -79,7 +79,7 @@
     <div class="main-container">
         <div class="col-left">
             <div class="card">
-                <h2>TRADING METHODS</h2>
+                <h2>METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl">
                     <option>SCALPING M1-M15</option>
                     <option>DAY TRADING H1</option>
@@ -92,66 +92,66 @@
                     <option>POSITION TRADING</option>
                     <option>PORTFOLIO MGMT</option>
                 </select>
-                <div id="news-countdown" style="font-size:0.65rem; color:var(--red);">NEXT HIGH IMPACT NEWS: 01:04:12</div>
+                <div id="news-countdown" style="font-size:0.65rem; color:var(--red);">BERITA HIGH IMPACT BERIKUTNYA: 01:04:12</div>
             </div>
             <div class="card" style="flex:1;">
-                <h2>GLOBAL MARKET NEWS</h2>
+                <h2>BERITA PASAR GLOBAL</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=320" frameborder="0" style="width:100%; height:320px;"></iframe>
             </div>
         </div>
 
         <div class="col-center">
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
-            <div class="card"><h2>AI ANALYSIS LOGIC</h2><p id="ai-logic" style="font-size:0.75rem; color:#ccc;"></p></div>
+            <div class="card"><h2>LOGIKA ANALISA AI</h2><p id="ai-logic" style="font-size:0.75rem; color:#ccc;"></p></div>
         </div>
 
         <div class="col-right">
             <div class="card signal-box">
-                <h2>SIGNAL XAUUSD <span style="font-size:0.6rem; color:var(--accent); float:right;">🔊 VOICE AI ON</span></h2>
+                <h2>SIGNAL XAUUSD <span style="font-size:0.6rem; color:var(--accent); float:right;">🔊 VOICE AI AKTIF</span></h2>
                 <div id="sig-dir" class="signal-dir">...</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                     <div class="card" style="padding:10px; background:#000;">
-                        <span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br>
+                        <span style="font-size:0.55rem; color:var(--gold)">ZONA ENTRY</span><br>
                         <span id="v-entry" class="val-big">...</span>
-                        <button class="btn btn-copy" onclick="copyVal('v-entry')">COPY</button>
+                        <button class="btn btn-copy" onclick="copyVal('v-entry')">SALIN</button>
                     </div>
-                    <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--accent)">ACCURACY</span><br><span class="val-big">98.2%</span></div>
+                    <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--accent)">AKURASI</span><br><span class="val-big">98.2%</span></div>
                 </div>
                 <div class="card" style="margin-top:10px; padding:10px; background:#000; border:1px solid var(--green);">
                     <span style="font-size:0.55rem; color:var(--green)">TAKE PROFIT</span><br>
                     <span id="v-tp" class="val-big" style="color:var(--green)">...</span>
-                    <button class="btn btn-copy" onclick="copyVal('v-tp')">COPY</button>
+                    <button class="btn btn-copy" onclick="copyVal('v-tp')">SALIN</button>
                 </div>
                 <div class="card" style="margin-top:5px; padding:10px; background:#000; border:1px solid var(--red);">
                     <span style="font-size:0.55rem; color:var(--red)">STOP LOSS</span><br>
                     <span id="v-sl" class="val-big" style="color:var(--red)">...</span>
-                    <button class="btn btn-copy" onclick="copyVal('v-sl')">COPY</button>
+                    <button class="btn btn-copy" onclick="copyVal('v-sl')">SALIN</button>
                 </div>
             </div>
 
             <div class="card">
-                <h2>RISK MANAGEMENT</h2>
+                <h2>MANAJEMEN RISIKO</h2>
                 <div style="display:flex; gap:5px;">
                     <select id="c-curr" class="form-ctrl" style="width:85px;">
                         <option value="IDR">IDR</option>
                         <option value="USD">USD</option>
                         <option value="USC">USC/CENT</option>
                     </select>
-                    <input type="number" id="c-bal" class="form-ctrl" placeholder="Balance">
+                    <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
-                <select id="c-risk" class="form-ctrl"><option value="1">Risk 1%</option><option value="5" selected>Risk 5%</option><option value="10">Risk 10%</option></select>
-                <button onclick="calculateLot()" class="btn btn-gold">CALCULATE STRATEGY</button>
+                <select id="c-risk" class="form-ctrl"><option value="1">Resiko 1%</option><option value="5" selected>Resiko 5%</option><option value="10">Resiko 10%</option></select>
+                <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
             </div>
             
-            <div class="card"><h2>PERFORMANCE TRACKER</h2><div id="tracker" class="tracker-list"></div></div>
+            <div class="card"><h2>PELACAK PERFORMA</h2><div id="tracker" class="tracker-list"></div></div>
             <div class="card" style="text-align:center; padding:10px;">
                 <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">HUBUNGI OWNER</a>
             </div>
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ WARNING: HIGH IMPACT NEWS DETECTED - USE 1% RISK - CONTACT ADMIN TO EXTEND VVIP ACCESS - TRADE WISELY ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PERINGATAN: TERDETEKSI BERITA HIGH IMPACT - GUNAKAN RESIKO MAKSIMAL 1% - HUBUNGI ADMIN UNTUK PERPANJANG AKSES VVIP - TRADINGLAH DENGAN BIJAK BERSAMA PREMIERE AI SYSTEM ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
@@ -170,16 +170,16 @@
 
         function unlock() {
             const k = document.getElementById('passKey').value.toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("ACCESS DENIED!"); }
+            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("AKSES DITOLAK!"); }
         }
 
         function copyVal(id) {
             const val = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(val); alert("Copied: " + val);
+            navigator.clipboard.writeText(val); alert("Berhasil disalin: " + val);
         }
 
         function startTrial() {
-            if(localStorage.getItem('vvip_trial_v3')) return alert("Trial expired!");
+            if(localStorage.getItem('vvip_trial_v3')) return alert("Masa trial sudah habis!");
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('trial-timer').style.display = 'inline';
             initDashboard();
@@ -204,10 +204,10 @@
                 let sl = (p + (p > 2350 ? -1.5 : 1.5)).toFixed(2);
                 document.getElementById('v-tp').innerText = tp;
                 document.getElementById('v-sl').innerText = sl;
-                document.getElementById('ai-logic').innerText = Math.random() > 0.8 ? "⚠️ HIGH IMPACT: Broadening Profit Targets." : "Normal Volatility. Focusing on Overbought/Oversold areas.";
+                document.getElementById('ai-logic').innerText = Math.random() > 0.8 ? "⚠️ HIGH IMPACT: Target profit diperlebar mengikuti volatilitas." : "Volatilitas Normal. Fokus pada area Overbought/Oversold.";
                 if(dir !== lastDir && !isFirst) { speakSignal(dir, p.toFixed(0)); lastDir = dir; }
                 const tr = document.getElementById('tracker');
-                tr.innerHTML = `<div>[${new Date().toLocaleTimeString()}] XAUUSD ${dir} @${p.toFixed(2)} - <b style="color:var(--green)">SUCCESS</b></div>` + tr.innerHTML;
+                tr.innerHTML = `<div>[${new Date().toLocaleTimeString()}] XAUUSD ${dir} @${p.toFixed(2)} - <b style="color:var(--green)">PROFIT</b></div>` + tr.innerHTML;
             });
         }
 
@@ -223,8 +223,8 @@
                 let ketahanan = usdBal / (totalLot * 10);
                 document.getElementById('c-res').innerHTML = `
                     <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
-                    <div style="font-size:0.8rem; color:#fff;">5 Layers @${lotPerLayer.toFixed(2)}</div>
-                    <div style="border:1px solid var(--green); padding:5px; border-radius:12px; font-size:0.6rem;">ENDURANCE: ${ketahanan.toFixed(0)} PIPS</div>
+                    <div style="font-size:0.8rem; color:#fff;">5 Layer @${lotPerLayer.toFixed(2)}</div>
+                    <div style="border:1px solid var(--green); padding:5px; border-radius:12px; font-size:0.6rem;">KETAHANAN: ${ketahanan.toFixed(0)} PIPS</div>
                 `;
             }
         }
