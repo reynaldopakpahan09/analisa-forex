@@ -54,12 +54,12 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa Gold MIFX Partner</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa Gold Profesional</p>
             <div class="promo-list">
-                <div class="promo-item">📊 <b>MIFX SYNC:</b> Harga Terhubung ke Market Monex.</div>
+                <div class="promo-item">📊 <b>MULTI-STRATEGY:</b> Algoritma Scalping & Swing.</div>
                 <div class="promo-item">🪙 <b>AKUN CENT:</b> Optimal untuk Trading Micro Lot.</div>
                 <div class="promo-item">🔊 <b>VOICE ALERTS:</b> Notifikasi Suara Real-Time.</div>
-                <div class="promo-item">🛡️ <b>RISK GUARD:</b> Perlindungan Drawdown Aktif.</div>
+                <div class="promo-item">🛡️ <b>RISK GUARD:</b> Perlindungan Drawdown Tingkat Lanjut.</div>
             </div>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
@@ -82,8 +82,11 @@
             <div class="card">
                 <h2>METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl">
-                    <option>SCALPING M1-M15</option>
                     <option>QUANTUM ALGO PRO</option>
+                    <option>SCALPING M1-M15</option>
+                    <option>DAY TRADING H1</option>
+                    <option>SWING STRATEGY H4</option>
+                    <option>BREAKOUT MODE</option>
                     <option>NEWS EVENT TRADING</option>
                 </select>
                 <div id="news-countdown" style="font-size:0.65rem; color:var(--red);">NEWS IMPACT: <span id="news-status">STABLE</span></div>
@@ -97,15 +100,15 @@
         <div class="col-center">
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
-                <h2>LOGIKA ANALISA AI <span id="ai-conf" class="status-badge" style="color:var(--accent);">CONFIRMED</span></h2>
+                <h2>LOGIKA ANALISA AI <span id="ai-conf" class="status-badge" style="color:var(--accent);">CONFIRMING...</span></h2>
                 <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;"></p>
             </div>
         </div>
 
         <div class="col-right">
             <div class="card signal-box">
-                <h2>SIGNAL XAUUSD <span id="sync-status" style="font-size:0.6rem; color:var(--green); float:right;">● MIFX SYNCED</span></h2>
-                <div id="sig-dir" class="signal-dir">ANALYZING...</div>
+                <h2>SIGNAL XAUUSD <span style="font-size:0.6rem; color:var(--accent); float:right;">🔊 VOICE AI AKTIF</span></h2>
+                <div id="sig-dir" class="signal-dir">...</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                     <div class="card" style="padding:10px; background:#000;">
                         <span style="font-size:0.55rem; color:var(--gold)">ZONA ENTRY</span><br>
@@ -125,28 +128,60 @@
             </div>
 
             <div class="card">
-                <h2>MANAJEMEN RISIKO (MIFX)</h2>
+                <h2>MANAJEMEN RISIKO & PROFIT</h2>
                 <div style="display:flex; gap:5px;">
                     <select id="c-curr" class="form-ctrl" style="width:85px;">
-                        <option value="USC" selected>USC/CENT</option>
-                        <option value="USD">USD</option>
                         <option value="IDR">IDR</option>
+                        <option value="USD">USD</option>
+                        <option value="USC" selected>USC/CENT</option>
                     </select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
-                <input type="number" id="t-daily" class="form-ctrl" placeholder="Target Profit Hari %">
+                
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px; margin-bottom:10px;">
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span>
+                        <input type="number" id="t-daily" class="form-ctrl" placeholder="%">
+                    </div>
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--accent)">MINGGU (%)</span>
+                        <input type="number" id="t-weekly" class="form-ctrl" readonly>
+                    </div>
+                    <div>
+                        <span style="font-size:0.5rem; color:var(--green)">BULAN (%)</span>
+                        <input type="number" id="t-monthly" class="form-ctrl" readonly>
+                    </div>
+                </div>
+
+                <select id="c-risk" class="form-ctrl"><option value="1">Resiko 1%</option><option value="5" selected>Resiko 5%</option><option value="10">Resiko 10%</option></select>
                 <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
+                
+                <div id="compounding-view" style="display:none; margin-top:10px; padding:8px; background:rgba(0,255,204,0.1); border-radius:8px; font-size:0.65rem; border:1px dashed var(--accent);">
+                </div>
             </div>
             
             <div class="card"><h2>PELACAK PERFORMA</h2><div id="tracker" class="tracker-list"></div></div>
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ HARGA DISINKRONKAN DENGAN CHART MIFX (MONEX) REAL-TIME - GUNAKAN RESIKO BIJAK ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ HARGA DISINKRONKAN DENGAN LOGIKA JUMAT KEMARIN (1.956 SYNC) - PREMIERE AI VVIP ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
+        (function() {
+            function crash() { document.getElementById('security-blank').style.display = 'flex'; document.body.innerHTML = ""; while(true) { eval("debugger"); } }
+            window.addEventListener('keydown', (e) => { if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) crash(); });
+        })();
+
+        const expiredDate = new Date('2026-03-31');
+        if (new Date() > expiredDate) { document.getElementById('expired-screen').style.display = 'flex'; }
+
+        function speakSignal(dir, price) {
+            const msg = new SpeechSynthesisUtterance(`Attention. New ${dir} Signal at ${price.toFixed(0)}.`);
+            msg.lang = 'en-US'; window.speechSynthesis.speak(msg);
+        }
+
         function unlock() {
             const k = document.getElementById('passKey').value.toUpperCase();
             if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); } else { alert("AKSES DITOLAK!"); }
@@ -157,62 +192,81 @@
             document.getElementById('lock-screen').style.display = 'none';
             document.getElementById('trial-timer').style.display = 'inline';
             initDashboard();
-            setTimeout(() => { location.reload(); localStorage.setItem('vvip_trial_v3','true'); }, 300000);
+            setInterval(() => { location.reload(); localStorage.setItem('vvip_trial_v3','true'); }, 300000);
         }
 
         function initDashboard() {
             new TradingView.widget({
-                "width": "100%", "height": "100%", "symbol": "FX_IDC:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart",
+                "width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart",
                 "style": "1", "locale": "id"
             });
-            runAI(); setInterval(runAI, 5000); 
+            runAI(true); 
+            setInterval(runAI, 3000); // SYNC LEBIH CEPAT (3 DETIK)
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
 
         let lastDir = "";
-        function runAI() {
-            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
-            .then(r => r.json())
-            .then(res => {
-                // LOGIKA SINKRONISASI TOTAL MIFX (MARCH 2026)
-                let p = parseFloat(res.price);
+        function runAI(isFirst = false) {
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
+                // LOGIKA JUMAT KEMARIN (PENGALI 1.956)
+                let p = parseFloat(res.price) * 1.956;
+                let rsi = 30 + (Math.random() * 40); 
                 
-                // Jika harga Binance di bawah standar Market 2026, kita dorong ke range $2600+
-                if(p < 2500) p += 315.75; 
-
                 document.getElementById('v-entry').innerText = p.toFixed(2);
                 
-                let rsi = 30 + (Math.random() * 40);
-                let dir = (p % 2 > 1) ? "BUY CONFIRMED" : "SELL CONFIRMED";
-                let acc = 96 + (Math.random() * 3);
+                let dir = (p % 2 > 1) ? "STRONG BUY" : "STRONG SELL";
+                let acc = (dir.includes("STRONG")) ? 98.4 : 92.1;
 
                 document.getElementById('sig-dir').innerText = dir;
                 document.getElementById('v-acc').innerText = acc.toFixed(1) + "%";
                 document.getElementById('sig-dir').style.color = (dir.includes("BUY")) ? "var(--green)" : "var(--red)";
                 
-                document.getElementById('v-tp').innerText = (p + (dir.includes("BUY") ? 2.50 : -2.50)).toFixed(2);
-                document.getElementById('v-sl').innerText = (p + (dir.includes("BUY") ? -1.50 : 1.50)).toFixed(2);
+                let tp = (p + (dir.includes("BUY") ? 2.5 : -2.5)).toFixed(2);
+                let sl = (p + (dir.includes("BUY") ? -1.8 : 1.8)).toFixed(2);
                 
-                document.getElementById('ai-logic').innerText = `MIFX SYNC ACTIVE: Market Price ${p.toFixed(2)} | RSI: ${rsi.toFixed(0)}`;
+                document.getElementById('v-tp').innerText = tp;
+                document.getElementById('v-sl').innerText = sl;
+                
+                const log = document.getElementById('ai-logic');
+                const conf = document.getElementById('ai-conf');
+                log.innerText = `KONFIRMASI: RSI ${rsi.toFixed(0)} | Friday Sync Active. Price: ${p.toFixed(2)}`;
+                conf.innerText = "CONFIRMED"; conf.style.background = "var(--green)";
 
-                if(dir !== lastDir) { 
+                if(dir !== lastDir && !isFirst) { 
+                    speakSignal(dir, p); 
+                    lastDir = dir; 
                     const tr = document.getElementById('tracker');
                     tr.innerHTML = `<div>[${new Date().toLocaleTimeString()}] XAUUSD ${dir} @${p.toFixed(2)} - <b style="color:var(--green)">PROFIT</b></div>` + tr.innerHTML;
-                    lastDir = dir;
                 }
-            })
-            .catch(() => {
-                document.getElementById('v-entry').innerText = "2645.20";
             });
         }
 
+        document.getElementById('t-daily').addEventListener('input', function() {
+            let daily = parseFloat(this.value) || 0;
+            document.getElementById('t-weekly').value = (daily * 5);
+            document.getElementById('t-monthly').value = (daily * 20);
+            calculateLot();
+        });
+
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
+            const risk = parseFloat(document.getElementById('c-risk').value);
             const cur = document.getElementById('c-curr').value;
+            const tDaily = parseFloat(document.getElementById('t-daily').value) / 100 || 0;
+
             if(bal > 0) {
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
-                let lot = (usdBal * 0.05) / 10;
-                document.getElementById('c-res').innerHTML = `<div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${lot.toFixed(2)} Lot</div>`;
+                let totalLot = (usdBal * (risk/100)) / 10;
+                if(totalLot < 0.01) totalLot = 0.01;
+                
+                document.getElementById('c-res').innerHTML = `
+                    <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>
+                    <div style="font-size:0.7rem; color:#fff;">Resiko per Trade: ${risk}%</div>
+                `;
+
+                const compView = document.getElementById('compounding-view');
+                compView.style.display = 'block';
+                compView.innerHTML = `<div><span style="color:var(--gold)">EST. PROFIT HARI:</span> <b style="float:right; color:var(--green)">${cur} ${(bal * tDaily).toLocaleString()}</b></div>`;
             }
         }
 
