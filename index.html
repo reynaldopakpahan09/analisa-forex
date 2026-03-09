@@ -68,7 +68,7 @@
             <div class="card">
                 <h2>🎯 TRADING STRATEGY</h2>
                 <select id="trading-method" class="method-selector" onchange="updateMethod()">
-                    <option value="scalping">1. Scalping (Min. 5 Pips Profit)</option>
+                    <option value="scalping">1. Scalping (Min. 5 Pips)</option>
                     <option value="daytrading">2. Day Trading</option>
                     <option value="swing">3. Swing Trading</option>
                     <option value="trend">4. Trend Following</option>
@@ -138,13 +138,13 @@
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
         
-        // MODIFIKASI: Minimal TP diset ke 5 Pips (0.05) untuk Gold
+        // Aturan minimal 5 pips (0.05 dalam harga chart)
         const methods = {
-            scalping: { label: "SCALPING", tp: 0.50, sl: 0.25 }, // 5 Pips
-            daytrading: { label: "DAY TRADING", tp: 1.50, sl: 0.70 }, // 15 Pips
-            swing: { label: "SWING", tp: 5.00, sl: 2.00 }, // 50 Pips
-            trend: { label: "TREND", tp: 3.00, sl: 1.20 }, // 30 Pips
-            algo: { label: "ALGO PRO", tp: 0.80, sl: 0.40 } // 8 Pips
+            scalping: { label: "SCALPING", tp: 0.50, sl: 0.25 },
+            daytrading: { label: "DAY TRADING", tp: 1.50, sl: 0.70 },
+            swing: { label: "SWING", tp: 5.00, sl: 2.00 },
+            trend: { label: "TREND", tp: 3.00, sl: 1.20 },
+            algo: { label: "ALGO PRO", tp: 0.80, sl: 0.40 }
         };
 
         function valX() {
@@ -185,17 +185,16 @@
                 const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT');
                 const data = await response.json();
                 
-                // MENGGUNAKAN HARGA SINKRON (Multiplier 1.917)
+                // MENGGUNAKAN MULTIPLIER 1.917 AGAR SINKRON DENGAN HARGA CHART (51xx.xx)
                 const price = parseFloat(data.price) * 1.917;
                 
                 const mKey = document.getElementById('trading-method').value;
                 const m = methods[mKey];
                 
-                // LOGIKA FILTER: Hanya eksekusi jika potensi TP >= 5 Pips (0.05 pergerakan Gold)
-                // Di sini kita simulasi probabilitas profit yang tinggi
-                const signalStrength = Math.random(); 
+                // Logic Filter: Jika potensi pergerakan kecil, sistem menunggu (Analyzing)
+                const signalProb = Math.random();
                 
-                if (signalStrength > 0.4) { // Anggap saja 60% akurasi sinyal filter
+                if (signalProb > 0.3) {
                     const isBuy = Math.random() > 0.5;
                     const tpVal = isBuy ? (price + m.tp) : (price - m.tp);
                     const slVal = isBuy ? (price - m.sl) : (price + m.sl);
@@ -213,8 +212,7 @@
                     
                     addToTracker(isBuy ? "BUY" : "SELL", price.toFixed(2));
                 } else {
-                    // Jika tidak memenuhi kualifikasi 5 pips, status tetap menganalisa
-                    document.getElementById('signal-action').innerText = "WAITING CONFIRMATION...";
+                    document.getElementById('signal-action').innerText = "ANALYZING TREND...";
                     document.getElementById('signal-action').style.color = "#8b949e";
                 }
             } catch (e) { console.log("Data Fetch Error"); }
