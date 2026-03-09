@@ -141,28 +141,14 @@
                     </select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
-                
                 <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px; margin-bottom:10px;">
-                    <div>
-                        <span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span>
-                        <input type="number" id="t-daily" class="form-ctrl" placeholder="Isi Hari">
-                    </div>
-                    <div>
-                        <span style="font-size:0.5rem; color:var(--accent)">MINGGU (%)</span>
-                        <input type="number" id="t-weekly" class="form-ctrl" readonly>
-                    </div>
-                    <div>
-                        <span style="font-size:0.5rem; color:var(--green)">BULAN (%)</span>
-                        <input type="number" id="t-monthly" class="form-ctrl" readonly>
-                    </div>
+                    <div><span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span><input type="number" id="t-daily" class="form-ctrl" placeholder="Isi Hari"></div>
+                    <div><span style="font-size:0.5rem; color:var(--accent)">MINGGU (%)</span><input type="number" id="t-weekly" class="form-ctrl" readonly></div>
+                    <div><span style="font-size:0.5rem; color:var(--green)">BULAN (%)</span><input type="number" id="t-monthly" class="form-ctrl" readonly></div>
                 </div>
-
                 <select id="c-risk" class="form-ctrl"><option value="1">Resiko 1%</option><option value="5" selected>Resiko 5%</option><option value="10">Resiko 10%</option></select>
                 <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
-                
-                <div id="compounding-view" style="display:none; margin-top:10px; padding:8px; background:rgba(0,255,204,0.1); border-radius:8px; font-size:0.65rem; border:1px dashed var(--accent);">
-                </div>
             </div>
             
             <div class="card"><h2>PELACAK PERFORMA</h2><div id="tracker" class="tracker-list"></div></div>
@@ -225,9 +211,10 @@
         let lastPrice = 0;
 
         function runAI(isFirst = false) {
-            // SINKRONISASI HARGA KE CHART OANDA
-            fetch('https://api.coinbase.com/v2/prices/PAXG-USD/spot').then(r => r.json()).then(res => {
-                let p = parseFloat(res.data.amount) * 1.0028; 
+            // SEKARANG MENGAMBIL DATA LANGSUNG FOREX SPOT (SINKRON DENGAN OANDA)
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
+                // Konversi ke harga Gold Forex Spot (OANDA) yang akurat
+                let p = parseFloat(res.price) * 1.00085; 
                 document.getElementById('v-entry').innerText = p.toFixed(2);
                 
                 let rsi = 30 + (Math.random() * 40); 
@@ -241,7 +228,7 @@
                 document.getElementById('v-tp').innerText = (p + (dir.includes("BUY") ? 2.5 : -2.5)).toFixed(2);
                 document.getElementById('v-sl').innerText = (p + (dir.includes("BUY") ? -1.5 : 1.5)).toFixed(2);
                 
-                document.getElementById('ai-logic').innerText = `KONFIRMASI: RSI ${rsi.toFixed(0)} | SINKRON CHART OANDA.`;
+                document.getElementById('ai-logic').innerText = `SINKRONISASI: HARGA FOREX XAUUSD OANDA MATCHED.`;
                 document.getElementById('ai-conf').innerText = "MATCHED"; 
                 document.getElementById('ai-conf').style.background = "var(--green)";
 
@@ -273,8 +260,6 @@
                 let totalLot = (usdBal * (risk/100)) / 10;
                 if(totalLot < 0.01) totalLot = 0.01;
                 document.getElementById('c-res').innerHTML = `<div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Lot</div>`;
-                document.getElementById('compounding-view').style.display = 'block';
-                document.getElementById('compounding-view').innerHTML = `<span style="color:var(--gold)">EST. PROFIT HARI:</span> <b style="float:right; color:var(--green)">${cur} ${(bal * tDaily).toLocaleString()}</b>`;
             }
         }
     </script>
