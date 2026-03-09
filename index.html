@@ -215,7 +215,7 @@
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
             .then(r => r.json()).then(res => {
-                // SINKRONISASI INDIKATOR CHART (x1.916 agar masuk ke angka 5xxx.xx)
+                // FIXED: Multiplier 1.916 untuk sinkron harga 5xxx.xx
                 const currentPrice = parseFloat(res.price) * 1.916;
                 const calibratedPrice = currentPrice.toFixed(2);
                 
@@ -229,7 +229,7 @@
                 action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 action.style.color = isBuy ? "var(--success)" : "var(--danger)";
                 
-                // KALKULASI TP & SL BERBASIS HARGA INDIKATOR
+                // FIXED: Kalkulasi TP/SL mengikuti range 5xxx.xx
                 const tpVal = isBuy ? (currentPrice + m.tp) : (currentPrice - m.tp);
                 const slVal = isBuy ? (currentPrice - m.sl) : (currentPrice + m.sl);
                 
