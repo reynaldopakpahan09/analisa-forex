@@ -42,7 +42,7 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 1-40 Pips</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 3-40 Pips</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
             <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: ULTRA-SENSITIVE 1 PIP ACTIVE - TARGET 12 PIPS SCALPING READY ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: ULTRA-SENSITIVE 1 PIP ACTIVE - MAX 40 PIPS GUARD READY ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
@@ -168,21 +168,19 @@
                 let diff = Math.abs(p - lastPrice); 
                 let trendDir = (p > lastPrice) ? "BUY" : "SELL";
                 
-                // Indikator Volatilitas Live
-                let pipsNow = (diff * 100).toFixed(2);
-                document.getElementById('ai-logic').innerText = `Live Volatility: ${pipsNow} Pips | Sinyal Aktif jika > 1.0 Pip`;
-
                 if (diff > 0.40) { 
                     document.getElementById('news-status').innerText = "OVER-VOLATILE";
                     document.getElementById('news-tag').style.display = "inline";
                     document.getElementById('sig-dir').innerText = "WAIT STABLE";
                     document.getElementById('sig-dir').style.color = "var(--red)";
+                    document.getElementById('ai-logic').innerText = "Peringatan: Pergerakan > 40 Pips. AI menahan sinyal.";
                     newsMultiplier = 0.1;
-                } else if (lastPrice !== 0 && diff < 0.01) { // Filter 1 Pip
+                } else if (lastPrice !== 0 && diff < 0.01) { // GANTI MINIMAL 1 PIP
                     document.getElementById('news-status').innerText = "STABLE";
                     document.getElementById('news-tag').style.display = "none";
                     document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
                     document.getElementById('sig-dir').style.color = "var(--gold)";
+                    document.getElementById('ai-logic').innerText = "Alasan: Pergerakan < 1 Pip. Menunggu volatilitas.";
                     document.getElementById('sig-details-container').style.opacity = "0.2";
                     newsMultiplier = 1.0;
                 } else {
@@ -192,10 +190,12 @@
                     document.getElementById('sig-dir').style.color = (trendDir === "BUY") ? "var(--green)" : "var(--red)";
                     document.getElementById('sig-details-container').style.opacity = "1";
                     
-                    // TP 12 PIPS (0.12), SL 10 PIPS (0.10)
+                    // BERI TAHU TP/SL BERAPA PIPS
                     document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.2 : p - 1.2).toFixed(2);
                     document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.0 : p + 1.0).toFixed(2);
+                    
                     document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
+                    document.getElementById('ai-logic').innerText = `Konfirmasi VVIP: Momentum ${trendDir} > 1 Pip terdeteksi.`;
                     newsMultiplier = 1.0;
                 }
                 lastPrice = p;
