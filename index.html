@@ -158,7 +158,6 @@
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
         
-        // Anti F12 & Key Combo
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = function(e) {
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 85))) return false;
@@ -216,17 +215,27 @@
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
             .then(r => r.json()).then(res => {
-                const calibratedPrice = (parseFloat(res.price) * 1.956).toFixed(2);
+                // SINKRON HARGA MT5 (Menghilangkan x1.956)
+                const currentPrice = parseFloat(res.price) * 1.0001;
+                const calibratedPrice = currentPrice.toFixed(2);
+                
                 const mKey = document.getElementById('trading-method').value;
                 const m = methods[mKey];
                 const isBuy = Math.random() > 0.5;
+                
                 document.getElementById('price-entry').innerText = calibratedPrice;
                 document.getElementById('method-label').innerText = m.label;
                 const action = document.getElementById('signal-action');
                 action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 action.style.color = isBuy ? "var(--success)" : "var(--danger)";
-                document.getElementById('price-tp').innerText = (parseFloat(calibratedPrice) + (isBuy ? m.tp : -m.tp)).toFixed(2);
-                document.getElementById('price-sl').innerText = (parseFloat(calibratedPrice) + (isBuy ? -m.sl : m.sl)).toFixed(2);
+                
+                // KALKULASI TP & SL MT5 MODE
+                const tpVal = isBuy ? (currentPrice + m.tp) : (currentPrice - m.tp);
+                const slVal = isBuy ? (currentPrice - m.sl) : (currentPrice + m.sl);
+                
+                document.getElementById('price-tp').innerText = tpVal.toFixed(2);
+                document.getElementById('price-sl').innerText = slVal.toFixed(2);
+                
                 addToTracker(isBuy ? "BUY" : "SELL", calibratedPrice);
             });
         }
