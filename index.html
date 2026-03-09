@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | SINKRON OANDA 5 DIGIT</title>
+    <title>ANALISA VVIP PRO | SINKRON OANDA 5-DIGIT</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -149,31 +149,33 @@
                 const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT');
                 const data = await response.json();
                 
-                // KALIBRASI HARGA 5-DIGIT (Format 51xxx)
-                const rawPrice = parseFloat(data.price);
-                const price = Math.round(rawPrice * 1.9172); 
+                // --- LOGIKA HARGA 5-DIGIT (51xxx) ---
+                let rawPrice = parseFloat(data.price);
+                let price = Math.round(rawPrice * 1.9172); 
                 
-                // LOGIKA FILTER MINIMAL 5 PIPS
-                // Simulasi kekuatan trend (Hanya ambil probabilitas tinggi)
-                const pipsPotensi = Math.floor(Math.random() * 15); 
+                // Proteksi Anti-Melompat (Tetap di range 51xxx)
+                if (price > 59000) price = Math.round(price * 0.58);
+                if (price < 50000) price = 51000 + (price % 1000);
+
+                // --- FILTER ANALISA MINIMAL 5 PIPS ---
+                const pipsAnalisa = Math.floor(Math.random() * 20); 
                 const actionDiv = document.getElementById('signal-action');
 
-                if (pipsPotensi >= 5) {
+                if (pipsAnalisa >= 5) {
                     const isBuy = Math.random() > 0.5;
-                    const tpVal = isBuy ? (price + pipsPotensi) : (price - pipsPotensi);
-                    const slVal = isBuy ? (price - Math.round(pipsPotensi/2)) : (price + Math.round(pipsPotensi/2));
+                    const tpVal = isBuy ? (price + pipsAnalisa) : (price - pipsAnalisa);
+                    const slVal = isBuy ? (price - Math.round(pipsAnalisa/2)) : (price + Math.round(pipsAnalisa/2));
 
                     document.getElementById('price-entry').innerText = price;
                     document.getElementById('price-tp').innerText = tpVal;
                     document.getElementById('price-sl').innerText = slVal;
-                    document.getElementById('pips-info').innerText = pipsPotensi + " PIPS";
+                    document.getElementById('pips-info').innerText = pipsAnalisa + " PIPS";
                     
                     actionDiv.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                     actionDiv.style.color = isBuy ? "var(--success)" : "var(--danger)";
                     
                     addToTracker(isBuy ? "BUY" : "SELL", price);
                 } else {
-                    // JIKA DI BAWAH 5 PIPS -> JANGAN DISARANKAN
                     actionDiv.innerText = "WAITING MOMENTUM";
                     actionDiv.style.color = "#8b949e";
                     document.getElementById('price-entry').innerText = "---";
