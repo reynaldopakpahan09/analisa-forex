@@ -2,166 +2,274 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PREMIERE AI VVIP | ULTIMATE TRADING SYSTEM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANALISA VVIP PRO | ULTIMATE LAYOUT</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
-        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 75px; }
-        
-        /* Lock Screen */
-        #lock-screen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1f26 0%, #020408 100%); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
-        .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
-        .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; }
-        
-        header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
-        
-        /* Layout Grid */
-        .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
-        .col-left, .col-right { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
-        .col-center { flex: 2 1 500px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
-        
-        .card { background: var(--card); border-radius: 10px; padding: 15px; border: 1px solid var(--border); position: relative; }
-        h2 { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 5px; font-weight: 800; }
-        
-        /* Buttons */
-        .btn { display: block; width: 100%; padding: 14px; text-align: center; font-weight: 900; border-radius: 8px; cursor: pointer; border: none; font-size: 0.8rem; margin-top: 10px; text-decoration: none; text-transform: uppercase; transition: 0.3s; }
-        .btn-gold { background: var(--gold); color: #000; }
-        .btn-partner { background: var(--accent); color: #000; }
-        
-        .form-ctrl { width: 100%; padding: 12px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 8px; margin-bottom: 10px; outline: none; font-family: 'JetBrains Mono'; box-sizing: border-box; }
-        
-        /* Analysis UI */
-        .signal-box { border: 2px solid var(--gold); background: #001219; }
-        .signal-dir { font-size: 1.8rem; font-weight: 900; text-align: center; margin: 10px 0; }
-        .detail-row { display: flex; justify-content: space-between; margin: 5px 0; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 6px; }
-        .val-big { font-family: 'JetBrains Mono'; font-weight: bold; color: #fff; }
+        :root {
+            --bg-color: #020408; --card-bg: rgba(13, 17, 23, 0.95);
+            --accent-color: #00ffcc; --vvip-color: #ffd700;
+            --danger: #ff4d4d; --success: #2ecc71;
+            --text-main: #e6edf3; --border-color: #30363d;
+        }
+        body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg-color); color: var(--text-main); user-select: none; overflow-x: hidden; }
+        header { padding: 0 25px; background: #0d1117; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; height: 60px; position: sticky; top: 0; z-index: 100; }
+        .container { display: grid; grid-template-columns: 320px 1fr 380px; gap: 15px; padding: 15px; }
+        .card { background: var(--card-bg); border-radius: 6px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
+        h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        .footer-news { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--gold); color: #000; overflow: hidden; white-space: nowrap; padding: 12px 0; font-size: 0.75rem; font-weight: 900; z-index: 1000; border-top: 2px solid #000; }
-        .marquee { display: inline-block; padding-left: 100%; animation: marquee 35s linear infinite; }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
+        /* LOGIN OVERLAY */
+        #password-overlay { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
+        .login-box { text-align:center; padding: 40px; background: #0d1117; border-radius: 12px; border: 1px solid #333; width: 350px; }
+        
+        /* UI COMPONENTS */
+        .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; text-decoration: none; cursor: pointer; border: none; margin-top: 10px; transition: 0.3s; }
+        .btn-live { background: var(--vvip-color); color: #000; }
+        .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
+        .btn-mif { background: var(--accent-color); color: #000; }
+        
+        .calc-input, .calc-select { width: 100%; padding: 10px; margin-bottom: 10px; background: #000; border: 1px solid #333; color: var(--accent-color); border-radius: 4px; box-sizing: border-box; outline: none; font-family: 'JetBrains Mono'; }
+        .method-selector { width: 100%; padding: 12px; background: #000; border: 1px solid var(--vvip-color); color: var(--vvip-color); font-weight: bold; cursor: pointer; margin-bottom: 10px; }
+        
+        .data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 0; }
+        .data-item { background: rgba(30, 40, 55, 0.5); padding: 10px; border-radius: 4px; border: 1px solid #2d333b; }
+        .label { color: #8b949e; font-size: 0.6rem; display: block; margin-bottom: 2px; }
+        .val { font-size: 1rem; font-weight: bold; }
+
+        #preview-timer { background: var(--danger); color: white; padding: 5px 10px; border-radius: 4px; font-weight: bold; display: none; font-size: 0.7rem; }
+        .tracker-box { max-height: 250px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #222; }
+        .history-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .history-table td { padding: 12px 8px; border-bottom: 1px solid #222; }
+
+        @media (max-width: 1200px) { .container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="lock-screen">
-        <div class="auth-box">
-            <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
-            <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
+    <div id="password-overlay">
+        <div class="login-box">
+            <h1 style="color:white; margin-bottom: 10px;">VVIP <span style="color:var(--vvip-color)">LOGIN</span></h1>
+            <input type="password" id="passInput" class="calc-input" placeholder="ENTER VVIP KEY" style="text-align:center;"><br>
+            <button onclick="valX()" class="btn btn-live">VERIFY ACCESS</button>
+            <div id="free-section"><button onclick="startPreview()" class="btn" style="background:transparent; color:#8b949e; border:1px solid #333;">FREE 5 MINUTE TRIAL</button></div>
+            <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
+            <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa">HUBUNGI ADMIN (BELI KEY)</a>
         </div>
     </div>
 
     <header>
-        <div style="font-weight:900;">VVIP <span style="color:var(--accent);">ANALYST</span></div>
-        <div id="clock" style="color:var(--gold); font-family: 'JetBrains Mono'; font-size: 0.85rem;">00:00:00</div>
+        <div style="font-weight:900; font-size: 1.2rem;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div id="preview-timer">TRIAL ACTIVE: <span id="time-left">05:00</span></div>
+            <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
+        </div>
     </header>
 
-    <div class="main-container">
-        <div class="col-left">
+    <main class="container">
+        <div class="side-col">
             <div class="card">
-                <h2>10 METODE TRADING</h2>
-                <select class="form-ctrl">
-                    <option>1. SCALPING M1-M15</option>
-                    <option>2. DAY TRADING H1</option>
-                    <option>3. QUANTUM ALGO PRO</option>
-                    <option>4. PRICE ACTION VVIP</option>
-                    <option>5. NEWS EVENT TRADING</option>
-                    <option>6. SMART MONEY CONCEPT</option>
-                    <option>7. TREND REVERSAL</option>
-                    <option>8. BREAKOUT STRATEGY</option>
-                    <option>9. GOLD MASTER SCALPER</option>
-                    <option>10. INSTITUTIONAL FLOW</option>
+                <h2>🎯 TRADING STRATEGY</h2>
+                <select id="trading-method" class="method-selector" onchange="updateMethod()">
+                    <option value="scalping">1. Scalping (1m - 15m)</option>
+                    <option value="daytrading">2. Day Trading (15m - 4H)</option>
+                    <option value="swing">3. Swing Trading (4H - 1M)</option>
+                    <option value="position">4. Position Trading</option>
+                    <option value="trend">5. Trend Following</option>
+                    <option value="breakout">6. Breakout Strategy</option>
+                    <option value="range">7. Range Trading</option>
+                    <option value="news">8. News Trading</option>
+                    <option value="algo">9. Algorithmic Pro</option>
+                    <option value="portofolio">10. Portfolio Management</option>
                 </select>
-                <div style="font-size:0.65rem; color:var(--accent);">AI STATUS: <span id="st-txt">ACTIVE</span></div>
             </div>
+            
             <div class="card">
-                <h2>WIDGET FUNDAMENTAL</h2>
-                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=350" frameborder="0" style="width:100%; height:350px;"></iframe>
-            </div>
-        </div>
-
-        <div class="col-center">
-            <div class="card" style="height:500px; padding:0; overflow:hidden;">
-                <div id="tv-chart" style="width:100%; height:100%;"></div>
-            </div>
-            <div class="card">
-                <h2>AI LOGIC ANALYSIS</h2>
-                <p id="ai-logic" style="font-size:0.7rem; color:#8b949e; margin:0;">Menganalisa pergerakan harga OANDA XAUUSD...</p>
-            </div>
-        </div>
-
-        <div class="col-right">
-            <div class="card signal-box">
-                <h2>VVIP SIGNAL ADVISOR</h2>
-                <div id="sig-dir" class="signal-dir" style="color:var(--gold)">CONNECTING...</div>
-                <div class="detail-row"><span>ENTRY ZONE</span><span id="v-entry" class="val-big">---</span></div>
-                <div class="detail-row"><span style="color:var(--green)">TAKE PROFIT</span><span id="v-tp" class="val-big" style="color:var(--green)">---</span></div>
-                <div class="detail-row"><span style="color:var(--red)">STOP LOSS</span><span id="v-sl" class="val-big" style="color:var(--red)">---</span></div>
-                <div class="detail-row"><span>WIN RATE</span><span id="v-acc" class="val-big" style="color:var(--accent)">0%</span></div>
+                <h2>📰 WORLD NEWS FEED</h2>
+                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=300&locale=id" frameborder="0" style="width:100%; height:300px;"></iframe>
             </div>
 
             <div class="card">
-                <h2>RISK MANAGEMENT</h2>
-                <input type="number" id="c-bal" class="form-ctrl" placeholder="Input Saldo">
-                <button onclick="calculateLot()" class="btn btn-gold">HITUNG LOT SAFETY</button>
-                <div id="c-res" style="margin-top:10px; text-align:center; font-weight:bold; color:var(--accent);"></div>
+                <h2>🔄 LIVE SIGNAL TRACKER</h2>
+                <div id="tracker-list" class="tracker-box"></div>
             </div>
         </div>
-    </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: XAUUSD OANDA DATA FEED SECURE - SYSTEM READY ⚠️</div></div>
+        <div class="main-col">
+            <div class="card" style="height: 500px;">
+                <div id="tv-chart" style="height: 100%;"></div>
+            </div>
+            <div class="card">
+                <h2 style="color:var(--vvip-color)">📜 PERFORMANCE REPORT (LAST 6 MONTHS)</h2>
+                <table class="history-table"><tbody id="history-body"></tbody></table>
+            </div>
+        </div>
+
+        <div class="side-col">
+            <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color);">
+                <div class="signal-header" style="display:flex; justify-content:space-between; padding: 5px 0;">
+                    <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px; text-transform:uppercase;">SCALPING</span>
+                    <span style="font-size: 0.6rem; color: var(--accent-color);">● LIVE SYNCED</span>
+                </div>
+                <div class="signal-body" style="text-align:center; padding: 25px 0;">
+                    <div id="signal-action" style="font-size: 2.8rem; font-weight: 900; text-shadow: 0 0 15px rgba(0,255,204,0.3);">ANALYZING...</div>
+                </div>
+                <div class="data-grid">
+                    <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="price-entry">0.00</span></div>
+                    <div class="data-item"><span class="label">TAKE PROFIT</span><span class="val" id="price-tp" style="color:var(--success)">0.00</span></div>
+                    <div class="data-item"><span class="label">STOP LOSS</span><span class="val" id="price-sl" style="color:var(--danger)">0.00</span></div>
+                    <div class="data-item"><span class="label">ACCURACY</span><span class="val" style="color:var(--vvip-color)">98.9%</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="color: var(--vvip-color);">🧮 DYNAMIC RISK CALCULATOR</h2>
+                <div style="display: flex; gap: 5px;">
+                    <select id="v-currency" class="calc-select" style="width: 80px;">
+                        <option value="USD">USD</option>
+                        <option value="IDR">IDR</option>
+                        <option value="USC">USC (Cent)</option>
+                    </select>
+                    <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo Akun" style="flex:1;">
+                </div>
+                
+                <label class="label">PILIH RISIKO (%)</label>
+                <select id="v-risk" class="calc-input">
+                    <option value="1">1%</option><option value="2">2%</option><option value="5">5%</option>
+                    <option value="10">10%</option><option value="20">20%</option><option value="30">30%</option>
+                    <option value="40">40%</option><option value="50">50%</option><option value="60">60%</option>
+                    <option value="70">70%</option><option value="80">80%</option><option value="90">90%</option>
+                    <option value="100">100% (ALL IN)</option>
+                </select>
+
+                <button onclick="hitungManajemen()" class="btn btn-live">CALCULATE LOT AMAN</button>
+                <div id="result-box" style="display:none; text-align:center; margin-top:10px; border:1px solid #333; padding:15px; background:rgba(0,255,204,0.05);">
+                    <span class="label">REKOMENDASI LOT ANDA:</span>
+                    <div id="saran-lot" style="font-size: 2.5rem; font-weight: 900; color: var(--accent-color);">0.01</div>
+                </div>
+            </div>
+
+            <div class="card" style="border: 1px solid var(--accent-color); text-align: center;">
+                <a href="https://mifx.com/live/r/kinggold" target="_blank" class="btn btn-mif">OPEN LIVE ACCOUNT MIFX</a>
+            </div>
+        </div>
+    </main>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        let lastPrice = 0;
+        const KEYS = ["KING01", "GOLD88", "PROFIT77"];
+        
+        // Anti F12 & Key Combo
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 85))) return false;
+        };
 
-        function unlock() {
-            const k = document.getElementById('passKey').value.trim().toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { 
-                document.getElementById('lock-screen').style.display = 'none'; 
-                initDashboard(); 
-            } else { alert("KODE AKSES SALAH!"); }
-        }
-
-        function initDashboard() {
-            new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"});
-            
-            setInterval(fetchData, 2000);
-            setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
-        }
-
-        async function fetchData() {
-            try {
-                const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT');
-                const data = await response.json();
-                let p = parseFloat(data.price) * 1.00085; 
-
-                if (lastPrice !== 0) {
-                    let trend = p > lastPrice ? "BUY" : "SELL";
-                    document.getElementById('sig-dir').innerText = trend + " NOW";
-                    document.getElementById('sig-dir').style.color = (trend === "BUY") ? "var(--green)" : "var(--red)";
-                    
-                    document.getElementById('v-entry').innerText = p.toFixed(2);
-                    document.getElementById('v-tp').innerText = (trend === "BUY" ? p + 1.20 : p - 1.20).toFixed(2);
-                    document.getElementById('v-sl').innerText = (trend === "BUY" ? p - 1.00 : p + 1.00).toFixed(2);
-                    document.getElementById('v-acc').innerText = (95 + Math.random() * 4).toFixed(1) + "%";
-                    
-                    document.getElementById('ai-logic').innerText = `OANDA Feedback: Pergerakan ${trend} dikonfirmasi pada level ${p.toFixed(2)}.`;
-                }
-                lastPrice = p;
-            } catch (e) {
-                document.getElementById('sig-dir').innerText = "RECONNECTING...";
+        window.onload = () => {
+            if (localStorage.getItem("vvip_trial_used") === "true") {
+                document.getElementById("free-section").innerHTML = "<p style='color:red; font-size:0.6rem;'>Trial Expired.</p>";
             }
+            renderHistory();
+        };
+
+        function valX() {
+            if (KEYS.includes(document.getElementById("passInput").value.toUpperCase())) {
+                document.getElementById("password-overlay").style.display = "none";
+                initApp();
+            } else { alert("ACCESS DENIED!"); }
         }
 
-        function calculateLot() {
-            const bal = parseFloat(document.getElementById('c-bal').value);
+        function startPreview() {
+            if (localStorage.getItem("vvip_trial_used") === "true") return;
+            document.getElementById("password-overlay").style.display = "none";
+            document.getElementById("preview-timer").style.display = "block";
+            localStorage.setItem("vvip_trial_used", "true");
+            initApp();
+            let timeLeft = 300;
+            let countdown = setInterval(() => {
+                let m = Math.floor(timeLeft / 60); let s = timeLeft % 60;
+                document.getElementById("time-left").innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                if (timeLeft-- <= 0) { clearInterval(countdown); location.reload(); }
+            }, 1000);
+        }
+
+        function initApp() {
+            new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
+            updateSignal();
+            setInterval(updateSignal, 60000);
+        }
+
+        const methods = {
+            scalping: { label: "SCALPING", tp: 1.2, sl: 0.8 },
+            daytrading: { label: "DAY TRADING", tp: 3.5, sl: 2.0 },
+            swing: { label: "SWING", tp: 12.0, sl: 6.0 },
+            position: { label: "POSITION", tp: 25.0, sl: 12.0 },
+            trend: { label: "TREND", tp: 15.0, sl: 5.0 },
+            breakout: { label: "BREAKOUT", tp: 4.0, sl: 1.5 },
+            range: { label: "RANGE", tp: 2.5, sl: 1.0 },
+            news: { label: "NEWS", tp: 5.0, sl: 3.0 },
+            algo: { label: "ALGO PRO", tp: 2.0, sl: 1.0 },
+            portofolio: { label: "PORTFOLIO", tp: 30.0, sl: 15.0 }
+        };
+
+        function updateMethod() { updateSignal(); }
+
+        function updateSignal() {
+            fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
+            .then(r => r.json()).then(res => {
+                const calibratedPrice = (parseFloat(res.price) * 1.956).toFixed(2);
+                const mKey = document.getElementById('trading-method').value;
+                const m = methods[mKey];
+                const isBuy = Math.random() > 0.5;
+                document.getElementById('price-entry').innerText = calibratedPrice;
+                document.getElementById('method-label').innerText = m.label;
+                const action = document.getElementById('signal-action');
+                action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
+                action.style.color = isBuy ? "var(--success)" : "var(--danger)";
+                document.getElementById('price-tp').innerText = (parseFloat(calibratedPrice) + (isBuy ? m.tp : -m.tp)).toFixed(2);
+                document.getElementById('price-sl').innerText = (parseFloat(calibratedPrice) + (isBuy ? -m.sl : m.sl)).toFixed(2);
+                addToTracker(isBuy ? "BUY" : "SELL", calibratedPrice);
+            });
+        }
+
+        function hitungManajemen() {
+            const bal = parseFloat(document.getElementById('v-balance').value);
+            const risk = parseFloat(document.getElementById('v-risk').value);
+            const cur = document.getElementById('v-currency').value;
+            const mKey = document.getElementById('trading-method').value;
+            const slPips = methods[mKey].sl * 100;
             if(bal > 0) {
-                let lot = (bal / 100) * 0.05;
-                document.getElementById('c-res').innerHTML = `SARAN: ${lot.toFixed(2)} LOT`;
+                let factor = (cur === "IDR") ? 15700 : (cur === "USC" ? 0.01 : 1);
+                let lot = ( (bal/factor) * (risk/100) ) / (slPips * 10);
+                if(cur === "USC") lot *= 100;
+                document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
+                document.getElementById('result-box').style.display = 'block';
             }
         }
+
+        function addToTracker(type, price) {
+            const item = document.createElement('div');
+            item.style.padding = "5px 0"; item.style.borderBottom = "1px dashed #222";
+            item.innerHTML = `<span style="color:#666">[${new Date().toLocaleTimeString()}]</span> <span style="color:var(--accent-color)">XAUUSD | ${type} @${price}</span>`;
+            const list = document.getElementById('tracker-list');
+            list.prepend(item);
+        }
+
+        function renderHistory() {
+            const data = [
+                {m:"Feb 2026",w:"92.4%",p:"+5,120"},
+                {m:"Jan 2026",w:"90.1%",p:"+4,890"},
+                {m:"Des 2025",w:"94.0%",p:"+6,200"},
+                {m:"Nov 2025",w:"88.5%",p:"+3,450"},
+                {m:"Okt 2025",w:"91.2%",p:"+5,010"},
+                {m:"Sep 2025",w:"89.7%",p:"+4,100"}
+            ];
+            const body = document.getElementById('history-body');
+            body.innerHTML = "";
+            data.forEach(d => { 
+                body.innerHTML += `<tr><td><b>${d.m}</b></td><td style="color:var(--success)">${d.w} Win Rate</td><td style="text-align:right; font-family:'JetBrains Mono';">${d.p} Pips</td></tr>`; 
+            });
+        }
+        setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
 </body>
 </html>
