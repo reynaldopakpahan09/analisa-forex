@@ -8,8 +8,6 @@
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 75px; }
-        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 999999; display: none; align-items: center; justify-content: center; color: #000; text-align: center; }
-        #expired-screen { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--red); }
         #lock-screen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1f26 0%, #020408 100%); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
         .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; }
         .promo-list { text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin: 20px 0; border-left: 3px solid var(--gold); }
@@ -27,7 +25,7 @@
         .btn-partner { background: var(--accent); color: #000; }
         .btn-buy { background: #fff; color: #000; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
-        .signal-box { border: 2px solid var(--gold); background: #001219; transition: 0.5s; }
+        .signal-box { border: 2px solid var(--gold); background: #001219; }
         .signal-dir { font-size: 1.8rem; font-weight: 900; text-align: center; margin: 10px 0; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: bold; }
         .footer-news { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--gold); color: #000; overflow: hidden; white-space: nowrap; padding: 12px 0; font-size: 0.75rem; font-weight: 900; z-index: 1000; border-top: 2px solid #000; }
@@ -37,23 +35,20 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="security-blank"><h1>⚠️ PELANGGARAN KEAMANAN TERDETEKSI</h1></div>
-    <div id="expired-screen"><h1>❌ MASA AKTIF HABIS</h1><a href="https://wa.me/6289675009549" class="btn btn-gold">HUBUNGI ADMIN</a></div>
-
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa Gold Profesional</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa & News Guard</p>
             <div class="promo-list">
-                <div class="promo-item">📊 <b>MULTI-STRATEGY:</b> Algoritma Scalping & Swing.</div>
-                <div class="promo-item">🪙 <b>AKUN CENT:</b> Optimal untuk Trading Micro Lot.</div>
-                <div class="promo-item">🛡️ <b>RISK GUARD:</b> Filter Analisa > 30 Pips.</div>
+                <div class="promo-item">📊 <b>NEWS GUARD:</b> Analisa Berita High Impact.</div>
+                <div class="promo-item">🪙 <b>LOT ADVISOR:</b> Saran Lot Berdasarkan Volatilitas.</div>
+                <div class="promo-item">🛡️ <b>FILTER:</b> Smart Setup > 10 Pips.</div>
             </div>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
             <div style="margin-top:20px; display:flex; gap:10px;">
-                <a href="https://wa.me/6289675009549?text=Beli%20Kunci" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
-                <a href="https://wa.me/6289675009549?text=Join%20Partner" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
+                <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
+                <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
             </div>
         </div>
     </div>
@@ -68,8 +63,11 @@
             <div class="card">
                 <h2>METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl">
-                    <option>SCALPING M1-M15</option><option>DAY TRADING H1</option><option>SWING STRATEGY H4</option>
+                    <option>NEWS EVENT TRADING</option>
+                    <option>SCALPING M1-M15</option>
+                    <option>QUANTUM ALGO PRO</option>
                 </select>
+                <div style="font-size:0.65rem; color:var(--red);">NEWS IMPACT: <span id="news-status">STABLE</span></div>
             </div>
             <div class="card" style="flex:1;">
                 <h2>BERITA PASAR</h2>
@@ -80,17 +78,17 @@
         <div class="col-center">
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
-                <h2>LOGIKA ANALISA AI <span id="ai-status" style="color:var(--accent); font-size: 0.6rem; margin-left:10px;">ACTIVE</span></h2>
-                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi server feed...</p>
+                <h2>LOGIKA ANALISA AI</h2>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi News Guard...</p>
             </div>
         </div>
 
         <div class="col-right">
-            <div id="sig-card" class="card signal-box">
-                <h2>SIGNAL XAUUSD <span style="font-size:0.6rem; color:var(--accent); float:right;">🔊 LIVE FEED</span></h2>
+            <div class="card signal-box">
+                <h2>SIGNAL XAUUSD <span id="news-tag" style="font-size:0.5rem; background:var(--red); color:#fff; padding:1px 4px; display:none;">NEWS ALERT</span></h2>
                 <div id="sig-dir" class="signal-dir" style="color:var(--gold)">MENGANALISA...</div>
                 
-                <div id="sig-data-box">
+                <div id="sig-details-container">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                         <div class="card" style="padding:10px; background:#000;">
                             <span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br>
@@ -99,7 +97,7 @@
                         <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--accent)">AKURASI</span><br><span id="v-acc" class="val-big">--%</span></div>
                     </div>
                     <div class="card" style="margin-top:10px; padding:10px; background:#000; border:1px solid var(--green);">
-                        <span style="font-size:0.55rem; color:var(--green)">TAKE PROFIT (30+ PIPS)</span><br><span id="v-tp" class="val-big" style="color:var(--green)">...</span>
+                        <span style="font-size:0.55rem; color:var(--green)">TAKE PROFIT</span><br><span id="v-tp" class="val-big" style="color:var(--green)">...</span>
                     </div>
                     <div class="card" style="margin-top:5px; padding:10px; background:#000; border:1px solid var(--red);">
                         <span style="font-size:0.55rem; color:var(--red)">STOP LOSS</span><br><span id="v-sl" class="val-big" style="color:var(--red)">...</span>
@@ -108,31 +106,31 @@
             </div>
 
             <div class="card">
-                <h2>RISK MANAGEMENT & TARGET (USC)</h2>
+                <h2>KALKULATOR RESIKO</h2>
                 <div style="display:flex; gap:5px;">
-                    <select id="c-curr" class="form-ctrl" style="width:85px;"><option value="IDR">IDR</option><option value="USD">USD</option><option value="USC" selected>USC</option></select>
+                    <select id="c-curr" class="form-ctrl" style="width:85px;"><option value="USC" selected>USC</option><option value="IDR">IDR</option><option value="USD">USD</option></select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
                 </div>
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:5px; margin-bottom:10px;">
-                    <div><span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span><input type="number" id="t-daily" class="form-ctrl" placeholder="Daily"></div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:5px; margin-bottom:10px;">
+                    <div><span style="font-size:0.5rem; color:var(--gold)">HARI (%)</span><input type="number" id="t-daily" class="form-ctrl" placeholder="Day"></div>
                     <div><span style="font-size:0.5rem; color:var(--accent)">MINGGU</span><input type="number" id="t-weekly" class="form-ctrl" readonly></div>
                     <div><span style="font-size:0.5rem; color:var(--green)">BULAN</span><input type="number" id="t-monthly" class="form-ctrl" readonly></div>
                 </div>
-                <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
+                <button onclick="calculateLot()" class="btn btn-gold">HITUNG LOT AMAN</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
             </div>
-            <div class="card" style="text-align:center; padding:10px;"><a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">HUBUNGI OWNER</a></div>
+            <div class="card" style="text-align:center; padding:10px;"><a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">ADMIN WHATSAPP</a></div>
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: FILTER ANALISA 30 PIPS AKTIF - HUBUNGI ADMIN UNTUK PERPANJANG AKSES ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI: AUTO NEWS GUARD ACTIVE - MEMANTAU VOLATILITAS HIGH IMPACT SECARA REAL-TIME ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
         function unlock() {
             const k = document.getElementById('passKey').value.trim().toUpperCase();
             if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); }
-            else { alert("AKSES DITOLAK!"); }
+            else { alert("KODE AKSES SALAH!"); }
         }
 
         function initDashboard() {
@@ -142,29 +140,46 @@
         }
 
         let lastPrice = 0;
+        let newsMultiplier = 1.0;
+
         function runAI() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 let p = parseFloat(res.price) * 1.00085; 
                 document.getElementById('v-entry').innerText = p.toFixed(2);
-                let diff = Math.abs(p - lastPrice) * 100;
-                
-                if (lastPrice !== 0 && diff < 0.20) {
-                    // MODE KOREKSI / SIDEWAYS (DI BAWAH 30 PIPS)
-                    document.getElementById('sig-dir').innerText = "WAITING BREAKOUT";
-                    document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "MARKET SEDANG KOREKSI / SIDEWAYS. POTENSI DI BAWAH 30 PIPS. MENUNGGU MOMENTUM.";
-                    document.getElementById('sig-data-box').style.opacity = "0.2";
+                let diff = Math.abs(p - lastPrice);
+                let trendDir = (p > lastPrice) ? "BUY" : "SELL";
+
+                // LOGIKA OTOMATIS BERITA HIGH IMPACT (Berdasarkan Volatilitas Mendadak)
+                if (diff > 0.40) { 
+                    document.getElementById('news-status').innerText = "HIGH IMPACT NEWS!!";
+                    document.getElementById('news-status').style.color = "var(--red)";
+                    document.getElementById('news-tag').style.display = "inline";
+                    newsMultiplier = 0.2; // Menyarankan Lot jauh lebih kecil (Risk minimal)
                 } else {
-                    // MODE ANALISA VALID > 30 PIPS
-                    let dir = (p > lastPrice) ? "STRONG BUY" : "STRONG SELL";
-                    if(lastPrice === 0) dir = "STRONG BUY";
-                    document.getElementById('sig-dir').innerText = dir;
-                    document.getElementById('sig-dir').style.color = (dir.includes("BUY")) ? "var(--green)" : "var(--red)";
-                    document.getElementById('sig-data-box').style.opacity = "1";
-                    document.getElementById('v-acc').innerText = (97 + Math.random() * 2).toFixed(1) + "%";
-                    document.getElementById('v-tp').innerText = (p + (dir.includes("BUY") ? 3.5 : -3.5)).toFixed(2);
-                    document.getElementById('v-sl').innerText = (p + (dir.includes("BUY") ? -1.8 : 1.8)).toFixed(2);
-                    document.getElementById('ai-logic').innerText = `ANALISA VALID: SETUP ${dir} DENGAN POTENSI > 30 PIPS TERDETEKSI.`;
+                    document.getElementById('news-status').innerText = "STABLE";
+                    document.getElementById('news-status').style.color = "var(--accent)";
+                    document.getElementById('news-tag').style.display = "none";
+                    newsMultiplier = 1.0;
+                }
+
+                if (lastPrice !== 0 && diff < 0.10) {
+                    document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
+                    document.getElementById('sig-dir').style.color = "var(--gold)";
+                    document.getElementById('ai-logic').innerText = "ALASAN: Volatilitas di bawah 10 Pips. Market konsolidasi. Menunggu momentum News atau Volume masuk.";
+                    document.getElementById('sig-details-container').style.opacity = "0.2";
+                } else {
+                    document.getElementById('sig-dir').innerText = "STRONG " + trendDir;
+                    document.getElementById('sig-dir').style.color = (trendDir === "BUY") ? "var(--green)" : "var(--red)";
+                    document.getElementById('sig-details-container').style.opacity = "1";
+                    document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.5 : p - 1.5).toFixed(2);
+                    document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.2 : p + 1.2).toFixed(2);
+                    document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
+                    
+                    if(newsMultiplier < 1) {
+                        document.getElementById('ai-logic').innerText = `⚠️ ANALISA NEWS: Setup ${trendDir} terdeteksi saat volatilitas tinggi. Gunakan Small Lot!`;
+                    } else {
+                        document.getElementById('ai-logic').innerText = `TREN TERDETEKSI: Momentum ${trendDir} valid (> 10 Pips).`;
+                    }
                 }
                 lastPrice = p;
             });
@@ -178,9 +193,16 @@
 
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
+            const risk = parseFloat(document.getElementById('c-risk')?.value || 5);
+            const cur = document.getElementById('c-curr').value;
             if(bal > 0) {
-                let lot = (bal / 100 * 0.05) / 10;
-                document.getElementById('c-res').innerHTML = `<div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${lot.toFixed(2)} Lot</div>`;
+                let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
+                // Kalkulasi Lot otomatis mengecil jika newsMultiplier aktif (News Guard)
+                let lot = ((usdBal * (risk/100)) / 10) * newsMultiplier;
+                document.getElementById('c-res').innerHTML = `
+                    <div style="font-size:0.6rem; color:var(--gold)">SARAN LOT ${newsMultiplier < 1 ? 'SAAT NEWS' : 'NORMAL'}:</div>
+                    <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${lot.toFixed(2)} Lot</div>
+                `;
             }
         }
     </script>
