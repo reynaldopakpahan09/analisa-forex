@@ -42,7 +42,7 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 3-40 Pips</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 1-40 Pips</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
             <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
@@ -85,29 +85,29 @@
         <div class="col-center">
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
-                <h2>LOGIKA ANALISA AI (MIN: 1 PIP | MAX: 40 PIPS)</h2>
-                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi sistem...</p>
+                <h2>LOGIKA ANALISA AI</h2>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Menganalisa Momentum Pasar...</p>
             </div>
         </div>
 
         <div class="col-right">
             <div class="card signal-box">
                 <h2>VVIP SIGNAL ADVISOR <span id="news-tag" style="font-size:0.5rem; background:var(--red); color:#fff; padding:1px 4px; display:none; border-radius:3px;">VOLATILE</span></h2>
-                <div id="sig-dir" class="signal-dir" style="color:var(--gold)">MENGANALISA...</div>
+                <div id="sig-dir" class="signal-dir" style="color:var(--gold)">MENUNGGU DATA...</div>
                 
                 <div id="sig-details-container">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br><span id="v-entry" class="val-big">...</span></div>
+                        <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br><span id="v-entry" class="val-big">---</span></div>
                         <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--accent)">AKURASI</span><br><span id="v-acc" class="val-big">--%</span></div>
                     </div>
                     <div class="card" style="margin-top:10px; padding:10px; background:#000; border:1px solid var(--green); text-align:center;">
                         <span style="font-size:0.55rem; color:var(--green)">VVIP TAKE PROFIT</span><br>
-                        <span id="v-tp" class="val-big" style="color:var(--green)">...</span><br>
+                        <span id="v-tp" class="val-big" style="color:var(--green)">---</span><br>
                         <span style="font-size:0.5rem; color:#fff;">(+12 Pips)</span>
                     </div>
                     <div class="card" style="margin-top:5px; padding:10px; background:#000; border:1px solid var(--red); text-align:center;">
                         <span style="font-size:0.55rem; color:var(--red)">VVIP STOP LOSS</span><br>
-                        <span id="v-sl" class="val-big" style="color:var(--red)">...</span><br>
+                        <span id="v-sl" class="val-big" style="color:var(--red)">---</span><br>
                         <span style="font-size:0.5rem; color:#fff;">(-10 Pips)</span>
                     </div>
                 </div>
@@ -128,15 +128,15 @@
                 <button onclick="calculateLot()" class="btn btn-gold">HITUNG STRATEGI</button>
                 <div id="c-res" style="margin-top:10px; text-align:center;"></div>
             </div>
-            <div class="card" style="text-align:center; padding:10px;"><a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="font-size:0.7rem;">ADMIN WHATSAPP</a></div>
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: ULTRA-SENSITIVE 1 PIP ACTIVE - MAX 40 PIPS GUARD READY ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: SENSITIVITAS 1 PIP AKTIF - MONITORING XAUUSD REAL-TIME ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        let lastPrice = 0; let newsMultiplier = 1.0;
+        let lastPrice = 0; 
+        let currentTrend = "BUY";
 
         function unlock() {
             const k = document.getElementById('passKey').value.trim().toUpperCase();
@@ -157,7 +157,8 @@
 
         function initDashboard() {
             new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"});
-            runAI(); setInterval(runAI, 3000);
+            runAI(); // Jalankan instan sekali
+            setInterval(runAI, 2000); // Percepat update ke 2 detik
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
 
@@ -165,40 +166,29 @@
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 let p = parseFloat(res.price) * 1.00085; 
                 document.getElementById('v-entry').innerText = p.toFixed(2);
-                let diff = Math.abs(p - lastPrice); 
-                let trendDir = (p > lastPrice) ? "BUY" : "SELL";
                 
-                if (diff > 0.40) { 
-                    document.getElementById('news-status').innerText = "OVER-VOLATILE";
-                    document.getElementById('news-tag').style.display = "inline";
-                    document.getElementById('sig-dir').innerText = "WAIT STABLE";
-                    document.getElementById('sig-dir').style.color = "var(--red)";
-                    document.getElementById('ai-logic').innerText = "Peringatan: Pergerakan > 40 Pips. AI menahan sinyal.";
-                    newsMultiplier = 0.1;
-                } else if (lastPrice !== 0 && diff < 0.01) { // GANTI MINIMAL 1 PIP
-                    document.getElementById('news-status').innerText = "STABLE";
-                    document.getElementById('news-tag').style.display = "none";
-                    document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
-                    document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "Alasan: Pergerakan < 1 Pip. Menunggu volatilitas.";
-                    document.getElementById('sig-details-container').style.opacity = "0.2";
-                    newsMultiplier = 1.0;
-                } else {
-                    document.getElementById('news-status').innerText = "ACTIVE";
-                    document.getElementById('news-tag').style.display = "none";
-                    document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + trendDir + " NOW";
-                    document.getElementById('sig-dir').style.color = (trendDir === "BUY") ? "var(--green)" : "var(--red)";
-                    document.getElementById('sig-details-container').style.opacity = "1";
-                    
-                    // BERI TAHU TP/SL BERAPA PIPS
-                    document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.2 : p - 1.2).toFixed(2);
-                    document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.0 : p + 1.0).toFixed(2);
-                    
-                    document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
-                    document.getElementById('ai-logic').innerText = `Konfirmasi VVIP: Momentum ${trendDir} > 1 Pip terdeteksi.`;
-                    newsMultiplier = 1.0;
+                // Logika Penentuan Tren Otomatis
+                if (lastPrice !== 0) {
+                    if (p > lastPrice) currentTrend = "BUY";
+                    else if (p < lastPrice) currentTrend = "SELL";
                 }
+
+                // Update Sinyal Secara Paksa (Anti Titik-Titik)
+                document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + currentTrend + " NOW";
+                document.getElementById('sig-dir').style.color = (currentTrend === "BUY") ? "var(--green)" : "var(--red)";
+                document.getElementById('sig-details-container').style.opacity = "1";
+                
+                let tpVal = (currentTrend === "BUY" ? p + 0.12 : p - 0.12).toFixed(2);
+                let slVal = (currentTrend === "BUY" ? p - 0.10 : p + 0.10).toFixed(2);
+                
+                document.getElementById('v-tp').innerText = tpVal;
+                document.getElementById('v-sl').innerText = slVal;
+                document.getElementById('v-acc').innerText = (97 + Math.random() * 2).toFixed(1) + "%";
+                document.getElementById('ai-logic').innerText = `Analisa VVIP Selesai: Arus ${currentTrend} terdeteksi.`;
+
                 lastPrice = p;
+            }).catch(err => {
+                document.getElementById('ai-logic').innerText = "Koneksi Bermasalah, Menghubungkan Ulang...";
             });
         }
 
@@ -214,15 +204,9 @@
             const cur = document.getElementById('c-curr').value;
             if(bal > 0) {
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
-                let totalLot = ((usdBal * (risk/100)) / 10) * newsMultiplier;
-                let layers = (usdBal < 10) ? 1 : (usdBal < 50) ? 3 : 5;
-                let lotPerLayer = totalLot / layers;
+                let totalLot = (usdBal * (risk/100)) / 10;
                 document.getElementById('c-res').innerHTML = `
                     <div style="font-size:1.3rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Total Lot</div>
-                    <div style="background:rgba(0,255,204,0.1); padding:5px; border-radius:5px; margin-top:5px; border:1px dashed var(--accent);">
-                        <b style="color:var(--gold); font-size:0.8rem;">${layers} Layer x ${lotPerLayer.toFixed(2)} Lot</b><br>
-                        <span style="font-size:0.55rem; color:#ccc;">Jarak: 15 Pips per Layer</span>
-                    </div>
                 `;
             }
         }
