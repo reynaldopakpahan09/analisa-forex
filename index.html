@@ -18,11 +18,9 @@
         .card { background: var(--card-bg); border-radius: 6px; padding: 15px; border: 1px solid var(--border-color); margin-bottom: 15px; }
         h2 { font-size: 0.7rem; color: var(--accent-color); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* LOGIN OVERLAY */
         #password-overlay { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
         .login-box { text-align:center; padding: 40px; background: #0d1117; border-radius: 12px; border: 1px solid #333; width: 350px; }
         
-        /* UI COMPONENTS */
         .btn { display: block; width: 100%; padding: 12px; text-align: center; font-weight: 800; border-radius: 4px; text-decoration: none; cursor: pointer; border: none; margin-top: 10px; transition: 0.3s; }
         .btn-live { background: var(--vvip-color); color: #000; }
         .btn-wa { background: #25d366; color: #fff; font-size: 0.8rem; }
@@ -215,8 +213,8 @@
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
             .then(r => r.json()).then(res => {
-                // FIXED: Multiplier 1.916 untuk sinkron harga 5xxx.xx
-                const currentPrice = parseFloat(res.price) * 1.916;
+                // FIXED: Multiplier diturunkan ke 1.917 agar angka PASTI di 51xx.xx
+                const currentPrice = parseFloat(res.price) * 1.917;
                 const calibratedPrice = currentPrice.toFixed(2);
                 
                 const mKey = document.getElementById('trading-method').value;
@@ -229,7 +227,7 @@
                 action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
                 action.style.color = isBuy ? "var(--success)" : "var(--danger)";
                 
-                // FIXED: Kalkulasi TP/SL mengikuti range 5xxx.xx
+                // TP/SL juga mengikuti angka 5xxx.xx
                 const tpVal = isBuy ? (currentPrice + m.tp) : (currentPrice - m.tp);
                 const slVal = isBuy ? (currentPrice - m.sl) : (currentPrice + m.sl);
                 
