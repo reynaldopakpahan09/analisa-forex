@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | FINAL SYNC 51xxx</title>
+    <title>ANALISA VVIP PRO | M1 SCALPER SINKRON</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -65,8 +65,8 @@
         <div class="side-col">
             <div class="card">
                 <h2>🎯 TRADING STRATEGY</h2>
-                <select id="trading-method" class="method-selector" onchange="updateSignal()">
-                    <option value="scalping">1. Scalping (Min. 5 Pips)</option>
+                <select id="trading-method" class="method-selector" onchange="resetSignal()">
+                    <option value="scalping">1. Scalping (M1 Locked)</option>
                     <option value="daytrading">2. Day Trading</option>
                     <option value="swing">3. Swing Trading</option>
                     <option value="trend">4. Trend Following</option>
@@ -97,16 +97,16 @@
             <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color); min-height: 280px;">
                 <div class="signal-header" style="display:flex; justify-content:space-between; padding: 5px 0;">
                     <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px; text-transform:uppercase;">SCALPING</span>
-                    <span style="font-size: 0.6rem; color: var(--accent-color);">● SYNCED 51xxx</span>
+                    <span style="font-size: 0.6rem; color: var(--accent-color);">● M1 SYNCED</span>
                 </div>
                 <div class="signal-body" style="text-align:center; padding: 30px 0;">
-                    <div id="signal-action" style="font-size: 2rem; font-weight: 900;">ANALYZING...</div>
+                    <div id="signal-action" style="font-size: 2rem; font-weight: 900;">WAITING...</div>
                 </div>
                 <div class="data-grid">
                     <div class="data-item"><span class="label">ENTRY ZONE</span><span class="val" id="price-entry">---</span></div>
                     <div class="data-item"><span class="label">TAKE PROFIT</span><span class="val" id="price-tp" style="color:var(--success)">---</span></div>
                     <div class="data-item"><span class="label">STOP LOSS</span><span class="val" id="price-sl" style="color:var(--danger)">---</span></div>
-                    <div class="data-item"><span class="label">ANALISA</span><span class="val" id="pips-info" style="color:var(--vvip-color)">0 PIPS</span></div>
+                    <div class="data-item"><span class="label">NEXT UPDATE</span><span class="val" id="signal-timer" style="color:var(--vvip-color)">60s</span></div>
                 </div>
             </div>
 
@@ -129,6 +129,9 @@
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
+        let currentSignal = null;
+        let lastSignalTime = 0;
+        const SIGNAL_LIFETIME = 60 * 1000; // SINYAL BERTAHAN 1 MENIT (SAMA DENGAN CANDLE M1)
 
         function valX() {
             const input = document.getElementById("passInput").value.toUpperCase();
@@ -156,7 +159,12 @@
                 "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"
             });
             updateSignal();
-            setInterval(updateSignal, 10000); 
+            setInterval(updateSignal, 1000); // Cek setiap detik untuk timer sisa sinyal
+        }
+
+        function resetSignal() {
+            currentSignal = null;
+            updateSignal();
         }
 
         async function updateSignal() {
@@ -165,35 +173,53 @@
                 const data = await response.json();
                 const raw = parseFloat(data.price);
                 
-                // --- LOGIKA "ANTI-LOMPAT" FINAL ---
-                // Kita ambil angka ratusan, puluhan, dan satuan dari API (ekor harga)
-                // Ini memastikan angka belakang tetap bergerak real-time
-                const ekor = Math.round((raw * 10) % 1000); 
+                // --- SINKRON HARGA (KUNCI 5-DIGIT DYNAMIC) ---
+                const entryPrice = Math.round(raw * 1.9175); 
+                const now = Date.now();
+
+                // LOGIKA LOCKING 1 MENIT
+                if (!currentSignal || (now - lastSignalTime >= SIGNAL_LIFETIME)) {
+                    const isBuy = Math.random() > 0.5;
+                    const targetPips = Math.floor(Math.random() * 11) + 6; // Target 6-16 pips
+                    
+                    currentSignal = {
+                        action: isBuy ? "STRONG BUY" : "STRONG SELL",
+                        color: isBuy ? "var(--success)" : "var(--danger)",
+                        pips: targetPips,
+                        isBuy: isBuy,
+                        entryLocked: entryPrice
+                    };
+                    lastSignalTime = now;
+                    addToTracker(isBuy ? "BUY" : "SELL", entryPrice);
+                }
+
+                // Hitung sisa waktu sinyal (countdown per detik)
+                const sisaWaktu = Math.max(0, Math.ceil((SIGNAL_LIFETIME - (now - lastSignalTime)) / 1000));
+                document.getElementById('signal-timer').innerText = sisaWaktu + "s";
+
+                // Kalkulasi TP/SL (Tetap berdasarkan target yang sedang dikunci)
+                const stopLossPips = Math.round(currentSignal.pips / 2);
+                let tpVal, slVal;
                 
-                // KUNCI KEPALA DI 51. Jadi harga PASTI di range 51xxx.
-                // Tidak pakai perkalian lagi agar tidak lompat ke 9000.
-                const entryPrice = 51000 + ekor; 
-                // ----------------------------------
+                if (currentSignal.isBuy) {
+                    tpVal = currentSignal.entryLocked + currentSignal.pips;
+                    slVal = currentSignal.entryLocked - stopLossPips;
+                } else {
+                    tpVal = currentSignal.entryLocked - currentSignal.pips;
+                    slVal = currentSignal.entryLocked + stopLossPips;
+                }
 
-                const targetPips = Math.floor(Math.random() * 11) + 5; 
-                const stopLossPips = Math.round(targetPips / 2);
+                // UPDATE UI
                 const actionDiv = document.getElementById('signal-action');
-                const isBuy = Math.random() > 0.5;
-
-                // Hitungan TP/SL pakai tambah-kurang poin langsung (Sangat Aman)
-                let tpVal = isBuy ? (entryPrice + targetPips) : (entryPrice - targetPips);
-                let slVal = isBuy ? (entryPrice - stopLossPips) : (entryPrice + stopLossPips);
-
-                document.getElementById('price-entry').innerText = entryPrice;
+                document.getElementById('price-entry').innerText = currentSignal.entryLocked;
                 document.getElementById('price-tp').innerText = tpVal;
                 document.getElementById('price-sl').innerText = slVal;
-                document.getElementById('pips-info').innerText = targetPips + " PIPS";
+                document.getElementById('pips-info').innerText = currentSignal.pips + " PIPS";
                 
-                actionDiv.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
-                actionDiv.style.color = isBuy ? "var(--success)" : "var(--danger)";
-                document.getElementById('method-label').innerText = document.getElementById('trading-method').value.toUpperCase();
-                
-                addToTracker(isBuy ? "BUY" : "SELL", entryPrice);
+                actionDiv.innerText = currentSignal.action;
+                actionDiv.style.color = currentSignal.color;
+                document.getElementById('method-label').innerText = document.getElementById('trading-method').value;
+
             } catch (e) { console.log("Sync Error"); }
         }
 
