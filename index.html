@@ -9,9 +9,9 @@
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 75px; }
         #lock-screen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1f26 0%, #020408 100%); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
-        .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; }
-        .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; }
         #expired-screen { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--red); }
+        .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; box-shadow: 0 0 50px rgba(255, 215, 0, 0.1); }
+        .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; }
         header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
         .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
         .col-left, .col-right { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
@@ -33,15 +33,19 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="expired-screen"><h1>❌ MASA AKTIF HABIS</h1><p>Hubungi admin untuk perpanjang akses.</p><a href="https://wa.me/6289675009549" class="btn btn-gold">HUBUNGI ADMIN</a></div>
+    <div id="expired-screen">
+        <h1>❌ MASA AKTIF HABIS</h1>
+        <p>Hubungi admin untuk perpanjang akses VVIP.</p>
+        <a href="https://wa.me/6289675009549" class="btn btn-gold" style="width:250px;">HUBUNGI ADMIN</a>
+    </div>
 
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
             <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 5 Pips</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
-            <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
-            <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
+            <button onclick="unlockApp()" class="btn btn-gold">MASUK KE SISTEM</button>
+            <button onclick="trialApp()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
             <div style="margin-top:20px; display:flex; gap:10px;">
                 <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
                 <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
@@ -125,20 +129,30 @@
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
         let lastPrice = 0; let newsMultiplier = 1.0;
-        function unlock() {
+
+        function unlockApp() {
             const k = document.getElementById('passKey').value.trim().toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); }
-            else { alert("KODE AKSES SALAH!"); }
+            if(k === "KING01" || k === "GOLD88") { 
+                document.getElementById('lock-screen').style.display = 'none'; 
+                initDashboard(); 
+            } else { alert("KODE AKSES SALAH!"); }
         }
-        function startTrial() {
-            document.getElementById('lock-screen').style.display = 'none'; initDashboard();
-            setTimeout(() => { document.getElementById('expired-screen').style.display = 'flex'; }, 300000);
+
+        function trialApp() {
+            document.getElementById('lock-screen').style.display = 'none'; 
+            initDashboard();
+            setTimeout(() => { 
+                document.getElementById('expired-screen').style.display = 'flex'; 
+                document.body.style.overflow = 'hidden';
+            }, 300000);
         }
+
         function initDashboard() {
             new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"});
             runAI(); setInterval(runAI, 3000);
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
+
         function runAI() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
                 let p = parseFloat(res.price) * 1.00085; document.getElementById('v-entry').innerText = p.toFixed(2);
@@ -152,11 +166,10 @@
                     document.getElementById('news-tag').style.display = "none"; newsMultiplier = 1.0;
                 }
 
-                // FILTER 5 PIPS (0.05)
                 if (lastPrice !== 0 && diff < 0.05) {
                     document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
                     document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "ALASAN: Volatilitas Sangat Rendah (< 5 Pips). Pasar sedang jenuh/sideways (Consolidation Mode). Menunggu dorongan volume dari sesi market atau big player.";
+                    document.getElementById('ai-logic').innerText = "ALASAN: Volatilitas Sangat Rendah (< 5 Pips). Pasar sedang jenuh/sideways (Consolidation Mode). Menunggu dorongan volume dari sesi market.";
                     document.getElementById('sig-details-container').style.opacity = "0.2";
                 } else {
                     document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + trendDir + " NOW";
@@ -170,10 +183,13 @@
                 lastPrice = p;
             });
         }
+
         document.getElementById('t-daily').addEventListener('input', function() {
             let daily = parseFloat(this.value) || 0;
-            document.getElementById('t-weekly').value = (daily * 5); document.getElementById('t-monthly').value = (daily * 20);
+            document.getElementById('t-weekly').value = (daily * 5); 
+            document.getElementById('t-monthly').value = (daily * 20);
         });
+
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
@@ -184,4 +200,14 @@
                 let layers = (usdBal < 10) ? 1 : (usdBal < 50) ? 3 : 5;
                 let lotPerLayer = totalLot / layers;
                 document.getElementById('c-res').innerHTML = `
-                    <div style="
+                    <div style="font-size:1.3rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Total Lot</div>
+                    <div style="background:rgba(0,255,204,0.1); padding:5px; border-radius:5px; margin-top:5px; border:1px dashed var(--accent);">
+                        <b style="color:var(--gold); font-size:0.8rem;">${layers} Layer x ${lotPerLayer.toFixed(2)} Lot</b><br>
+                        <span style="font-size:0.55rem; color:#ccc;">Jarak Aman: 15 Pips per Layer</span>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
