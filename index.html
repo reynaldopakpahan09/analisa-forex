@@ -42,10 +42,10 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Ultra-Sensitive 3 Pips</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 3-40 Pips</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
-            <button onclick="unlockApp()" class="btn btn-gold">MASUK KE SISTEM</button>
-            <button onclick="trialApp()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
+            <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
+            <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
             <div style="margin-top:20px; display:flex; gap:10px;">
                 <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
                 <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
@@ -86,7 +86,7 @@
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
                 <h2>LOGIKA ANALISA AI (MIN: 3 PIPS | MAX: 40 PIPS)</h2>
-                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi Ultra-Sensitive...</p>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi sistem...</p>
             </div>
         </div>
 
@@ -124,19 +124,21 @@
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: ULTRA-SENSITIVE 3 PIPS ACTIVE - AUTO-ADVISOR READY ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: ULTRA-SENSITIVE 3 PIPS ACTIVE - MAX 40 PIPS GUARD READY ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
         let lastPrice = 0; let newsMultiplier = 1.0;
 
-        function unlockApp() {
+        function unlock() {
             const k = document.getElementById('passKey').value.trim().toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); }
-            else { alert("KODE AKSES SALAH!"); }
+            if(k === "KING01" || k === "GOLD88") { 
+                document.getElementById('lock-screen').style.display = 'none'; 
+                initDashboard(); 
+            } else { alert("KODE AKSES SALAH!"); }
         }
 
-        function trialApp() {
+        function startTrial() {
             document.getElementById('lock-screen').style.display = 'none'; 
             initDashboard();
             setTimeout(() => { 
@@ -153,28 +155,26 @@
 
         function runAI() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
-                let p = parseFloat(res.price) * 1.00085; document.getElementById('v-entry').innerText = p.toFixed(2);
+                let p = parseFloat(res.price) * 1.00085; 
+                document.getElementById('v-entry').innerText = p.toFixed(2);
                 let diff = Math.abs(p - lastPrice); let trendDir = (p > lastPrice) ? "BUY" : "SELL";
                 
-                // DETEKSI VOLATILITAS TINGGI (BATAS MAKSIMAL 40 PIPS)
                 if (diff > 0.40) { 
-                    document.getElementById('news-status').innerText = "MARKET OVER-VOLATILE";
-                    document.getElementById('news-tag').style.display = "inline"; 
-                    document.getElementById('sig-dir').innerText = "WAIT FOR STABLE";
+                    document.getElementById('news-status').innerText = "OVER-VOLATILE";
+                    document.getElementById('news-tag').style.display = "inline";
+                    document.getElementById('sig-dir').innerText = "WAIT STABLE";
                     document.getElementById('sig-dir').style.color = "var(--red)";
-                    document.getElementById('ai-logic').innerText = "PERINGATAN: Lonjakan Harga Melebihi 40 Pips (High News Impact). AI menahan sinyal demi keamanan akun (Anti-Slippage).";
+                    document.getElementById('ai-logic').innerText = "Peringatan: Pergerakan > 40 Pips (High Volatility). AI menahan sinyal untuk keamanan.";
                     newsMultiplier = 0.1;
                 } else if (lastPrice !== 0 && diff < 0.03) {
-                    // MINIMAL 3 PIPS (0.03)
-                    document.getElementById('news-status').innerText = "STABLE / LOW VOL";
+                    document.getElementById('news-status').innerText = "STABLE";
                     document.getElementById('news-tag').style.display = "none";
                     document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
                     document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "ALASAN: Pergerakan di bawah 3 Pips (Sideways). Menunggu sedikit dorongan volume lagi.";
+                    document.getElementById('ai-logic').innerText = "Alasan: Pergerakan < 3 Pips. Pasar sedang jenuh atau sideways.";
                     document.getElementById('sig-details-container').style.opacity = "0.2";
                     newsMultiplier = 1.0;
                 } else {
-                    // MOMENTUM VALID (ANTARA 3 SAMPAI 40 PIPS)
                     document.getElementById('news-status').innerText = "ACTIVE";
                     document.getElementById('news-tag').style.display = "none";
                     document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + trendDir + " NOW";
@@ -183,7 +183,7 @@
                     document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.2 : p - 1.2).toFixed(2);
                     document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.0 : p + 1.0).toFixed(2);
                     document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
-                    document.getElementById('ai-logic').innerText = `KONFIRMASI VVIP: Momentum ${trendDir} terdeteksi > 3 Pips. Entry disarankan.`;
+                    document.getElementById('ai-logic').innerText = `Konfirmasi VVIP: Momentum ${trendDir} terdeteksi > 3 Pips.`;
                     newsMultiplier = 1.0;
                 }
                 lastPrice = p;
@@ -193,4 +193,27 @@
         document.getElementById('t-daily').addEventListener('input', function() {
             let daily = parseFloat(this.value) || 0;
             document.getElementById('t-weekly').value = (daily * 5); 
-            document.getElementById('t-monthly').value =
+            document.getElementById('t-monthly').value = (daily * 20);
+        });
+
+        function calculateLot() {
+            const bal = parseFloat(document.getElementById('c-bal').value);
+            const risk = parseFloat(document.getElementById('c-risk').value);
+            const cur = document.getElementById('c-curr').value;
+            if(bal > 0) {
+                let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
+                let totalLot = ((usdBal * (risk/100)) / 10) * newsMultiplier;
+                let layers = (usdBal < 10) ? 1 : (usdBal < 50) ? 3 : 5;
+                let lotPerLayer = totalLot / layers;
+                document.getElementById('c-res').innerHTML = `
+                    <div style="font-size:1.3rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Total Lot</div>
+                    <div style="background:rgba(0,255,204,0.1); padding:5px; border-radius:5px; margin-top:5px; border:1px dashed var(--accent);">
+                        <b style="color:var(--gold); font-size:0.8rem;">${layers} Layer x ${lotPerLayer.toFixed(2)} Lot</b><br>
+                        <span style="font-size:0.55rem; color:#ccc;">Jarak: 15 Pips per Layer</span>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>
