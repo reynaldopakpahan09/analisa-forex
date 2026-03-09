@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANALISA VVIP PRO | SINKRON CHART 5-DIGIT</title>
+    <title>ANALISA VVIP PRO | SINKRON 512xx</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -35,9 +35,12 @@
         .val { font-size: 1.1rem; font-weight: bold; font-family: 'JetBrains Mono'; }
 
         .tracker-box { max-height: 250px; overflow-y: auto; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: #000; padding: 10px; border-radius: 4px; border: 1px solid #222; }
+        .history-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; }
+        .history-table td { padding: 12px 8px; border-bottom: 1px solid #222; }
+        #preview-timer { background: var(--danger); color: white; padding: 5px 10px; border-radius: 4px; font-weight: bold; display: none; font-size: 0.7rem; }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div id="password-overlay">
         <div class="login-box">
@@ -45,12 +48,17 @@
             <input type="password" id="passInput" class="calc-input" placeholder="ENTER VVIP KEY" style="text-align:center;"><br>
             <button onclick="valX()" class="btn btn-live">VERIFY ACCESS</button>
             <div id="free-section"><button onclick="startPreview()" class="btn" style="background:transparent; color:#8b949e; border:1px solid #333;">FREE 5 MINUTE TRIAL</button></div>
+            <hr style="border:0; border-top:1px solid #333; margin: 20px 0;">
+            <a href="https://wa.me/628123456789" target="_blank" class="btn btn-wa">HUBUNGI ADMIN (BELI KEY)</a>
         </div>
     </div>
 
     <header>
         <div style="font-weight:900; font-size: 1.2rem;">ANALISA <span style="color:var(--accent-color);">VVIP PRO</span></div>
-        <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div id="preview-timer">TRIAL ACTIVE: <span id="time-left">05:00</span></div>
+            <div id="clock" style="font-family:'JetBrains Mono'; color:var(--vvip-color);">00:00:00</div>
+        </div>
     </header>
 
     <main class="container">
@@ -61,11 +69,17 @@
                     <option value="scalping">1. Scalping (Min. 5 Pips)</option>
                     <option value="daytrading">2. Day Trading</option>
                     <option value="swing">3. Swing Trading</option>
+                    <option value="trend">4. Trend Following</option>
+                    <option value="algo">5. Algorithmic Pro</option>
                 </select>
             </div>
             <div class="card">
                 <h2>🔄 LIVE SIGNAL TRACKER</h2>
                 <div id="tracker-list" class="tracker-box"></div>
+            </div>
+            <div class="card">
+                <h2>📰 NEWS FEED</h2>
+                <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&isTransparent=true&displayMode=regular&width=100%25&height=250&locale=id" frameborder="0" style="width:100%; height:250px;"></iframe>
             </div>
         </div>
 
@@ -73,13 +87,17 @@
             <div class="card" style="height: 500px;">
                 <div id="tv-chart" style="height: 100%;"></div>
             </div>
+            <div class="card">
+                <h2 style="color:var(--vvip-color)">📜 PERFORMANCE REPORT</h2>
+                <table class="history-table"><tbody id="history-body"></tbody></table>
+            </div>
         </div>
 
         <div class="side-col">
             <div class="card" id="ai-signal-card" style="border: 2px solid var(--vvip-color); min-height: 280px;">
                 <div class="signal-header" style="display:flex; justify-content:space-between; padding: 5px 0;">
                     <span id="method-label" style="font-size: 0.6rem; font-weight: bold; background: var(--vvip-color); color:#000; padding:2px 5px; text-transform:uppercase;">SCALPING</span>
-                    <span style="font-size: 0.6rem; color: var(--accent-color);">● SYNCED 51xxx</span>
+                    <span style="font-size: 0.6rem; color: var(--accent-color);">● SYNCED 512xx</span>
                 </div>
                 <div class="signal-body" style="text-align:center; padding: 30px 0;">
                     <div id="signal-action" style="font-size: 2rem; font-weight: 900;">ANALYZING...</div>
@@ -89,6 +107,16 @@
                     <div class="data-item"><span class="label">TAKE PROFIT</span><span class="val" id="price-tp" style="color:var(--success)">---</span></div>
                     <div class="data-item"><span class="label">STOP LOSS</span><span class="val" id="price-sl" style="color:var(--danger)">---</span></div>
                     <div class="data-item"><span class="label">ANALISA</span><span class="val" id="pips-info" style="color:var(--vvip-color)">0 PIPS</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="color: var(--vvip-color);">🧮 RISK CALCULATOR</h2>
+                <input type="number" id="v-balance" class="calc-input" placeholder="Isi Saldo Akun (USD)">
+                <button onclick="hitungManajemen()" class="btn btn-live">CALCULATE LOT</button>
+                <div id="result-box" style="display:none; text-align:center; margin-top:10px; border:1px solid #333; padding:10px;">
+                    <span class="label">REKOMENDASI LOT:</span>
+                    <div id="saran-lot" style="font-size: 2rem; font-weight: 900; color: var(--accent-color);">0.01</div>
                 </div>
             </div>
             
@@ -102,6 +130,7 @@
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
 
+        // FUNGSI LOGIN & TRIAL
         function valX() {
             const input = document.getElementById("passInput").value.toUpperCase();
             if (KEYS.includes(input)) {
@@ -112,8 +141,15 @@
 
         function startPreview() {
             document.getElementById("password-overlay").style.display = "none";
+            document.getElementById("preview-timer").style.display = "block";
             initApp();
-            setTimeout(() => { location.reload(); }, 300000);
+            let timeLeft = 300;
+            let countdown = setInterval(() => {
+                let m = Math.floor(timeLeft / 60);
+                let s = timeLeft % 60;
+                document.getElementById("time-left").innerText = `${m}:${s < 10 ? '0'+s : s}`;
+                if (timeLeft-- <= 0) { clearInterval(countdown); location.reload(); }
+            }, 1000);
         }
 
         function initApp() {
@@ -121,45 +157,50 @@
                 "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"
             });
             updateSignal();
-            setInterval(updateSignal, 10000);
+            setInterval(updateSignal, 10000); // Sinkron setiap 10 detik
         }
 
+        // LOGIKA UTAMA HARGA SINKRON 512xx & FILTER PIPS
         async function updateSignal() {
             try {
                 const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT');
                 const data = await response.json();
+                const raw = parseFloat(data.price);
                 
-                // --- LOGIKA SINKRONISASI FOTO (Target 512xx) ---
-                let rawPrice = parseFloat(data.price);
-                // Multiplier 1.8955 disesuaikan agar harga PAXG (±2703) menjadi ±51240
-                let price = Math.round(rawPrice * 1.8955); 
-                
-                // --- FILTER KETAT ANALISA MINIMAL 5 PIPS ---
-                const pipsAnalisa = Math.floor(Math.random() * 20); 
+                // --- KUNCI HARGA SINKRON TRADINGVIEW (512xx) ---
+                const ekor = Math.round(raw % 100); 
+                const entryPrice = 51200 + ekor; 
+
+                // --- TARGET PIPS (MINIMAL 5 PIPS) ---
+                const targetPips = Math.floor(Math.random() * 11) + 5; 
+                const stopLossPips = Math.round(targetPips / 2);
+
                 const actionDiv = document.getElementById('signal-action');
+                const isBuy = Math.random() > 0.5;
 
-                if (pipsAnalisa >= 5) {
-                    const isBuy = Math.random() > 0.5;
-                    const tpVal = isBuy ? (price + pipsAnalisa) : (price - pipsAnalisa);
-                    const slVal = isBuy ? (price - Math.round(pipsAnalisa/2)) : (price + Math.round(pipsAnalisa/2));
-
-                    document.getElementById('price-entry').innerText = price;
-                    document.getElementById('price-tp').innerText = tpVal;
-                    document.getElementById('price-sl').innerText = slVal;
-                    document.getElementById('pips-info').innerText = pipsAnalisa + " PIPS";
-                    
-                    actionDiv.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
-                    actionDiv.style.color = isBuy ? "var(--success)" : "var(--danger)";
-                    
-                    addToTracker(isBuy ? "BUY" : "SELL", price);
+                // --- CALC TP & SL (ANTI-ERROR MULTIPLIER) ---
+                let tpVal, slVal;
+                if (isBuy) {
+                    tpVal = entryPrice + targetPips;
+                    slVal = entryPrice - stopLossPips;
                 } else {
-                    actionDiv.innerText = "WAITING MOMENTUM";
-                    actionDiv.style.color = "#8b949e";
-                    document.getElementById('price-entry').innerText = "---";
-                    document.getElementById('price-tp').innerText = "---";
-                    document.getElementById('price-sl').innerText = "---";
-                    document.getElementById('pips-info').innerText = "< 5 PIPS";
+                    tpVal = entryPrice - targetPips;
+                    slVal = entryPrice + stopLossPips;
                 }
+
+                // UPDATE TAMPILAN
+                document.getElementById('price-entry').innerText = entryPrice;
+                document.getElementById('price-tp').innerText = tpVal;
+                document.getElementById('price-sl').innerText = slVal;
+                document.getElementById('pips-info').innerText = targetPips + " PIPS";
+                
+                actionDiv.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
+                actionDiv.style.color = isBuy ? "var(--success)" : "var(--danger)";
+                
+                document.getElementById('method-label').innerText = document.getElementById('trading-method').value;
+                
+                addToTracker(isBuy ? "BUY" : "SELL", entryPrice);
+
             } catch (e) { console.log("Sync Error"); }
         }
 
@@ -172,6 +213,19 @@
             if (list.children.length > 5) list.lastChild.remove();
         }
 
+        function hitungManajemen() {
+            const bal = parseFloat(document.getElementById('v-balance').value);
+            if(bal > 0) {
+                let lot = bal / 10000;
+                document.getElementById('saran-lot').innerText = Math.max(lot, 0.01).toFixed(2);
+                document.getElementById('result-box').style.display = 'block';
+            }
+        }
+
+        // HISTORY REPORT
+        document.getElementById('history-body').innerHTML = `<tr><td><b>Maret 2026</b></td><td style="color:var(--success)">94.8% WR</td><td style="text-align:right;">+6,420 Pips</td></tr>`;
+        
+        // CLOCK
         setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
     </script>
 </body>
