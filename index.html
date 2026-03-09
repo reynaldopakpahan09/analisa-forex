@@ -24,7 +24,7 @@
         .btn-buy { background: #fff; color: #000; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
         .signal-box { border: 2px solid var(--gold); background: #001219; }
-        .signal-dir { font-size: 1.6rem; font-weight: 900; text-align: center; margin: 10px 0; transition: 0.3s; }
+        .signal-dir { font-size: 1.6rem; font-weight: 900; text-align: center; margin: 10px 0; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: bold; }
         .footer-news { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--gold); color: #000; overflow: hidden; white-space: nowrap; padding: 12px 0; font-size: 0.75rem; font-weight: 900; z-index: 1000; border-top: 2px solid #000; }
         .marquee { display: inline-block; padding-left: 100%; animation: marquee 35s linear infinite; }
@@ -38,7 +38,7 @@
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Strategy System</p>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Smart Filter 5 Pips</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
             <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
@@ -57,13 +57,20 @@
     <div class="main-container">
         <div class="col-left">
             <div class="card">
-                <h2>METODE TRADING</h2>
+                <h2>10 METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl">
-                    <option value="scalp">SCALPING M1-M15</option>
-                    <option value="day">DAY TRADING H1</option>
-                    <option value="quantum">QUANTUM ALGO PRO</option>
+                    <option>1. SCALPING M1-M15</option>
+                    <option>2. DAY TRADING H1</option>
+                    <option>3. QUANTUM ALGO PRO</option>
+                    <option>4. PRICE ACTION VVIP</option>
+                    <option>5. NEWS EVENT TRADING</option>
+                    <option>6. SMART MONEY CONCEPT</option>
+                    <option>7. TREND REVERSAL</option>
+                    <option>8. BREAKOUT STRATEGY</option>
+                    <option>9. GOLD MASTER SCALPER</option>
+                    <option>10. INSTITUTIONAL FLOW</option>
                 </select>
-                <div style="font-size:0.65rem; color:var(--red);">AI STATUS: <span id="news-status" style="color:var(--accent)">READY</span></div>
+                <div style="font-size:0.65rem; color:var(--accent);">AI STATUS: <span id="news-status">ACTIVE</span></div>
             </div>
             <div class="card" style="flex:1;">
                 <h2>BERITA PASAR</h2>
@@ -74,8 +81,8 @@
         <div class="col-center">
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
-                <h2>LOGIKA ANALISA AI</h2>
-                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Menganalisa pergerakan market...</p>
+                <h2>LOGIKA ANALISA AI (FILTER 5 PIPS)</h2>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Menganalisa momentum...</p>
             </div>
         </div>
 
@@ -113,7 +120,7 @@
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: AUTO-ADVISOR ACTIVE - ANALYSER MIN 10 PIPS - SMART LAYERING ENABLED ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: AUTO-ADVISOR ACTIVE - SMART FILTER 5 PIPS - 10 TRADING METHODS READY ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
@@ -141,14 +148,15 @@
                     document.getElementById('news-status').innerText = "HIGH VOLATILE";
                     document.getElementById('news-tag').style.display = "inline"; newsMultiplier = 0.2;
                 } else {
-                    document.getElementById('news-status').innerText = "READY";
+                    document.getElementById('news-status').innerText = "STABLE";
                     document.getElementById('news-tag').style.display = "none"; newsMultiplier = 1.0;
                 }
 
-                if (lastPrice !== 0 && diff < 0.10) {
+                // FILTER 5 PIPS (0.05)
+                if (lastPrice !== 0 && diff < 0.05) {
                     document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
                     document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "VVIP NOTICE: Pergerakan di bawah 10 Pips. AI menyarankan Wait & See untuk menghindari sideways.";
+                    document.getElementById('ai-logic').innerText = "ALASAN: Volatilitas Sangat Rendah (< 5 Pips). Pasar sedang jenuh/sideways (Consolidation Mode). Menunggu dorongan volume dari sesi market atau big player.";
                     document.getElementById('sig-details-container').style.opacity = "0.2";
                 } else {
                     document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + trendDir + " NOW";
@@ -157,7 +165,7 @@
                     document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.2 : p - 1.2).toFixed(2);
                     document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.0 : p + 1.0).toFixed(2);
                     document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
-                    document.getElementById('ai-logic').innerText = `KONFIRMASI VVIP: Momentum ${trendDir} terdeteksi > 10 Pips. Silakan buka posisi sesuai target.`;
+                    document.getElementById('ai-logic').innerText = `KONFIRMASI VVIP: Momentum ${trendDir} terdeteksi > 5 Pips. Power pasar mencukupi untuk entry.`;
                 }
                 lastPrice = p;
             });
@@ -176,15 +184,4 @@
                 let layers = (usdBal < 10) ? 1 : (usdBal < 50) ? 3 : 5;
                 let lotPerLayer = totalLot / layers;
                 document.getElementById('c-res').innerHTML = `
-                    <div style="font-size:0.6rem; color:var(--gold)">SARAN MEMBER VVIP:</div>
-                    <div style="font-size:1.3rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Total Lot</div>
-                    <div style="background:rgba(0,255,204,0.1); padding:5px; border-radius:5px; margin-top:5px; border:1px dashed var(--accent);">
-                        <b style="color:var(--gold); font-size:0.8rem;">${layers} Layer x ${lotPerLayer.toFixed(2)} Lot</b><br>
-                        <span style="font-size:0.55rem; color:#ccc;">Strategi: Bertahap per 15 Pips</span>
-                    </div>
-                `;
-            }
-        }
-    </script>
-</body>
-</html>
+                    <div style="
