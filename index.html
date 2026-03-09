@@ -8,37 +8,24 @@
     <style>
         :root { --bg: #020408; --card: #0d1117; --accent: #00ffcc; --gold: #ffd700; --red: #ff4d4d; --green: #2ecc71; --border: #30363d; }
         body { margin: 0; font-family: 'Inter', sans-serif; background: var(--bg); color: #e6edf3; user-select: none; overflow-x: hidden; padding-bottom: 75px; }
-        
-        /* Security Screens */
-        #security-blank { position: fixed; inset: 0; background: #fff; z-index: 999999; display: none; align-items: center; justify-content: center; color: #000; text-align: center; }
-        #expired-screen { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--red); }
-
         #lock-screen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1a1f26 0%, #020408 100%); display: flex; align-items: center; justify-content: center; z-index: 10000; padding: 20px; }
-        .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; box-shadow: 0 0 60px rgba(255, 215, 0, 0.15); }
-        .promo-list { text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; margin: 20px 0; border-left: 3px solid var(--gold); }
-        .promo-item { font-size: 0.85rem; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .promo-item b { color: var(--gold); }
-        
+        .auth-box { padding: 40px 30px; background: var(--card); border-radius: 24px; border: 1px solid var(--gold); width: 100%; max-width: 450px; text-align: center; }
         .key-input { width: 100%; padding: 18px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: var(--accent); border-radius: 12px; text-align: center; font-family: 'JetBrains Mono'; font-size: 1.2rem; outline: none; box-sizing: border-box; }
-        
+        #expired-screen { position: fixed; inset: 0; background: #000; z-index: 20000; display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; color: var(--red); }
         header { padding: 15px 20px; background: var(--card); display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; align-items: center; }
         .main-container { display: flex; flex-wrap: wrap; gap: 10px; padding: 10px; box-sizing: border-box; }
         .col-left, .col-right { flex: 1 1 300px; display: flex; flex-direction: column; gap: 10px; }
         .col-center { flex: 2 1 500px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
         .card { background: var(--card); border-radius: 10px; padding: 15px; border: 1px solid var(--border); position: relative; }
         h2 { font-size: 0.65rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin: 0 0 10px 0; border-bottom: 1px solid var(--border); padding-bottom: 5px; font-weight: 800; }
-
         .btn { display: block; width: 100%; padding: 14px; text-align: center; font-weight: 900; border-radius: 8px; cursor: pointer; border: none; text-decoration: none; font-size: 0.8rem; margin-top: 10px; box-sizing: border-box; transition: 0.3s; text-transform: uppercase; }
         .btn-gold { background: var(--gold); color: #000; }
         .btn-partner { background: var(--accent); color: #000; }
         .btn-buy { background: #fff; color: #000; }
         .form-ctrl { width: 100%; padding: 10px; background: #000; border: 1px solid var(--border); color: #fff; border-radius: 5px; margin-bottom: 8px; outline: none; font-size: 0.8rem; box-sizing: border-box; }
-        
-        /* Signal UI */
         .signal-box { border: 2px solid var(--gold); background: #001219; }
-        .signal-dir { font-size: 1.8rem; font-weight: 900; text-align: center; margin: 10px 0; }
+        .signal-dir { font-size: 1.6rem; font-weight: 900; text-align: center; margin: 10px 0; transition: 0.3s; }
         .val-big { font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: bold; }
-        
         .footer-news { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--gold); color: #000; overflow: hidden; white-space: nowrap; padding: 12px 0; font-size: 0.75rem; font-weight: 900; z-index: 1000; border-top: 2px solid #000; }
         .marquee { display: inline-block; padding-left: 100%; animation: marquee 35s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
@@ -46,29 +33,18 @@
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="security-blank"><h1>⚠️ PELANGGARAN KEAMANAN TERDETEKSI</h1></div>
-    <div id="expired-screen">
-        <h1>❌ MASA AKTIF HABIS</h1>
-        <p>Silakan hubungi admin untuk akses penuh tanpa batas.</p>
-        <a href="https://wa.me/6289675009549" class="btn btn-gold">HUBUNGI ADMIN</a>
-    </div>
+    <div id="expired-screen"><h1>❌ MASA AKTIF HABIS</h1><p>Hubungi admin untuk perpanjang akses.</p><a href="https://wa.me/6289675009549" class="btn btn-gold">HUBUNGI ADMIN</a></div>
 
     <div id="lock-screen">
         <div class="auth-box">
             <h1 style="color:var(--gold); margin:0; font-size: 1.8rem;">PREMIERE AI VVIP</h1>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">Sistem Analisa & Manajemen Risiko</p>
-            <div class="promo-list">
-                <div class="promo-item">🛡️ <b>SMART FILTER:</b> Analisa Minimum 10 Pips.</div>
-                <div class="promo-item">⚠️ <b>NEWS GUARD:</b> Deteksi Volatilitas Berita.</div>
-                <div class="promo-item">🪙 <b>LOT ADVISOR:</b> Kalkulator Akun Cent (USC).</div>
-            </div>
+            <p style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">VVIP Analyst & Strategy System</p>
             <input type="password" id="passKey" class="key-input" placeholder="KODE AKSES">
             <button onclick="unlock()" class="btn btn-gold">MASUK KE SISTEM</button>
             <button onclick="startTrial()" class="btn" style="background: #222; color: #fff;">MULAI COBA GRATIS (5 MIN)</button>
-            
             <div style="margin-top:20px; display:flex; gap:10px;">
-                <a href="https://wa.me/6289675009549?text=Beli%20Akses" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
-                <a href="https://wa.me/6289675009549?text=Join%20Partner" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
+                <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-buy" style="flex:1; font-size:0.65rem;">BELI KUNCI</a>
+                <a href="https://wa.me/6289675009549" target="_blank" class="btn btn-partner" style="flex:1; font-size:0.65rem;">GABUNG PARTNER</a>
             </div>
         </div>
     </div>
@@ -83,14 +59,14 @@
             <div class="card">
                 <h2>METODE TRADING</h2>
                 <select id="m-select" class="form-ctrl">
-                    <option>NEWS EVENT TRADING</option>
-                    <option>SCALPING M1-M15</option>
-                    <option>QUANTUM ALGO PRO</option>
+                    <option value="scalp">SCALPING M1-M15</option>
+                    <option value="day">DAY TRADING H1</option>
+                    <option value="quantum">QUANTUM ALGO PRO</option>
                 </select>
-                <div style="font-size:0.65rem; color:var(--red);">NEWS IMPACT: <span id="news-status">STABLE</span></div>
+                <div style="font-size:0.65rem; color:var(--red);">AI STATUS: <span id="news-status" style="color:var(--accent)">READY</span></div>
             </div>
             <div class="card" style="flex:1;">
-                <h2>BERITA PASAR GLOBAL</h2>
+                <h2>BERITA PASAR</h2>
                 <iframe src="https://www.tradingview-widget.com/embed-widget/timeline/?colorTheme=dark&width=100%25&height=350" frameborder="0" style="width:100%; height:350px;"></iframe>
             </div>
         </div>
@@ -99,34 +75,27 @@
             <div class="card" style="height:500px; padding:0; overflow:hidden;"><div id="tv-chart" style="width:100%; height:100%;"></div></div>
             <div class="card">
                 <h2>LOGIKA ANALISA AI</h2>
-                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Inisialisasi News Guard...</p>
+                <p id="ai-logic" style="font-size:0.75rem; color:#ccc; margin:0;">Menganalisa pergerakan market...</p>
             </div>
         </div>
 
         <div class="col-right">
             <div class="card signal-box">
-                <h2>SIGNAL XAUUSD <span id="news-tag" style="font-size:0.5rem; background:var(--red); color:#fff; padding:1px 4px; display:none; border-radius:3px;">NEWS ALERT</span></h2>
+                <h2>VVIP SIGNAL ADVISOR <span id="news-tag" style="font-size:0.5rem; background:var(--red); color:#fff; padding:1px 4px; display:none; border-radius:3px;">VOLATILE</span></h2>
                 <div id="sig-dir" class="signal-dir" style="color:var(--gold)">MENGANALISA...</div>
                 
                 <div id="sig-details-container">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        <div class="card" style="padding:10px; background:#000;">
-                            <span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br>
-                            <span id="v-entry" class="val-big">...</span>
-                        </div>
+                        <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--gold)">ENTRY ZONE</span><br><span id="v-entry" class="val-big">...</span></div>
                         <div class="card" style="padding:10px; background:#000;"><span style="font-size:0.55rem; color:var(--accent)">AKURASI</span><br><span id="v-acc" class="val-big">--%</span></div>
                     </div>
-                    <div class="card" style="margin-top:10px; padding:10px; background:#000; border:1px solid var(--green);">
-                        <span style="font-size:0.55rem; color:var(--green)">TAKE PROFIT (SMART TARGET)</span><br><span id="v-tp" class="val-big" style="color:var(--green)">...</span>
-                    </div>
-                    <div class="card" style="margin-top:5px; padding:10px; background:#000; border:1px solid var(--red);">
-                        <span style="font-size:0.55rem; color:var(--red)">STOP LOSS</span><br><span id="v-sl" class="val-big" style="color:var(--red)">...</span>
-                    </div>
+                    <div class="card" style="margin-top:10px; padding:10px; background:#000; border:1px solid var(--green);"><span style="font-size:0.55rem; color:var(--green)">VVIP TAKE PROFIT</span><br><span id="v-tp" class="val-big" style="color:var(--green)">...</span></div>
+                    <div class="card" style="margin-top:5px; padding:10px; background:#000; border:1px solid var(--red);"><span style="font-size:0.55rem; color:var(--red)">VVIP STOP LOSS</span><br><span id="v-sl" class="val-big" style="color:var(--red)">...</span></div>
                 </div>
             </div>
 
             <div class="card">
-                <h2>MANAJEMEN RISIKO & TARGET</h2>
+                <h2>RISK & LAYER CALCULATOR</h2>
                 <div style="display:flex; gap:5px;">
                     <select id="c-curr" class="form-ctrl" style="width:85px;"><option value="IDR">IDR</option><option value="USD">USD</option><option value="USC" selected>USC</option></select>
                     <input type="number" id="c-bal" class="form-ctrl" placeholder="Saldo">
@@ -144,93 +113,75 @@
         </div>
     </div>
 
-    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI: AUTO NEWS GUARD & 10 PIPS FILTER ACTIVE - HUBUNGI ADMIN UNTUK AKSES PENUH ⚠️</div></div>
+    <div class="footer-news"><div class="marquee">⚠️ PREMIERE AI VVIP: AUTO-ADVISOR ACTIVE - ANALYSER MIN 10 PIPS - SMART LAYERING ENABLED ⚠️</div></div>
 
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
-        // Security & Trial Logic
-        let lastPrice = 0;
-        let newsMultiplier = 1.0;
-
+        let lastPrice = 0; let newsMultiplier = 1.0;
         function unlock() {
             const k = document.getElementById('passKey').value.trim().toUpperCase();
-            if(k === "KING01" || k === "GOLD88") { 
-                document.getElementById('lock-screen').style.display = 'none'; 
-                initDashboard(); 
-            } else { alert("KODE AKSES SALAH!"); }
+            if(k === "KING01" || k === "GOLD88") { document.getElementById('lock-screen').style.display = 'none'; initDashboard(); }
+            else { alert("KODE AKSES SALAH!"); }
         }
-
         function startTrial() {
-            document.getElementById('lock-screen').style.display = 'none';
-            initDashboard();
-            setTimeout(() => {
-                document.getElementById('expired-screen').style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }, 300000); // 5 Menit
+            document.getElementById('lock-screen').style.display = 'none'; initDashboard();
+            setTimeout(() => { document.getElementById('expired-screen').style.display = 'flex'; }, 300000);
         }
-
         function initDashboard() {
             new TradingView.widget({"width": "100%", "height": "100%", "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart", "locale": "id"});
-            runAI(); setInterval(runAI, 3000); 
+            runAI(); setInterval(runAI, 3000);
             setInterval(() => { document.getElementById('clock').innerHTML = new Date().toLocaleTimeString(); }, 1000);
         }
-
         function runAI() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT').then(r => r.json()).then(res => {
-                let p = parseFloat(res.price) * 1.00085; 
-                document.getElementById('v-entry').innerText = p.toFixed(2);
-                let diff = Math.abs(p - lastPrice);
-                let trendDir = (p > lastPrice) ? "BUY" : "SELL";
-
-                // High Impact Detection
+                let p = parseFloat(res.price) * 1.00085; document.getElementById('v-entry').innerText = p.toFixed(2);
+                let diff = Math.abs(p - lastPrice); let trendDir = (p > lastPrice) ? "BUY" : "SELL";
+                
                 if (diff > 0.40) { 
-                    document.getElementById('news-status').innerText = "HIGH IMPACT NEWS!!";
-                    document.getElementById('news-status').style.color = "var(--red)";
-                    document.getElementById('news-tag').style.display = "inline";
-                    newsMultiplier = 0.2;
+                    document.getElementById('news-status').innerText = "HIGH VOLATILE";
+                    document.getElementById('news-tag').style.display = "inline"; newsMultiplier = 0.2;
                 } else {
-                    document.getElementById('news-status').innerText = "STABLE";
-                    document.getElementById('news-status').style.color = "var(--accent)";
-                    document.getElementById('news-tag').style.display = "none";
-                    newsMultiplier = 1.0;
+                    document.getElementById('news-status').innerText = "READY";
+                    document.getElementById('news-tag').style.display = "none"; newsMultiplier = 1.0;
                 }
 
-                // 10 Pips Filter Logic
                 if (lastPrice !== 0 && diff < 0.10) {
                     document.getElementById('sig-dir').innerText = "NO ENTRY ZONE";
                     document.getElementById('sig-dir').style.color = "var(--gold)";
-                    document.getElementById('ai-logic').innerText = "ALASAN: Volatilitas terlalu rendah (< 10 Pips). Market sedang konsolidasi/koreksi teknis. Tidak disarankan open posisi.";
+                    document.getElementById('ai-logic').innerText = "VVIP NOTICE: Pergerakan di bawah 10 Pips. AI menyarankan Wait & See untuk menghindari sideways.";
                     document.getElementById('sig-details-container').style.opacity = "0.2";
                 } else {
-                    document.getElementById('sig-dir').innerText = "STRONG " + trendDir;
+                    document.getElementById('sig-dir').innerText = "VVIP ENTRY: " + trendDir + " NOW";
                     document.getElementById('sig-dir').style.color = (trendDir === "BUY") ? "var(--green)" : "var(--red)";
                     document.getElementById('sig-details-container').style.opacity = "1";
                     document.getElementById('v-tp').innerText = (trendDir === "BUY" ? p + 1.2 : p - 1.2).toFixed(2);
                     document.getElementById('v-sl').innerText = (trendDir === "BUY" ? p - 1.0 : p + 1.0).toFixed(2);
                     document.getElementById('v-acc').innerText = (96 + Math.random() * 3).toFixed(1) + "%";
-                    document.getElementById('ai-logic').innerText = (newsMultiplier < 1) ? `⚠️ NEWS ALERT: Momentum ${trendDir} sangat tinggi. Gunakan lot kecil!` : `TREN TERDETEKSI: Momentum ${trendDir} valid (> 10 Pips).`;
+                    document.getElementById('ai-logic').innerText = `KONFIRMASI VVIP: Momentum ${trendDir} terdeteksi > 10 Pips. Silakan buka posisi sesuai target.`;
                 }
                 lastPrice = p;
             });
         }
-
-        // Calculator Logic
         document.getElementById('t-daily').addEventListener('input', function() {
             let daily = parseFloat(this.value) || 0;
-            document.getElementById('t-weekly').value = (daily * 5);
-            document.getElementById('t-monthly').value = (daily * 20);
+            document.getElementById('t-weekly').value = (daily * 5); document.getElementById('t-monthly').value = (daily * 20);
         });
-
         function calculateLot() {
             const bal = parseFloat(document.getElementById('c-bal').value);
             const risk = parseFloat(document.getElementById('c-risk').value);
             const cur = document.getElementById('c-curr').value;
             if(bal > 0) {
                 let usdBal = (cur === "IDR") ? bal / 15800 : (cur === "USC") ? bal / 100 : bal;
-                let lot = ((usdBal * (risk/100)) / 10) * newsMultiplier;
+                let totalLot = ((usdBal * (risk/100)) / 10) * newsMultiplier;
+                let layers = (usdBal < 10) ? 1 : (usdBal < 50) ? 3 : 5;
+                let lotPerLayer = totalLot / layers;
                 document.getElementById('c-res').innerHTML = `
-                    <div style="font-size:0.6rem; color:var(--gold)">SARAN LOT ${newsMultiplier < 1 ? 'SAAT NEWS' : 'NORMAL'}:</div>
-                    <div style="font-size:1.5rem; color:var(--accent); font-weight:900;">${lot.toFixed(2)} Lot</div>
+                    <div style="font-size:0.6rem; color:var(--gold)">SARAN MEMBER VVIP:</div>
+                    <div style="font-size:1.3rem; color:var(--accent); font-weight:900;">${totalLot.toFixed(2)} Total Lot</div>
+                    <div style="background:rgba(0,255,204,0.1); padding:5px; border-radius:5px; margin-top:5px; border:1px dashed var(--accent);">
+                        <b style="color:var(--gold); font-size:0.8rem;">${layers} Layer x ${lotPerLayer.toFixed(2)} Lot</b><br>
+                        <span style="font-size:0.55rem; color:#ccc;">Strategi: Bertahap per 15 Pips</span>
+                    </div>
                 `;
             }
         }
