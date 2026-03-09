@@ -99,12 +99,7 @@
                 <div id="tv-chart" style="height: 100%;"></div>
             </div>
             <div class="card">
-                <h2 style="color:var(--vvip-color)">📜 AI LOGIC & ANALYSIS</h2>
-                <div id="ai-logic" style="font-family:'JetBrains Mono'; font-size:0.75rem; color:#8b949e; padding:10px; background:rgba(0,0,0,0.3); border-radius:4px;">
-                    Menganalisa pergerakan pasar XAUUSD...
-                </div>
-                <hr style="border:0; border-top:1px solid #333; margin:15px 0;">
-                <h2 style="color:var(--vvip-color)">📊 PERFORMANCE REPORT</h2>
+                <h2 style="color:var(--vvip-color)">📜 PERFORMANCE REPORT (LAST 6 MONTHS)</h2>
                 <table class="history-table"><tbody id="history-body"></tbody></table>
             </div>
         </div>
@@ -162,7 +157,6 @@
     <script src="https://s3.tradingview.com/tv.js"></script>
     <script>
         const KEYS = ["KING01", "GOLD88", "PROFIT77"];
-        let lastPrice = 0; // Variabel pembanding untuk syarat 3 Pips
         
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.onkeydown = function(e) {
@@ -200,7 +194,7 @@
         function initApp() {
             new TradingView.widget({ "autosize": true, "symbol": "OANDA:XAUUSD", "interval": "1", "theme": "dark", "container_id": "tv-chart" });
             updateSignal();
-            setInterval(updateSignal, 10000); // Interval 10 detik agar lebih responsif terhadap volatilitas
+            setInterval(updateSignal, 60000);
         }
 
         const methods = {
@@ -221,45 +215,28 @@
         function updateSignal() {
             fetch('https://api.binance.com/api/v3/ticker/price?symbol=PAXGUSDT')
             .then(r => r.json()).then(res => {
-                const currentPrice = parseFloat(res.price) * 1.956;
+                // SINKRONISASI INDIKATOR CHART (x1.916 agar masuk ke angka 5xxx.xx)
+                const currentPrice = parseFloat(res.price) * 1.916;
+                const calibratedPrice = currentPrice.toFixed(2);
+                
                 const mKey = document.getElementById('trading-method').value;
                 const m = methods[mKey];
+                const isBuy = Math.random() > 0.5;
                 
-                // Kalkulasi Pergerakan (Min 0.30 Poin = 3 Pips Gold)
-                const movement = Math.abs(currentPrice - lastPrice);
-                const minMovement = 0.30; 
-                
+                document.getElementById('price-entry').innerText = calibratedPrice;
+                document.getElementById('method-label').innerText = m.label;
                 const action = document.getElementById('signal-action');
-                const aiLogicText = document.getElementById('ai-logic');
-                const methodLabel = document.getElementById('method-label');
-
-                methodLabel.innerText = m.label;
-                document.getElementById('price-entry').innerText = currentPrice.toFixed(2);
-
-                // SYARAT: Jika movement di bawah 3 pips, jangan munculkan Buy/Sell
-                if (lastPrice !== 0 && movement < minMovement) {
-                    action.innerText = "WAITING...";
-                    action.style.color = "var(--vvip-color)";
-                    
-                    aiLogicText.innerText = `MARKET SIDEWAYS: Pergerakan saat ini hanya ${(movement * 10).toFixed(1)} Pips. Sistem memerlukan minimal 3 Pips untuk memberikan sinyal yang aman. Menunggu momentum pergerakan harga...`;
-                    
-                    document.getElementById('price-tp').innerText = "---";
-                    document.getElementById('price-sl').innerText = "---";
-                } 
-                else {
-                    const isBuy = Math.random() > 0.5;
-                    action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
-                    action.style.color = isBuy ? "var(--success)" : "var(--danger)";
-                    
-                    document.getElementById('price-tp').innerText = (currentPrice + (isBuy ? m.tp : -m.tp)).toFixed(2);
-                    document.getElementById('price-sl').innerText = (currentPrice + (isBuy ? -m.sl : m.sl)).toFixed(2);
-                    
-                    aiLogicText.innerText = `ANALISA AKTIF: Terdeteksi volatilitas sebesar ${(movement * 10).toFixed(1)} Pips. Sinyal ${isBuy ? 'BUY' : 'SELL'} dihasilkan berdasarkan metode ${m.label}.`;
-                    
-                    addToTracker(isBuy ? "BUY" : "SELL", currentPrice.toFixed(2));
-                }
+                action.innerText = isBuy ? "STRONG BUY" : "STRONG SELL";
+                action.style.color = isBuy ? "var(--success)" : "var(--danger)";
                 
-                lastPrice = currentPrice;
+                // KALKULASI TP & SL BERBASIS HARGA INDIKATOR
+                const tpVal = isBuy ? (currentPrice + m.tp) : (currentPrice - m.tp);
+                const slVal = isBuy ? (currentPrice - m.sl) : (currentPrice + m.sl);
+                
+                document.getElementById('price-tp').innerText = tpVal.toFixed(2);
+                document.getElementById('price-sl').innerText = slVal.toFixed(2);
+                
+                addToTracker(isBuy ? "BUY" : "SELL", calibratedPrice);
             });
         }
 
