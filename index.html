@@ -3,184 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Forex Analyzer</title>
+    <title>AI Gold Analyzer Pro</title>
     <style>
         :root {
-            --bg-color: #0d1117;
+            --bg: #0a0c10;
+            --gold: #FFD700;
             --card-bg: #161b22;
-            --green-glow: #238636;
-            --red-glow: #da3633;
-            --text-main: #c9d1d9;
-            --accent: #58a6ff;
+            --green: #00ff88;
+            --red: #ff4444;
+            --text: #e6edf3;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
             margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
-        .container {
-            width: 90%;
-            max-width: 450px;
-        }
+        .container { width: 100%; max-width: 500px; }
 
+        /* Card Utama */
         .signal-card {
             background: var(--card-bg);
             border: 1px solid #30363d;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-
-        .pair-name { font-size: 1.2rem; color: var(--accent); font-weight: bold; margin-bottom: 5px; }
-        
-        /* Status Sinyal */
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
             margin-bottom: 20px;
         }
 
-        .buy { background: rgba(35, 134, 54, 0.2); color: #3fb950; border: 1px solid #238636; }
-        .sell { background: rgba(218, 54, 51, 0.2); color: #f85149; border: 1px solid #da3633; }
-        .waiting { background: rgba(139, 148, 158, 0.2); color: #8b949e; border: 1px solid #484f58; }
-
-        /* Data Grid */
-        .data-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 20px;
-            text-align: left;
+        .pair-name { 
+            font-size: 1.8rem; 
+            color: var(--gold); 
+            font-weight: 800; 
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+            margin-bottom: 10px;
         }
 
-        .data-item {
-            background: rgba(255,255,255,0.03);
-            padding: 12px;
-            border-radius: 8px;
-        }
-
-        .label { font-size: 0.7rem; color: #8b949e; display: block; margin-bottom: 4px; }
-        .value { font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 1rem; }
-
-        .profit-info {
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 8px;
+        .status-badge {
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
             font-size: 0.9rem;
-            background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.1), transparent);
+            border: 1px solid #484f58;
         }
 
-        .btn-analyze {
-            margin-top: 25px;
+        .buy { color: var(--green); border-color: var(--green); box-shadow: 0 0 10px rgba(0, 255, 136, 0.2); }
+        .sell { color: var(--red); border-color: var(--red); box-shadow: 0 0 10px rgba(255, 68, 68, 0.2); }
+
+        /* Grid Data */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; text-align: left; }
+        .label { font-size: 0.7rem; color: #8b949e; display: block; }
+        .val { font-family: monospace; font-size: 1.1rem; font-weight: bold; }
+
+        /* History Table */
+        .history {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px;
+            border: 1px solid #30363d;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { text-align: left; color: #8b949e; padding-bottom: 10px; border-bottom: 1px solid #30363d; }
+        td { padding: 8px 0; border-bottom: 1px solid #21262d; }
+
+        .btn {
+            background: var(--gold);
+            color: black;
             border: none;
-            background: var(--accent);
-            color: white;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 1rem;
             transition: 0.3s;
         }
-
-        .btn-analyze:hover { opacity: 0.8; }
+        .btn:hover { transform: scale(1.02); filter: brightness(1.1); }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="signal-card" id="card">
-        <div class="pair-name">EUR / USD</div>
-        <div id="status" class="status-badge waiting">Menganalisa Market...</div>
+    <div class="signal-card">
+        <div class="pair-name">XAU / USD</div>
+        <div id="status" class="status-badge">MENUNGGU ANALISA...</div>
 
-        <div class="data-grid">
-            <div class="data-item">
-                <span class="label">ENTRY ZONE</span>
-                <span class="value" id="entry">-</span>
-            </div>
-            <div class="data-item">
-                <span class="label">CURRENT PRICE</span>
-                <span class="value" id="current">-</span>
-            </div>
-            <div class="data-item">
-                <span class="label">TAKE PROFIT (TP)</span>
-                <span class="value" id="tp" style="color: #3fb950;">-</span>
-            </div>
-            <div class="data-item">
-                <span class="label">STOP LOSS (SL)</span>
-                <span class="value" id="sl" style="color: #f85149;">-</span>
-            </div>
+        <div class="grid">
+            <div class="item"><span class="label">PRICE</span><span id="price" class="val">2035.50</span></div>
+            <div class="item"><span class="label">EMA 200</span><span id="ema" class="val">2030.10</span></div>
+            <div class="item"><span class="label">ENTRY</span><span id="entry" class="val">-</span></div>
+            <div class="item"><span class="label">RSI (14)</span><span id="rsi" class="val">32</span></div>
+            <div class="item" style="border: 1px solid var(--green);"><span class="label">TAKE PROFIT</span><span id="tp" class="val" style="color:var(--green)">-</span></div>
+            <div class="item" style="border: 1px solid var(--red);"><span class="label">STOP LOSS</span><span id="sl" class="val" style="color:var(--red)">-</span></div>
         </div>
 
-        <div class="profit-info" id="profit-text">
-            Menunggu konfirmasi indikator...
-        </div>
+        <button class="btn" onclick="runGoldAI()">MULAI ANALISA GOLD</button>
+    </div>
 
-        <button class="btn-analyze" onclick="runAI()">MULAI ANALISA AI</button>
+    <div class="history">
+        <h4 style="margin-top: 0; color: var(--gold);">Sinyal History (Min. 3 Pips)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Entry</th>
+                    <th>TP</th>
+                    <th>Profit</th>
+                </tr>
+            </thead>
+            <tbody id="historyBody">
+                </tbody>
+        </table>
     </div>
 </div>
 
 <script>
-    function runAI() {
-        // Simulasi Data (Nantinya ini diambil dari API)
-        const currentPrice = 1.08540;
-        const rsi = 25; // Kondisi Oversold
-        const ma = 1.08500; // Harga di atas MA
-        
-        const entry = currentPrice;
-        const tp = entry + 0.00120; // Target 12 pips
-        const sl = entry - 0.00060; // SL 6 pips
-        
-        const pipsDistance = Math.abs(tp - entry) * 10000;
+    function runGoldAI() {
+        // Simulasi Data Real-time (Bisa diganti dengan API Fetch)
+        const price = 2035.50 + (Math.random() * 0.5); 
+        const ema200 = 2030.10;
+        const rsi = Math.floor(Math.random() * 80) + 10; // Random RSI 10-90
+
+        document.getElementById('price').innerText = price.toFixed(2);
+        document.getElementById('ema').innerText = ema200.toFixed(2);
+        document.getElementById('rsi').innerText = rsi;
+
         const statusEl = document.getElementById('status');
-        const profitText = document.getElementById('profit-text');
+        let signal = "NONE";
+        let tp = 0;
+        let sl = 0;
 
-        // Reset Tampilan
-        document.getElementById('current').innerText = currentPrice.toFixed(5);
+        // LOGIKA STRATEGI GOLD
+        // BUY: Harga > EMA 200 (Uptrend) & RSI < 35 (Oversold)
+        if (price > ema200 && rsi < 35) {
+            signal = "BUY";
+            tp = price + 0.50; // +50 pips ($0.50 move)
+            sl = price - 0.30;
+        } 
+        // SELL: Harga < EMA 200 (Downtrend) & RSI > 65 (Overbought)
+        else if (price < ema200 && rsi > 65) {
+            signal = "SELL";
+            tp = price - 0.50;
+            sl = price + 0.30;
+        }
 
-        // LOGIKA AI: Minimal 3 Pips
-        if (pipsDistance >= 3) {
-            if (rsi < 30 && currentPrice > ma) {
-                // Sinyal BUY
-                statusEl.innerText = "SIGNAL: BUY NOW";
-                statusEl.className = "status-badge buy";
-                updateFields(entry, tp, sl, pipsDistance);
-            } else if (rsi > 70 && currentPrice < ma) {
-                // Sinyal SELL
-                statusEl.innerText = "SIGNAL: SELL NOW";
-                statusEl.className = "status-badge sell";
-                updateFields(entry, entry - 0.00120, entry + 0.00060, pipsDistance);
-            } else {
-                noSignal("Kondisi Indikator Belum Terpenuhi");
-            }
+        // FILTER MINIMAL 3 PIPS (0.03 di Gold)
+        const pipsDistance = Math.abs(tp - price) * 100;
+
+        if (signal !== "NONE" && pipsDistance >= 3) {
+            statusEl.innerText = "SIGNAL: " + signal;
+            statusEl.className = "status-badge " + signal.toLowerCase();
+            
+            document.getElementById('entry').innerText = price.toFixed(2);
+            document.getElementById('tp').innerText = tp.toFixed(2);
+            document.getElementById('sl').innerText = sl.toFixed(2);
+
+            addHistory(signal, price.toFixed(2), tp.toFixed(2), pipsDistance.toFixed(0));
         } else {
-            noSignal("Sinyal Lemah (Di bawah 3 Pips)");
+            statusEl.innerText = "WAITING / NO SIGNAL";
+            statusEl.className = "status-badge";
+            resetFields();
         }
     }
 
-    function updateFields(e, t, s, p) {
-        document.getElementById('entry').innerText = e.toFixed(5);
-        document.getElementById('tp').innerText = t.toFixed(5);
-        document.getElementById('sl').innerText = s.toFixed(5);
-        document.getElementById('profit-text').innerText = "Estimasi Profit: +" + p.toFixed(1) + " Pips ✅";
+    function addHistory(type, entry, tp, pips) {
+        const table = document.getElementById('historyBody');
+        const row = `<tr>
+            <td style="color:${type === 'BUY' ? '#00ff88' : '#ff4444'}">${type}</td>
+            <td>${entry}</td>
+            <td>${tp}</td>
+            <td style="color:var(--gold)">+${pips} Pips</td>
+        </tr>`;
+        table.innerHTML = row + table.innerHTML;
     }
 
-    function noSignal(msg) {
-        document.getElementById('status').innerText = "WAITING";
-        document.getElementById('status').className = "status-badge waiting";
-        document.getElementById('profit-text').innerText = msg;
+    function resetFields() {
+        document.getElementById('entry').innerText = "-";
+        document.getElementById('tp').innerText = "-";
+        document.getElementById('sl').innerText = "-";
     }
 </script>
 
